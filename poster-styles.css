@@ -1,0 +1,211 @@
+/* ============================================================ 
+   POSTER DOWNLOAD STYLES - BRAND REFINED
+   Palette:
+   - Page Bg: #F6F2FA
+   - Primary Purple: #6B2FE6
+   - Info Card Bg: #F0EAFE
+   - Section Card Bg: #EFE7FB
+   - Primary Text: #2E2E2E
+   - Secondary Text: #6B6B6B
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.premium-variant {
+    background: #F6F2FA;
+    /* Requested Page Background */
+    color: #2E2E2E;
+    /* Primary Text */
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(107, 47, 230, 0.05);
+    width: 400px;
+    min-height: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid rgba(107, 47, 230, 0.1);
+}
+
+/* Header */
+.p-header {
+    margin-bottom: 5px;
+}
+
+.p-brand-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #6B2FE6;
+    /* Primary Purple */
+    margin: 0;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.p-subtitle {
+    font-size: 10px;
+    color: #6B6B6B;
+    /* Secondary Text */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Hero Section */
+.p-hero-section {
+    background: #F0EAFE;
+    /* Info Card Background */
+    border-radius: 16px;
+    padding: 25px 15px;
+    border: 1px solid rgba(107, 47, 230, 0.05);
+}
+
+.p-name-en {
+    font-family: 'Lora', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #2E2E2E;
+    margin: 0;
+}
+
+.p-name-hi {
+    font-size: 26px;
+    color: #6B2FE6;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.p-meaning {
+    font-size: 14px;
+    font-style: italic;
+    color: #6B6B6B;
+    font-family: 'Lora', serif;
+}
+
+/* Identity Row - Grid Alignment */
+.p-identity-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.p-identity-item {
+    background: #F0EAFE;
+    /* Info Card Background */
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(107, 47, 230, 0.05);
+}
+
+.p-identity-icon {
+    width: 18px;
+    text-align: center;
+    color: #6B2FE6;
+    /* Primary Purple */
+}
+
+.p-identity-text {
+    font-weight: 600;
+    color: #2E2E2E;
+    text-transform: uppercase;
+}
+
+/* Section Panels */
+.p-soft-panel,
+.p-prediction-section {
+    background: #EFE7FB;
+    /* Section Card Background */
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid rgba(107, 47, 230, 0.05);
+    text-align: left;
+}
+
+.p-panel-title,
+.p-prediction-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6B2FE6;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(107, 47, 230, 0.1);
+    padding-bottom: 4px;
+}
+
+.p-numerology-content {
+    font-size: 12px;
+    color: #2E2E2E;
+}
+
+.p-numerology-content strong {
+    color: #6B2FE6;
+}
+
+.p-prediction-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #2E2E2E;
+}
+
+/* Footer Section */
+.p-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 20px;
+}
+
+.p-quote {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #6B6B6B;
+    max-width: 250px;
+}
+
+.p-cta {
+    font-size: 10px;
+    color: #6B2FE6;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* Verification Seal - Subtle */
+.p-seal {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: #6B2FE6;
+    color: #F6F2FA;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* Utility to hide during capture prep */
+#poster-generator-container {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    visibility: visible;
+    display: block;
+}

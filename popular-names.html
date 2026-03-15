@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        (() => {
+            const preferredLang = localStorage.getItem("language") || "en";
+            document.documentElement.lang = preferredLang;
+        })();
+    </script>
+    <style>
+        body {
+            visibility: hidden;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popular & Trending Names - Naamin</title>
+    <meta name="description" content="Discover the most popular and trending baby names of 2026" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="popular-names.css">
+</head>
+
+<body data-theme="light">
+
+    <nav class="navbar">
+        <!-- Logo -->
+        <div class="logo">Naam<span class="logo-in">in</span></div>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links desktop-only">
+            <li><a href="index.html" data-en="Home" data-hi="होम">Home</a></li>
+            <li><a href="about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+            <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चा">Parents to Child</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-en="More" data-hi="अधिक">
+                    More <span class="arrow">▼</span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="popular-names.html" class="active" data-en="Popular Names"
+                            data-hi="लोकप्रिय नाम">Popular Names</a></li>
+                    <li><a href="unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a></li>
+                    <li><a href="famous-personalities.html" data-en="Famous Personalities"
+                            data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                    <li><a href="more/motto-for-everything/index.html" data-en="Motto Generator"
+                            data-hi="आदर्श वाक्य जनरेटर">Motto Generator</a></li>
+                    <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="राशि चक्र खोजक">Zodiac
+                            Finder</a></li>
+                    <li><a href="product.html" data-en="Products" data-hi="उत्पाद">Products</a></li>
+
+
+
+                    <li><a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                    <li><a href="pricing.html" data-en="Aura" data-hi="आभा">Aura</a></li>
+                    <li><a href="careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Desktop Actions -->
+        <div class="nav-actions desktop-only">
+            <button id="language-toggle" class="btn" style="font-size:12px; padding:6px 10px;"
+                title="Toggle language">ENG/HIN</button>
+            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span id="fav-count">0</span>
+            </button>
+            <a href="login.html" class="btn btn-login">Log in</a>
+            <a href="signup.html" class="btn btn-signup">Sign up</a>
+        </div>
+
+        <!-- Hamburger Icon (Mobile Only) -->
+        <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html" data-en="Home" data-hi="होम">Home</a></li>
+                <li><a href="about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+                <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चा">Parents to
+                        Child</a></li>
+
+                <!-- Mobile Dropdown -->
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="अधिक">More <span
+                            class="arrow">▼</span></a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="popular-names.html" class="active" data-en="Popular Names"
+                                data-hi="लोकप्रिय नाम">Popular Names</a></li>
+                        <li><a href="unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a>
+                        </li>
+                        <li><a href="famous-personalities.html" data-en="Famous Personalities"
+                                data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                        <li><a href="more/motto-for-everything/index.html" data-en="Motto Generator"
+                                data-hi="आदर्श वाक्य जनरेटर">Motto Generator</a></li>
+                        <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder"
+                                data-hi="राशि चक्र खोजक">Zodiac Finder</a></li>
+                        <li><a href="product.html" data-en="Products" data-hi="उत्पाद">Products</a></li>
+
+                        <li><a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                        <li><a href="pricing.html" data-en="Aura" data-hi="आभा">Aura</a></li>
+                        <li><a href="careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                        <li><a href="blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions">
+                <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
+                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn">
+                    <i class="fas fa-heart"></i>
+                    <span id="fav-count-mobile">0</span>
+                </button>
+                <a href="login.html" class="btn btn-login mobile-btn">Log in</a>
+                <a href="signup.html" class="btn btn-signup mobile-btn">Sign up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="popular-names">
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="page-title" data-en="Popular & Trending Names" data-hi="लोकप्रिय और ट्रेंडिंग नाम">Popular &
+                    Trending Names</h1>
+                <p class="page-subtitle" data-en="Discover the most loved names of 2026"
+                    data-hi="2026 के सबसे पसंदीदा नाम खोजें">Discover the most loved names of 2026</p>
+                <p class="update-text" data-en="Updated based on recent naming trends"
+                    data-hi="हालिया नामकरण रुझानों के आधार पर अपडेट किया गया">Updated based on recent naming trends</p>
+            </div>
+        </section>
+
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-container">
+                    <!-- Gender Filter -->
+                    <div class="filter-group">
+                        <label class="filter-label">Gender</label>
+                        <div class="filter-pills">
+                            <button class="filter-pill active" data-filter="gender" data-value="all">All</button>
+                            <button class="filter-pill" data-filter="gender" data-value="male">
+                                <i class="fas fa-mars"></i> Male
+                            </button>
+                            <button class="filter-pill" data-filter="gender" data-value="female">
+                                <i class="fas fa-venus"></i> Female
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Culture Filter -->
+                    <div class="filter-group">
+                        <label class="filter-label" data-en="Culture" data-hi="संस्कृति">Culture</label>
+                        <select class="filter-select" id="culture-filter">
+                            <option value="all" data-en="All Cultures" data-hi="सभी संस्कृतियां">All Cultures</option>
+                            <option value="hindu" data-en="Hindu" data-hi="हिंदू">Hindu</option>
+                            <option value="muslim" data-en="Muslim" data-hi="मुस्लिम">Muslim</option>
+                            <option value="sikh" data-en="Sikh" data-hi="सिख">Sikh</option>
+                            <option value="christian" data-en="Christian" data-hi="ईसाई">Christian</option>
+                            <option value="modern" data-en="Modern/Global" data-hi="आधुनिक/वैश्विक">Modern/Global
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Region Filter -->
+                    <div class="filter-group">
+                        <label class="filter-label" data-en="Region" data-hi="क्षेत्र">Region</label>
+                        <select class="filter-select" id="region-filter">
+                            <option value="all">All Regions</option>
+                            <option value="north">North India</option>
+                            <option value="south">South India</option>
+                            <option value="west">West India</option>
+                            <option value="east">East India</option>
+                            <option value="pan-india">Pan-India</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="results-count">
+                    Showing <span id="showing-count">0</span> names
+                </div>
+            </div>
+        </section>
+
+        <section class="names-section">
+            <div class="container">
+                <div id="names-grid" class="names-grid">
+                    <!-- Names will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3><a href="index.html" data-en="Home"
+                    data-hi="होम">Home</a><a href="about.html" data-en="About" data-hi="हमारे बारे में">About</a><a
+                    href="services.html" data-en="Services" data-hi="सेवाएं">Services</a><a href="contact.html"
+                    data-en="Contact" data-hi="संपर्क करें">Contact</a>
+            </div>
+            <div>
+                <h3 data-en="Our Services" data-hi="हमारी सेवाएं">Our Services</h3><a href="services.html"
+                    data-en="Baby Naming" data-hi="शिशु नामकरण">Baby Naming</a><a href="services.html"
+                    data-en="Company Naming" data-hi="कंपनी नामकरण">Company Naming</a><a href="services.html"
+                    data-en="Motto Creation" data-hi="उद्घोष निर्माण">Motto Creation</a>
+            </div>
+            <div>
+                <h3 data-en="Follow Us" data-hi="हमें फॉलो करें">Follow Us</h3>
+                <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
+            </div>
+            <div>
+                <h3 data-en="Contact" data-hi="संपर्क">Contact</h3>
+                <p><a href="tel:+919413678955">+91 94136 78955</a></p>
+                <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
+                <p data-en="Hyderabad, Telangana, India" data-hi="हैदराबाद, तेलंगाना, भारत">Hyderabad, Telangana, India
+                </p>
+            </div>
+        </div>
+        <p class="copyrights" data-en="© 2025 Naamin. All rights reserved."
+            data-hi="© २०२५ नामिन। सभी अधिकार सुरक्षित।">© 2025 Naamin. All rights reserved.</p>
+    </footer>
+
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <a href="https://wa.me/9413678955?text=Hello" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+    </a>
+
+    <script src="hindi-transliterate.js"></script>
+    <script src="script.js?v=debug" defer></script>
+    <script src="popular-names.js"></script>
+</body>
+
+</html>
