@@ -1,154 +1,129 @@
 /* =========================
-    Naamin Premium Preloader
+   Naamin Preloader
 ========================= */
 
 #naamin-preloader {
-    position: fixed;
-    inset: 0;
-    /* आपकी थीम के वेरिएबल का उपयोग */
-    background: var(--bg-light); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999; /* सबसे ऊपर रखने के लिए */
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-                visibility 0.6s;
+  position: fixed;
+  inset: 0;
+  background: #fafefd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .naamin-inner {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  text-align: center;
+  animation: floatUp 2.4s ease-in-out 1;
 }
 
 .naamin-logo {
-    font-family: 'Inter', 'Poppins', sans-serif;
-    font-weight: 900;
-    color: var(--text-dark);
-    font-size: clamp(3rem, 10vw, 5rem);
-    display: flex;
-    align-items: baseline;
-    letter-spacing: -1px;
-    position: relative;
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+  font-weight: 800;
+  color: #333333;
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  display: flex;
+  align-items: baseline;
+  letter-spacing: 0.4px;
+  position: relative;
+  animation: logoPulse 2.4s ease-in-out 1;
 }
 
-/* "in" को ऑरेंज/गोल्ड कलर देने के लिए */
-.naamin-logo .logo-in { 
-    color: var(--highlight-gold);
-    text-shadow: 0 0 15px rgba(230, 126, 34, 0.2);
-}
+/* color the trailing "in" to match the homepage logo */
+.naamin-logo .logo-in { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* Letters Animation - स्मूथ बाउंस और फेड */
+/* Letters */
 .logo-letter {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(30px) scale(0.9);
-    filter: blur(5px);
-    animation: letterReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+  transform: translateY(8px);
+  line-height: 1;
 }
 
-@keyframes letterReveal {
-    to { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
-        filter: blur(0);
-    }
+.logo-letter:nth-child(1){animation:letterIn .32s ease .02s forwards}
+.logo-letter:nth-child(2){animation:letterIn .32s ease .06s forwards}
+.logo-letter:nth-child(3){animation:letterIn .32s ease .10s forwards}
+.logo-letter:nth-child(4){animation:letterIn .32s ease .14s forwards}
+.logo-letter:nth-child(5){animation:letterIn .32s ease .18s forwards}
+.logo-letter:nth-child(6){animation:letterIn .32s ease .22s forwards}
+
+@keyframes letterIn {
+  to { opacity: 1; transform: none; }
 }
 
-/* अक्षरों के बीच समय का अंतर (Stagger) */
-.logo-letter:nth-child(1) { animation-delay: 0.1s; }
-.logo-letter:nth-child(2) { animation-delay: 0.15s; }
-.logo-letter:nth-child(3) { animation-delay: 0.2s; }
-.logo-letter:nth-child(4) { animation-delay: 0.25s; }
-.logo-letter:nth-child(5) { animation-delay: 0.3s; }
-.logo-letter:nth-child(6) { animation-delay: 0.35s; }
-
-/* i-dot Animation */
-.i-wrap { position: relative; }
+/* i-dot */
+.i-wrap {
+  position: relative;
+  display: inline-flex;
+}
 
 .i-dot {
-    position: absolute;
-    left: 50%;
-    top: -0.1em;
-    width: 0.22em;
-    height: 0.22em;
-    background: var(--highlight-gold);
-    border-radius: 50%;
-    transform: translateX(-50%) scale(0);
-    animation: dotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.5s,
-               dotGlow 1.5s ease-in-out infinite alternate 0.9s;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: .36em;
+  height: .36em;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -30%);
+  opacity: 0;
+  animation: iDotIn .24s ease forwards .22s;
 }
 
-@keyframes dotPop {
-    to { transform: translateX(-50%) scale(1); }
+@keyframes iDotIn {
+  to { opacity: 1; }
 }
 
-@keyframes dotGlow {
-    from { box-shadow: 0 0 5px var(--highlight-gold); }
-    to { box-shadow: 0 0 20px var(--highlight-gold); transform: translateX(-50%) translateY(-5px); }
+.i-dot.animate {
+  animation: iDotMove 1.4s ease-in-out infinite;
 }
 
-/* Progress Bar - प्रीमियम लुक */
+@keyframes iDotMove {
+  50% { transform: translate(-50%, -45%) scale(1.05); }
+}
+
+/* Progress bar */
 .preloader-bar {
-    width: 180px;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-[data-theme="dark"] .preloader-bar {
-    background: rgba(255, 255, 255, 0.1);
+  margin: 1rem auto 0;
+  width: 220px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.06);
+  overflow: hidden;
 }
 
 .preloader-progress {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    background: linear-gradient(90deg, var(--highlight-gold), var(--highlight-gold-darker));
-    box-shadow: 0 0 10px var(--highlight-gold);
-    animation: progressFill 2s ease-in-out forwards;
+  height: 100%;
+  width: 0;
+  background: var(--accent-primary);
+  animation: progressAnim .85s ease forwards;
 }
 
-/* बार के ऊपर चमकता हुआ इफ़ेक्ट */
-.preloader-progress::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: shine 1.5s infinite;
+@keyframes progressAnim {
+  to { width: 100%; }
 }
 
-@keyframes progressFill {
-    0% { width: 0%; }
-    50% { width: 70%; }
-    100% { width: 100%; }
+/* Subtle motion */
+@keyframes logoPulse {
+  50% { transform: scale(1.02); }
 }
 
-@keyframes shine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+@keyframes floatUp {
+  50% { transform: translateY(-3px); }
 }
 
-/* Exit Animation - जब प्रीलोडर खत्म हो */
+/* Fade out */
 #naamin-preloader.fade-out {
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .42s ease, visibility .42s ease;
 }
 
-#naamin-preloader.fade-out .naamin-inner {
-    transform: scale(1.1);
-    transition: transform 0.5s ease-out;
+/* Stop animations on exit */
+#naamin-preloader.fade-out * {
+  animation-play-state: paused !important;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
-    .naamin-logo { font-size: 2.5rem; }
-    .preloader-bar { width: 140px; }
+/* Mobile */
+@media (max-width: 520px) {
+  .naamin-logo { font-size: 2rem; }
 }
