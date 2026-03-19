@@ -7,37 +7,37 @@
 
 :root {
     /* Royal Heritage Colors */
-    --gradient-start: #F5F0FF;
+    --gradient-start: #F8F2FF;
     /* Soft lavender */
-    --gradient-mid: #E8DEFF;
-    /* Light purple */
-    --gradient-end: #FFF8E8;
-    /* Pale gold */
+    --gradient-mid: #EEF4FF;
+    /* Mist blue */
+    --gradient-end: #FFFFFF;
+    /* Clean white */
 
     /* Text colors */
-    --text-primary: #2C1654;
-    /* Deep royal purple */
-    --text-secondary: #4A2C6D;
-    /* Medium purple */
-    --text-light: #6B5B95;
-    /* Muted purple */
+    --text-primary: #1F1B2E;
+    /* Deep violet */
+    --text-secondary: #5C566E;
+    /* Muted violet */
+    --text-light: #8D86A6;
+    /* Soft lavender */
 
     /* Accent */
-    --accent-gold: #D4AF37;
-    /* Royal gold */
-    --accent-purple: #6A4C93;
-    /* Royal purple */
-    --accent-blue: #1E3A8A;
+    --accent-gold: #E2B558;
+    /* Warm gold */
+    --accent-purple: #6C2BD9;
+    /* Brand violet */
+    --accent-blue: #3B4CCA;
     /* Deep blue */
 
     /* Card colors */
     --card-bg: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(212, 175, 55, 0.3);
+    --card-border: rgba(108, 43, 217, 0.2);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px rgba(44, 22, 84, 0.1);
-    --shadow-hover: 0 8px 30px rgba(44, 22, 84, 0.15);
-    --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.2);
+    --shadow-soft: 0 4px 20px rgba(108, 43, 217, 0.1);
+    --shadow-hover: 0 8px 30px rgba(108, 43, 217, 0.15);
+    --shadow-gold: 0 0 20px rgba(216, 180, 92, 0.25);
 }
 
 /* Main Background */

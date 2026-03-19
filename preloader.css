@@ -5,7 +5,8 @@
 #naamin-preloader {
   position: fixed;
   inset: 0;
-  background: #fafefd;
+  background: var(--bg-main-light);
+  background-image: linear-gradient(135deg, #F8F2FF 0%, #EEF4FF 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +21,7 @@
 .naamin-logo {
   font-family: 'Poppins', 'Inter', system-ui, sans-serif;
   font-weight: 800;
-  color: #333333;
+  color: var(--text-dark);
   font-size: clamp(2.6rem, 8vw, 4.2rem);
   display: flex;
   align-items: baseline;
@@ -87,7 +88,7 @@
   width: 220px;
   height: 6px;
   border-radius: 999px;
-  background: rgba(0,0,0,.06);
+  background: rgba(31, 27, 46, 0.08);
   overflow: hidden;
 }
 

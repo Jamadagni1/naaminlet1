@@ -1,16 +1,18 @@
 /* Unique Names Styling */
 
 :root {
-    --unique-bg-gradient: linear-gradient(135deg, #f5f0ff 0%, #fff0f5 50%, #f0f7ff 100%);
+    --unique-bg-gradient: linear-gradient(135deg, #F8F2FF 0%, #EEF4FF 50%, #FFFFFF 100%);
     --card-shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.05);
     --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
-    --exclusive-gold: #c5a059;
-    --rare-purple: #9b59b6;
-    --very-rare-ruby: #e74c3c;
+    --exclusive-gold: #E2B558;
+    --rare-purple: #6C2BD9;
+    --very-rare-ruby: #D95757;
+    --text-strong: #1F1B2E;
+    --text-muted: #5C566E;
 }
 
 body[data-theme="girl"] {
-    --unique-bg-gradient: linear-gradient(135deg, #fff0f5 0%, #fff9fb 100%);
+    --unique-bg-gradient: linear-gradient(135deg, #F8F2FF 0%, #FFFFFF 100%);
 }
 
 #unique-names-page {

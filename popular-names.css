@@ -7,34 +7,35 @@
 
 :root {
     /* Rose/Coral gradient */
-    --gradient-start: #FFE5E5;
-    /* Soft rose */
-    --gradient-mid: #FFD6D6;
-    /* Light coral */
-    --gradient-end: #FFF0F0;
-    /* Pale pink */
+    --gradient-start: #F8F2FF;
+    /* Soft lavender */
+    --gradient-mid: #EEF4FF;
+    /* Mist blue */
+    --gradient-end: #FFFFFF;
+    /* Clean white */
 
     /* Text colors */
-    --text-primary: #8B3A3A;
-    /* Deep rose */
-    --text-secondary: #A64D4D;
-    /* Medium rose */
-    --text-light: #C97676;
-    /* Light rose */
+    --text-primary: #1F1B2E;
+    /* Deep violet */
+    --text-secondary: #5C566E;
+    /* Muted violet */
+    --text-light: #8D86A6;
+    /* Soft lavender */
 
     /* Accent - User specified */
-    --accent: #b76868;
-    /* Rose coral */
-    --accent-light: #D48A8A;
-    --accent-lighter: #F0C4C4;
+    --accent: #6C2BD9;
+    /* Brand violet */
+    --accent-light: #C184F3;
+    --accent-lighter: #E9D9FF;
+    --accent-secondary: #E2B558;
 
     /* Card colors */
     --card-bg: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(183, 104, 104, 0.2);
+    --card-border: rgba(108, 43, 217, 0.15);
 
     /* Shadows */
-    --shadow-soft: 0 2px 12px rgba(139, 58, 58, 0.08);
-    --shadow-hover: 0 5px 20px rgba(139, 58, 58, 0.12);
+    --shadow-soft: 0 2px 14px rgba(108, 43, 217, 0.08);
+    --shadow-hover: 0 6px 22px rgba(108, 43, 217, 0.12);
 }
 
 /* Main Background Gradient */
