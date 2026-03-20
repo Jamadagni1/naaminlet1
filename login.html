@@ -133,6 +133,40 @@
       opacity: 0.8;
     }
 
+    .google-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .google-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(108, 43, 217, 0.18);
+    }
+
+    #auth-message {
+      min-height: 18px;
+      margin: 12px 0 0;
+      font-size: 13px;
+      text-align: center;
+      color: #111827;
+    }
+
+    #auth-message[data-type="error"] {
+      color: #b91c1c;
+    }
+
+    #auth-message[data-type="success"] {
+      color: #166534;
+    }
+
   </style>
 
   <script>
@@ -143,7 +177,7 @@
   </script>
 </head>
 
-<body>
+<body data-auth="login">
 
   <!-- BACK ARROW -->
   <a href="index.html" class="back-btn">&#8592;</a>
@@ -151,11 +185,15 @@
   <div class="card">
     <h2>Log in to Naamin</h2>
 
-    <form>
-      <input type="email" placeholder="Email address" required />
-      <input type="password" placeholder="Password" required />
+    <form id="login-form">
+      <input id="login-email" type="email" placeholder="Email address" required />
+      <input id="login-password" type="password" placeholder="Password" required />
       <button type="submit">Log In</button>
     </form>
+    <button id="google-auth-btn" class="google-btn" type="button">
+      <span>Continue with Google</span>
+    </button>
+    <p id="auth-message" role="alert" aria-live="polite"></p>
 
     <div class="footer">
       Don’t have an account?
@@ -163,6 +201,7 @@
     </div>
   </div>
 
+  <script type="module" src="auth.js"></script>
 </body>
 
 </html>

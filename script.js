@@ -1272,9 +1272,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const favListContainer = document.getElementById('fav-list-container');
 
     if (favBtn) {
-        // Open dedicated wishlist page instead of modal
         favBtn.onclick = () => {
-            window.location.href = 'wishlist.html';
+            openWishlistPanel();
         };
     }
 
@@ -1341,6 +1340,195 @@ document.addEventListener("DOMContentLoaded", () => {
             favListContainer.appendChild(row);
         });
     }
+
+    // --- WISHLIST PANEL (PRODUCTS) ---
+    class WishlistManager {
+        constructor() {
+            this.storageKey = 'naamin_wishlist_v1';
+            this.items = this.load();
+        }
+
+        load() {
+            try {
+                return JSON.parse(localStorage.getItem(this.storageKey)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        save() {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.items));
+        }
+
+        has(id) {
+            return this.items.some(item => item.id === id);
+        }
+
+        add(item) {
+            if (!this.has(item.id)) {
+                this.items.unshift(item);
+                this.save();
+            }
+        }
+
+        remove(id) {
+            this.items = this.items.filter(item => item.id !== id);
+            this.save();
+        }
+
+        clear() {
+            this.items = [];
+            this.save();
+        }
+    }
+
+    const wishlist = new WishlistManager();
+    const wishlistPanel = document.getElementById('wishlist-panel');
+    const wishlistBackdrop = document.getElementById('wishlist-backdrop');
+    const wishlistCloseBtn = document.getElementById('wishlist-close');
+    const wishlistItems = document.getElementById('wishlist-items');
+    const wishlistViewBtn = document.getElementById('wishlist-view-btn');
+    const favBtnMobile = document.getElementById('fav-view-btn-mobile');
+
+    function openWishlistPanel() {
+        if (!wishlistPanel) {
+            window.location.href = 'wishlist.html';
+            return;
+        }
+        wishlistPanel.classList.add('open');
+        wishlistPanel.setAttribute('aria-hidden', 'false');
+        renderWishlist();
+    }
+
+    function closeWishlistPanel() {
+        if (!wishlistPanel) return;
+        wishlistPanel.classList.remove('open');
+        wishlistPanel.setAttribute('aria-hidden', 'true');
+    }
+
+    function updateWishlistCount() {
+        const countDesktop = document.getElementById('fav-count');
+        const countMobile = document.getElementById('fav-count-mobile');
+        if (countDesktop) countDesktop.textContent = wishlist.items.length;
+        if (countMobile) countMobile.textContent = wishlist.items.length;
+    }
+
+    function renderWishlist() {
+        if (!wishlistItems) return;
+        wishlistItems.innerHTML = '';
+
+        if (wishlist.items.length === 0) {
+            wishlistItems.innerHTML = `
+                <div class="wishlist-empty">
+                    <i class="far fa-heart"></i>
+                    <p>Your wishlist is empty</p>
+                    <span>Save your favorite looks for later.</span>
+                </div>
+            `;
+            updateWishlistCount();
+            return;
+        }
+
+        wishlist.items.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'wishlist-item';
+            row.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div>
+                    <h4>${item.name}</h4>
+                    <div class="wishlist-item-price">${item.price}</div>
+                    <div class="wishlist-item-actions">
+                        <button class="remove-btn">❌ Remove</button>
+                        <button class="move-btn">Move to Cart</button>
+                    </div>
+                </div>
+            `;
+
+            row.querySelector('.remove-btn').onclick = (e) => {
+                e.stopPropagation();
+                wishlist.remove(item.id);
+                renderWishlist();
+                syncWishlistButtons();
+            };
+
+            row.querySelector('.move-btn').onclick = (e) => {
+                e.stopPropagation();
+                moveToCart(item);
+                wishlist.remove(item.id);
+                renderWishlist();
+                syncWishlistButtons();
+            };
+
+            wishlistItems.appendChild(row);
+        });
+
+        updateWishlistCount();
+    }
+
+    function moveToCart(item) {
+        const cartKey = 'naamin_cart_v1';
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        } catch (e) {
+            cart = [];
+        }
+        cart.unshift(item);
+        localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+
+    function syncWishlistButtons() {
+        document.querySelectorAll('.wishlist-add-btn').forEach(btn => {
+            const id = btn.getAttribute('data-product-id');
+            const active = wishlist.has(id);
+            btn.classList.toggle('active', active);
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = active ? 'fas fa-heart' : 'far fa-heart';
+        });
+        updateWishlistCount();
+    }
+
+    if (wishlistBackdrop) {
+        wishlistBackdrop.addEventListener('click', closeWishlistPanel);
+    }
+
+    if (wishlistCloseBtn) {
+        wishlistCloseBtn.addEventListener('click', closeWishlistPanel);
+    }
+
+    if (favBtnMobile) {
+        favBtnMobile.addEventListener('click', () => {
+            openWishlistPanel();
+        });
+    }
+
+    if (wishlistViewBtn) {
+        wishlistViewBtn.addEventListener('click', () => {
+            window.location.href = 'wishlist.html';
+        });
+    }
+
+    document.querySelectorAll('.wishlist-add-btn').forEach(btn => {
+        const name = btn.getAttribute('data-product-name');
+        const price = btn.getAttribute('data-product-price');
+        const image = btn.getAttribute('data-product-image');
+        const id = `${name}`.toLowerCase().replace(/\\s+/g, '-');
+        btn.setAttribute('data-product-id', id);
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const item = { id, name, price, image };
+            if (wishlist.has(id)) {
+                wishlist.remove(id);
+            } else {
+                wishlist.add(item);
+            }
+            renderWishlist();
+            syncWishlistButtons();
+        });
+    });
+
+    syncWishlistButtons();
 
     // --- NAAMIN TYPING ANIMATION (GUARANTEED LOOP) ---
     const typeNaam = document.getElementById("type-naam");
@@ -1605,5 +1793,22 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Initial language update
-    updateBabyCarouselLanguage();
+updateBabyCarouselLanguage();
 });
+
+// === TESTIMONIAL ROTATION (HOMEPAGE) ===
+(function () {
+    const grid = document.querySelector('.testimonial-grid[data-rotate]');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.testimonial-card'));
+    if (cards.length < 2) return;
+
+    let current = 0;
+    const rotate = () => {
+        cards[current].classList.remove('active');
+        current = (current + 1) % cards.length;
+        cards[current].classList.add('active');
+    };
+
+    setInterval(rotate, 5000);
+})();
