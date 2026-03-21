@@ -1,4 +1,4 @@
-/* ======================================================
+﻿/* ======================================================
    SCRIPT.JS - FINAL COMPLETE VERSION
    (Includes: 2026 Horoscope, Favorites, Typing Animation)
    ====================================================== */
@@ -57,26 +57,26 @@ function getHindiName(englishName) {
 
     // 1. Precise Mapping for common names
     const preciseMapping = {
-        'Aarav': 'आरव', 'Aditya': 'आदित्य', 'Arjun': 'अर्जुन', 'Aryan': 'आर्यन',
-        'Ayaan': 'अयान', 'Dev': 'देव', 'Dhruv': 'ध्रुव', 'Harsh': 'हर्ष',
-        'Ishan': 'ईशान', 'Ishaan': 'ईशान', 'Karan': 'करण', 'Krishna': 'कृष्ण',
-        'Om': 'ॐ', 'Pranav': 'प्रणव', 'Rohan': 'रोहन', 'Rahul': 'राहुल',
-        'Sahil': 'साहिल', 'Shiv': 'शिव', 'Vihaan': 'विहान', 'Yash': 'यश',
-        'Ansi': 'अंसी', 'Ananya': 'अनन्या', 'Aisha': 'आयशा', 'Aditi': 'अदिति',
-        'Diya': 'दीया', 'Isha': 'ईशा', 'Kavya': 'काव्या', 'Prisha': 'प्रिशा'
+        'Aarav': 'à¤†à¤°à¤µ', 'Aditya': 'à¤†à¤¦à¤¿à¤¤à¥à¤¯', 'Arjun': 'à¤…à¤°à¥à¤œà¥à¤¨', 'Aryan': 'à¤†à¤°à¥à¤¯à¤¨',
+        'Ayaan': 'à¤…à¤¯à¤¾à¤¨', 'Dev': 'à¤¦à¥‡à¤µ', 'Dhruv': 'à¤§à¥à¤°à¥à¤µ', 'Harsh': 'à¤¹à¤°à¥à¤·',
+        'Ishan': 'à¤ˆà¤¶à¤¾à¤¨', 'Ishaan': 'à¤ˆà¤¶à¤¾à¤¨', 'Karan': 'à¤•à¤°à¤£', 'Krishna': 'à¤•à¥ƒà¤·à¥à¤£',
+        'Om': 'à¥', 'Pranav': 'à¤ªà¥à¤°à¤£à¤µ', 'Rohan': 'à¤°à¥‹à¤¹à¤¨', 'Rahul': 'à¤°à¤¾à¤¹à¥à¤²',
+        'Sahil': 'à¤¸à¤¾à¤¹à¤¿à¤²', 'Shiv': 'à¤¶à¤¿à¤µ', 'Vihaan': 'à¤µà¤¿à¤¹à¤¾à¤¨', 'Yash': 'à¤¯à¤¶',
+        'Ansi': 'à¤…à¤‚à¤¸à¥€', 'Ananya': 'à¤…à¤¨à¤¨à¥à¤¯à¤¾', 'Aisha': 'à¤†à¤¯à¤¶à¤¾', 'Aditi': 'à¤…à¤¦à¤¿à¤¤à¤¿',
+        'Diya': 'à¤¦à¥€à¤¯à¤¾', 'Isha': 'à¤ˆà¤¶à¤¾', 'Kavya': 'à¤•à¤¾à¤µà¥à¤¯à¤¾', 'Prisha': 'à¤ªà¥à¤°à¤¿à¤¶à¤¾'
     };
 
     if (preciseMapping[englishName]) return preciseMapping[englishName];
 
     // 2. Fallback: Phonetic Transliteration logic
     const phoneticMap = {
-        'a': 'अ', 'i': 'इ', 'u': 'उ', 'e': 'ए', 'o': 'ओ',
-        'k': 'क', 'kh': 'ख', 'g': 'ग', 'gh': 'घ',
-        'ch': 'च', 'chh': 'छ', 'j': 'ज', 'jh': 'झ',
-        't': 'त', 'th': 'थ', 'd': 'द', 'dh': 'ध', 'n': 'न',
-        'p': 'प', 'ph': 'फ', 'b': 'ब', 'bh': 'भ', 'm': 'म',
-        'y': 'य', 'r': 'र', 'l': 'ल', 'v': 'व', 'w': 'व',
-        's': 'स', 'sh': 'श', 'h': 'ह'
+        'a': 'à¤…', 'i': 'à¤‡', 'u': 'à¤‰', 'e': 'à¤', 'o': 'à¤“',
+        'k': 'à¤•', 'kh': 'à¤–', 'g': 'à¤—', 'gh': 'à¤˜',
+        'ch': 'à¤š', 'chh': 'à¤›', 'j': 'à¤œ', 'jh': 'à¤',
+        't': 'à¤¤', 'th': 'à¤¥', 'd': 'à¤¦', 'dh': 'à¤§', 'n': 'à¤¨',
+        'p': 'à¤ª', 'ph': 'à¤«', 'b': 'à¤¬', 'bh': 'à¤­', 'm': 'à¤®',
+        'y': 'à¤¯', 'r': 'à¤°', 'l': 'à¤²', 'v': 'à¤µ', 'w': 'à¤µ',
+        's': 'à¤¸', 'sh': 'à¤¶', 'h': 'à¤¹'
     };
 
     let name = englishName.toLowerCase();
@@ -101,7 +101,7 @@ function getHindiName(englishName) {
 window.getHindiName = getHindiName;
 
 
-// 🌟 ASTRO ENGINE
+// ðŸŒŸ ASTRO ENGINE
 class AstroEngine {
     constructor() {
         this.numerologyMap = { 'A': 1, 'I': 1, 'J': 1, 'Q': 1, 'Y': 1, 'B': 2, 'K': 2, 'R': 2, 'C': 3, 'G': 3, 'L': 3, 'S': 3, 'D': 4, 'M': 4, 'T': 4, 'E': 5, 'H': 5, 'N': 5, 'X': 5, 'U': 6, 'V': 6, 'W': 6, 'O': 7, 'Z': 7, 'F': 8, 'P': 8 };
@@ -109,125 +109,125 @@ class AstroEngine {
         // --- 2026 FULL HOROSCOPE DATA (COMPLETE TEXT) ---
         this.rashiMap = [
             {
-                rashi_en: "Aries (Mesh)", rashi_hi: "मेष (Aries)",
+                rashi_en: "Aries (Mesh)", rashi_hi: "à¤®à¥‡à¤· (Aries)",
                 letters: ["chu", "che", "cho", "la", "li", "lu", "le", "lo", "a"],
                 nakshatras: ["Ashwini", "Bharani", "Krittika"],
                 phal_en: "Courageous, energetic, and a born leader.",
-                phal_hi: "साहसी, ऊर्जावान और नेतृत्व करने वाला।",
+                phal_hi: "à¤¸à¤¾à¤¹à¤¸à¥€, à¤Šà¤°à¥à¤œà¤¾à¤µà¤¾à¤¨ à¤”à¤° à¤¨à¥‡à¤¤à¥ƒà¤¤à¥à¤µ à¤•à¤°à¤¨à¥‡ à¤µà¤¾à¤²à¤¾à¥¤",
                 rashiphal_en: "2026 brings massive career growth and energy. Focus on health in the second half. New beginnings are favored.",
-                rashiphal_hi: "2026 करियर में भारी वृद्धि और ऊर्जा लाएगा। वर्ष के दूसरे भाग में स्वास्थ्य पर ध्यान दें। नई शुरुआत के लिए समय अनुकूल है।"
+                rashiphal_hi: "2026 à¤•à¤°à¤¿à¤¯à¤° à¤®à¥‡à¤‚ à¤­à¤¾à¤°à¥€ à¤µà¥ƒà¤¦à¥à¤§à¤¿ à¤”à¤° à¤Šà¤°à¥à¤œà¤¾ à¤²à¤¾à¤à¤—à¤¾à¥¤ à¤µà¤°à¥à¤· à¤•à¥‡ à¤¦à¥‚à¤¸à¤°à¥‡ à¤­à¤¾à¤— à¤®à¥‡à¤‚ à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤ªà¤° à¤§à¥à¤¯à¤¾à¤¨ à¤¦à¥‡à¤‚à¥¤ à¤¨à¤ˆ à¤¶à¥à¤°à¥à¤†à¤¤ à¤•à¥‡ à¤²à¤¿à¤ à¤¸à¤®à¤¯ à¤…à¤¨à¥à¤•à¥‚à¤² à¤¹à¥ˆà¥¤"
             },
             {
-                rashi_en: "Taurus (Vrishabh)", rashi_hi: "वृषभ (Taurus)",
+                rashi_en: "Taurus (Vrishabh)", rashi_hi: "à¤µà¥ƒà¤·à¤­ (Taurus)",
                 letters: ["i", "ee", "u", "oo", "e", "o", "va", "vi", "vu", "ve", "vo"],
                 nakshatras: ["Krittika", "Rohini", "Mrigashira"],
                 phal_en: "Calm, reliable, and lover of arts.",
-                phal_hi: "शांत, विश्वसनीय और कला प्रेमी।",
+                phal_hi: "à¤¶à¤¾à¤‚à¤¤, à¤µà¤¿à¤¶à¥à¤µà¤¸à¤¨à¥€à¤¯ à¤”à¤° à¤•à¤²à¤¾ à¤ªà¥à¤°à¥‡à¤®à¥€à¥¤",
                 rashiphal_en: "Financial stability improves significantly in 2026. Relationships will deepen. Avoid stubbornness in family matters.",
-                rashiphal_hi: "2026 में आर्थिक स्थिरता काफी बेहतर होगी। रिश्ते गहरे होंगे। पारिवारिक मामलों में जिद्दी होने से बचें।"
+                rashiphal_hi: "2026 à¤®à¥‡à¤‚ à¤†à¤°à¥à¤¥à¤¿à¤• à¤¸à¥à¤¥à¤¿à¤°à¤¤à¤¾ à¤•à¤¾à¤«à¥€ à¤¬à¥‡à¤¹à¤¤à¤° à¤¹à¥‹à¤—à¥€à¥¤ à¤°à¤¿à¤¶à¥à¤¤à¥‡ à¤—à¤¹à¤°à¥‡ à¤¹à¥‹à¤‚à¤—à¥‡à¥¤ à¤ªà¤¾à¤°à¤¿à¤µà¤¾à¤°à¤¿à¤• à¤®à¤¾à¤®à¤²à¥‹à¤‚ à¤®à¥‡à¤‚ à¤œà¤¿à¤¦à¥à¤¦à¥€ à¤¹à¥‹à¤¨à¥‡ à¤¸à¥‡ à¤¬à¤šà¥‡à¤‚à¥¤"
             },
             {
-                rashi_en: "Gemini (Mithun)", rashi_hi: "मिथुन (Gemini)",
+                rashi_en: "Gemini (Mithun)", rashi_hi: "à¤®à¤¿à¤¥à¥à¤¨ (Gemini)",
                 letters: ["ka", "ki", "ku", "gh", "ng", "ch", "ke", "ko", "ha"],
                 nakshatras: ["Mrigashira", "Ardra", "Punarvasu"],
                 phal_en: "Intelligent, talkative, and versatile.",
-                phal_hi: "बुद्धिमान, वाचाल और बहुमुखी प्रतिभा वाला।",
+                phal_hi: "à¤¬à¥à¤¦à¥à¤§à¤¿à¤®à¤¾à¤¨, à¤µà¤¾à¤šà¤¾à¤² à¤”à¤° à¤¬à¤¹à¥à¤®à¥à¤–à¥€ à¤ªà¥à¤°à¤¤à¤¿à¤­à¤¾ à¤µà¤¾à¤²à¤¾à¥¤",
                 rashiphal_en: "A great year for learning, travel, and communication. New opportunities arise in business. Stay focused.",
-                rashiphal_hi: "सीखने, यात्रा और संचार के लिए यह एक बेहतरीन वर्ष है। व्यापार में नए अवसर मिलेंगे। अपने लक्ष्य पर केंद्रित रहें।"
+                rashiphal_hi: "à¤¸à¥€à¤–à¤¨à¥‡, à¤¯à¤¾à¤¤à¥à¤°à¤¾ à¤”à¤° à¤¸à¤‚à¤šà¤¾à¤° à¤•à¥‡ à¤²à¤¿à¤ à¤¯à¤¹ à¤à¤• à¤¬à¥‡à¤¹à¤¤à¤°à¥€à¤¨ à¤µà¤°à¥à¤· à¤¹à¥ˆà¥¤ à¤µà¥à¤¯à¤¾à¤ªà¤¾à¤° à¤®à¥‡à¤‚ à¤¨à¤ à¤…à¤µà¤¸à¤° à¤®à¤¿à¤²à¥‡à¤‚à¤—à¥‡à¥¤ à¤…à¤ªà¤¨à¥‡ à¤²à¤•à¥à¤·à¥à¤¯ à¤ªà¤° à¤•à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¤ à¤°à¤¹à¥‡à¤‚à¥¤"
             },
             {
-                rashi_en: "Cancer (Kark)", rashi_hi: "कर्क (Cancer)",
+                rashi_en: "Cancer (Kark)", rashi_hi: "à¤•à¤°à¥à¤• (Cancer)",
                 letters: ["hi", "hu", "he", "ho", "da", "di", "du", "de", "do"],
                 nakshatras: ["Punarvasu", "Pushya", "Ashlesha"],
                 phal_en: "Emotional, sensitive, and family-oriented.",
-                phal_hi: "भावुक, संवेदनशील और परिवार प्रेमी।",
+                phal_hi: "à¤­à¤¾à¤µà¥à¤•, à¤¸à¤‚à¤µà¥‡à¤¦à¤¨à¤¶à¥€à¤² à¤”à¤° à¤ªà¤°à¤¿à¤µà¤¾à¤° à¤ªà¥à¤°à¥‡à¤®à¥€à¥¤",
                 rashiphal_en: "Focus on home and property in 2026. Emotional strength increases. Career stability is indicated mid-year.",
-                rashiphal_hi: "2026 में घर और संपत्ति पर ध्यान केंद्रित रहेगा। भावनात्मक शक्ति बढ़ेगी। वर्ष के मध्य में करियर में स्थिरता आएगी।"
+                rashiphal_hi: "2026 à¤®à¥‡à¤‚ à¤˜à¤° à¤”à¤° à¤¸à¤‚à¤ªà¤¤à¥à¤¤à¤¿ à¤ªà¤° à¤§à¥à¤¯à¤¾à¤¨ à¤•à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¤ à¤°à¤¹à¥‡à¤—à¤¾à¥¤ à¤­à¤¾à¤µà¤¨à¤¾à¤¤à¥à¤®à¤• à¤¶à¤•à¥à¤¤à¤¿ à¤¬à¤¢à¤¼à¥‡à¤—à¥€à¥¤ à¤µà¤°à¥à¤· à¤•à¥‡ à¤®à¤§à¥à¤¯ à¤®à¥‡à¤‚ à¤•à¤°à¤¿à¤¯à¤° à¤®à¥‡à¤‚ à¤¸à¥à¤¥à¤¿à¤°à¤¤à¤¾ à¤†à¤à¤—à¥€à¥¤"
             },
             {
-                rashi_en: "Leo (Simha)", rashi_hi: "सिंह (Leo)",
+                rashi_en: "Leo (Simha)", rashi_hi: "à¤¸à¤¿à¤‚à¤¹ (Leo)",
                 letters: ["ma", "mi", "mu", "me", "mo", "ta", "ti", "tu", "te"],
                 nakshatras: ["Magha", "Purva Phalguni", "Uttara Phalguni"],
                 phal_en: "Confident, generous, and regal nature.",
-                phal_hi: "आत्मविश्वासी, उदार और राजा जैसा स्वभाव।",
+                phal_hi: "à¤†à¤¤à¥à¤®à¤µà¤¿à¤¶à¥à¤µà¤¾à¤¸à¥€, à¤‰à¤¦à¤¾à¤° à¤”à¤° à¤°à¤¾à¤œà¤¾ à¤œà¥ˆà¤¸à¤¾ à¤¸à¥à¤µà¤­à¤¾à¤µà¥¤",
                 rashiphal_en: "Leadership roles await you in 2026. Your creativity will shine. Recognition and fame are on the cards.",
-                rashiphal_hi: "2026 में नेतृत्व की भूमिकाएँ आपका इंतज़ार कर रही हैं। आपकी रचनात्मकता चमकेगी। मान-सम्मान और प्रसिद्धि मिलने के योग हैं।"
+                rashiphal_hi: "2026 à¤®à¥‡à¤‚ à¤¨à¥‡à¤¤à¥ƒà¤¤à¥à¤µ à¤•à¥€ à¤­à¥‚à¤®à¤¿à¤•à¤¾à¤à¤ à¤†à¤ªà¤•à¤¾ à¤‡à¤‚à¤¤à¤œà¤¼à¤¾à¤° à¤•à¤° à¤°à¤¹à¥€ à¤¹à¥ˆà¤‚à¥¤ à¤†à¤ªà¤•à¥€ à¤°à¤šà¤¨à¤¾à¤¤à¥à¤®à¤•à¤¤à¤¾ à¤šà¤®à¤•à¥‡à¤—à¥€à¥¤ à¤®à¤¾à¤¨-à¤¸à¤®à¥à¤®à¤¾à¤¨ à¤”à¤° à¤ªà¥à¤°à¤¸à¤¿à¤¦à¥à¤§à¤¿ à¤®à¤¿à¤²à¤¨à¥‡ à¤•à¥‡ à¤¯à¥‹à¤— à¤¹à¥ˆà¤‚à¥¤"
             },
             {
-                rashi_en: "Virgo (Kanya)", rashi_hi: "कन्या (Virgo)",
+                rashi_en: "Virgo (Kanya)", rashi_hi: "à¤•à¤¨à¥à¤¯à¤¾ (Virgo)",
                 letters: ["to", "pa", "pi", "pu", "sha", "na", "th", "pe", "po"],
                 nakshatras: ["Uttara Phalguni", "Hasta", "Chitra"],
                 phal_en: "Analytical, practical, and hardworking.",
-                phal_hi: "विश्लेषण करने वाला, व्यावहारिक और मेहनती।",
+                phal_hi: "à¤µà¤¿à¤¶à¥à¤²à¥‡à¤·à¤£ à¤•à¤°à¤¨à¥‡ à¤µà¤¾à¤²à¤¾, à¤µà¥à¤¯à¤¾à¤µà¤¹à¤¾à¤°à¤¿à¤• à¤”à¤° à¤®à¥‡à¤¹à¤¨à¤¤à¥€à¥¤",
                 rashiphal_en: "Hard work pays off this year. Excellent time for skill development and education. Health requires care.",
-                rashiphal_hi: "इस वर्ष कड़ी मेहनत का फल मिलेगा। कौशल विकास और शिक्षा के लिए उत्तम समय है। स्वास्थ्य का ध्यान रखने की आवश्यकता है।"
+                rashiphal_hi: "à¤‡à¤¸ à¤µà¤°à¥à¤· à¤•à¤¡à¤¼à¥€ à¤®à¥‡à¤¹à¤¨à¤¤ à¤•à¤¾ à¤«à¤² à¤®à¤¿à¤²à¥‡à¤—à¤¾à¥¤ à¤•à¥Œà¤¶à¤² à¤µà¤¿à¤•à¤¾à¤¸ à¤”à¤° à¤¶à¤¿à¤•à¥à¤·à¤¾ à¤•à¥‡ à¤²à¤¿à¤ à¤‰à¤¤à¥à¤¤à¤® à¤¸à¤®à¤¯ à¤¹à¥ˆà¥¤ à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤•à¤¾ à¤§à¥à¤¯à¤¾à¤¨ à¤°à¤–à¤¨à¥‡ à¤•à¥€ à¤†à¤µà¤¶à¥à¤¯à¤•à¤¤à¤¾ à¤¹à¥ˆà¥¤"
             },
             {
-                rashi_en: "Libra (Tula)", rashi_hi: "तुला (Libra)",
+                rashi_en: "Libra (Tula)", rashi_hi: "à¤¤à¥à¤²à¤¾ (Libra)",
                 letters: ["ra", "ri", "ru", "re", "ro", "ta", "ti", "tu", "te"],
                 nakshatras: ["Chitra", "Swati", "Vishakha"],
                 phal_en: "Fair, balanced, and social.",
-                phal_hi: "न्यायप्रिय, संतुलित और मिलनसार।",
+                phal_hi: "à¤¨à¥à¤¯à¤¾à¤¯à¤ªà¥à¤°à¤¿à¤¯, à¤¸à¤‚à¤¤à¥à¤²à¤¿à¤¤ à¤”à¤° à¤®à¤¿à¤²à¤¨à¤¸à¤¾à¤°à¥¤",
                 rashiphal_en: "Balance in partnerships is key in 2026. Artistic pursuits flourish. A good year for marriage or new alliances.",
-                rashiphal_hi: "2026 में साझेदारी में संतुलन महत्वपूर्ण रहेगा। कलात्मक कार्यों में सफलता मिलेगी। विवाह या नए गठबंधनों के लिए अच्छा वर्ष है।"
+                rashiphal_hi: "2026 à¤®à¥‡à¤‚ à¤¸à¤¾à¤à¥‡à¤¦à¤¾à¤°à¥€ à¤®à¥‡à¤‚ à¤¸à¤‚à¤¤à¥à¤²à¤¨ à¤®à¤¹à¤¤à¥à¤µà¤ªà¥‚à¤°à¥à¤£ à¤°à¤¹à¥‡à¤—à¤¾à¥¤ à¤•à¤²à¤¾à¤¤à¥à¤®à¤• à¤•à¤¾à¤°à¥à¤¯à¥‹à¤‚ à¤®à¥‡à¤‚ à¤¸à¤«à¤²à¤¤à¤¾ à¤®à¤¿à¤²à¥‡à¤—à¥€à¥¤ à¤µà¤¿à¤µà¤¾à¤¹ à¤¯à¤¾ à¤¨à¤ à¤—à¤ à¤¬à¤‚à¤§à¤¨à¥‹à¤‚ à¤•à¥‡ à¤²à¤¿à¤ à¤…à¤šà¥à¤›à¤¾ à¤µà¤°à¥à¤· à¤¹à¥ˆà¥¤"
             },
             {
-                rashi_en: "Scorpio (Vrishchik)", rashi_hi: "वृश्चिक (Scorpio)",
+                rashi_en: "Scorpio (Vrishchik)", rashi_hi: "à¤µà¥ƒà¤¶à¥à¤šà¤¿à¤• (Scorpio)",
                 letters: ["to", "na", "ni", "nu", "ne", "no", "ya", "yi", "yu"],
                 nakshatras: ["Vishakha", "Anuradha", "Jyeshtha"],
                 phal_en: "Intense, mysterious, and determined.",
-                phal_hi: "तीव्र, रहस्यमयी और दृढ़ निश्चय वाला।",
+                phal_hi: "à¤¤à¥€à¤µà¥à¤°, à¤°à¤¹à¤¸à¥à¤¯à¤®à¤¯à¥€ à¤”à¤° à¤¦à¥ƒà¤¢à¤¼ à¤¨à¤¿à¤¶à¥à¤šà¤¯ à¤µà¤¾à¤²à¤¾à¥¤",
                 rashiphal_en: "A transformative year. Trust your intuition and take calculated risks. Sudden gains are possible.",
-                rashiphal_hi: "यह एक परिवर्तनकारी वर्ष है। अपनी अंतर्ज्ञान पर भरोसा करें और सोच-समझकर जोखिम लें। अचानक धन लाभ संभव है।"
+                rashiphal_hi: "à¤¯à¤¹ à¤à¤• à¤ªà¤°à¤¿à¤µà¤°à¥à¤¤à¤¨à¤•à¤¾à¤°à¥€ à¤µà¤°à¥à¤· à¤¹à¥ˆà¥¤ à¤…à¤ªà¤¨à¥€ à¤…à¤‚à¤¤à¤°à¥à¤œà¥à¤žà¤¾à¤¨ à¤ªà¤° à¤­à¤°à¥‹à¤¸à¤¾ à¤•à¤°à¥‡à¤‚ à¤”à¤° à¤¸à¥‹à¤š-à¤¸à¤®à¤à¤•à¤° à¤œà¥‹à¤–à¤¿à¤® à¤²à¥‡à¤‚à¥¤ à¤…à¤šà¤¾à¤¨à¤• à¤§à¤¨ à¤²à¤¾à¤­ à¤¸à¤‚à¤­à¤µ à¤¹à¥ˆà¥¤"
             },
             {
-                rashi_en: "Sagittarius (Dhanu)", rashi_hi: "धनु (Sagittarius)",
+                rashi_en: "Sagittarius (Dhanu)", rashi_hi: "à¤§à¤¨à¥ (Sagittarius)",
                 letters: ["ye", "yo", "bha", "bhi", "bhu", "dha", "pha", "dha", "bhe"],
                 nakshatras: ["Mula", "Purva Ashadha", "Uttara Ashadha"],
                 phal_en: "Optimistic, philosophical, and independent.",
-                phal_hi: "आशावादी, दार्शनिक और स्वतंत्र।",
+                phal_hi: "à¤†à¤¶à¤¾à¤µà¤¾à¤¦à¥€, à¤¦à¤¾à¤°à¥à¤¶à¤¨à¤¿à¤• à¤”à¤° à¤¸à¥à¤µà¤¤à¤‚à¤¤à¥à¤°à¥¤",
                 rashiphal_en: "Luck favors you in 2026. Spiritual growth and long-distance travel are strongly indicated. Optimism returns.",
-                rashiphal_hi: "2026 में भाग्य आपका साथ देगा। आध्यात्मिक विकास और लंबी दूरी की यात्रा के प्रबल संकेत हैं। जीवन में आशावाद लौटेगा।"
+                rashiphal_hi: "2026 à¤®à¥‡à¤‚ à¤­à¤¾à¤—à¥à¤¯ à¤†à¤ªà¤•à¤¾ à¤¸à¤¾à¤¥ à¤¦à¥‡à¤—à¤¾à¥¤ à¤†à¤§à¥à¤¯à¤¾à¤¤à¥à¤®à¤¿à¤• à¤µà¤¿à¤•à¤¾à¤¸ à¤”à¤° à¤²à¤‚à¤¬à¥€ à¤¦à¥‚à¤°à¥€ à¤•à¥€ à¤¯à¤¾à¤¤à¥à¤°à¤¾ à¤•à¥‡ à¤ªà¥à¤°à¤¬à¤² à¤¸à¤‚à¤•à¥‡à¤¤ à¤¹à¥ˆà¤‚à¥¤ à¤œà¥€à¤µà¤¨ à¤®à¥‡à¤‚ à¤†à¤¶à¤¾à¤µà¤¾à¤¦ à¤²à¥Œà¤Ÿà¥‡à¤—à¤¾à¥¤"
             },
             {
-                rashi_en: "Capricorn (Makar)", rashi_hi: "मकर (Capricorn)",
+                rashi_en: "Capricorn (Makar)", rashi_hi: "à¤®à¤•à¤° (Capricorn)",
                 letters: ["bho", "ja", "ji", "ju", "je", "jo", "kha", "ga", "gi"],
                 nakshatras: ["Uttara Ashadha", "Shravana", "Dhanishtha"],
                 phal_en: "Ambitious, disciplined, and patient.",
-                phal_hi: "महत्वाकांक्षी, अनुशासित और धैर्यवान।",
+                phal_hi: "à¤®à¤¹à¤¤à¥à¤µà¤¾à¤•à¤¾à¤‚à¤•à¥à¤·à¥€, à¤…à¤¨à¥à¤¶à¤¾à¤¸à¤¿à¤¤ à¤”à¤° à¤§à¥ˆà¤°à¥à¤¯à¤µà¤¾à¤¨à¥¤",
                 rashiphal_en: "Career goals will be met through discipline. 2026 rewards your patience. Real estate investments look good.",
-                rashiphal_hi: "अनुशासन के माध्यम से करियर के लक्ष्य पूरे होंगे। 2026 आपके धैर्य का फल देगा। अचल संपत्ति में निवेश शुभ रहेगा।"
+                rashiphal_hi: "à¤…à¤¨à¥à¤¶à¤¾à¤¸à¤¨ à¤•à¥‡ à¤®à¤¾à¤§à¥à¤¯à¤® à¤¸à¥‡ à¤•à¤°à¤¿à¤¯à¤° à¤•à¥‡ à¤²à¤•à¥à¤·à¥à¤¯ à¤ªà¥‚à¤°à¥‡ à¤¹à¥‹à¤‚à¤—à¥‡à¥¤ 2026 à¤†à¤ªà¤•à¥‡ à¤§à¥ˆà¤°à¥à¤¯ à¤•à¤¾ à¤«à¤² à¤¦à¥‡à¤—à¤¾à¥¤ à¤…à¤šà¤² à¤¸à¤‚à¤ªà¤¤à¥à¤¤à¤¿ à¤®à¥‡à¤‚ à¤¨à¤¿à¤µà¥‡à¤¶ à¤¶à¥à¤­ à¤°à¤¹à¥‡à¤—à¤¾à¥¤"
             },
             {
-                rashi_en: "Aquarius (Kumbh)", rashi_hi: "कुम्भ (Aquarius)",
+                rashi_en: "Aquarius (Kumbh)", rashi_hi: "à¤•à¥à¤®à¥à¤­ (Aquarius)",
                 letters: ["gu", "ge", "go", "sa", "si", "su", "se", "so", "da"],
                 nakshatras: ["Dhanishtha", "Shatabhisha", "Purva Bhadrapada"],
                 phal_en: "Innovative, humanitarian, and friendly.",
-                phal_hi: "नवीन सोच वाला, मानवीय और मित्रवत।",
+                phal_hi: "à¤¨à¤µà¥€à¤¨ à¤¸à¥‹à¤š à¤µà¤¾à¤²à¤¾, à¤®à¤¾à¤¨à¤µà¥€à¤¯ à¤”à¤° à¤®à¤¿à¤¤à¥à¤°à¤µà¤¤à¥¤",
                 rashiphal_en: "Innovation leads to success. Your social circle expands significantly in 2026. Financial gains from networks.",
-                rashiphal_hi: "नवचार से सफलता मिलेगी। 2026 में आपका सामाजिक दायरा काफी बढ़ेगा। नेटवर्किंग से आर्थिक लाभ होगा।"
+                rashiphal_hi: "à¤¨à¤µà¤šà¤¾à¤° à¤¸à¥‡ à¤¸à¤«à¤²à¤¤à¤¾ à¤®à¤¿à¤²à¥‡à¤—à¥€à¥¤ 2026 à¤®à¥‡à¤‚ à¤†à¤ªà¤•à¤¾ à¤¸à¤¾à¤®à¤¾à¤œà¤¿à¤• à¤¦à¤¾à¤¯à¤°à¤¾ à¤•à¤¾à¤«à¥€ à¤¬à¤¢à¤¼à¥‡à¤—à¤¾à¥¤ à¤¨à¥‡à¤Ÿà¤µà¤°à¥à¤•à¤¿à¤‚à¤— à¤¸à¥‡ à¤†à¤°à¥à¤¥à¤¿à¤• à¤²à¤¾à¤­ à¤¹à¥‹à¤—à¤¾à¥¤"
             },
             {
-                rashi_en: "Pisces (Meen)", rashi_hi: "मीन (Pisces)",
+                rashi_en: "Pisces (Meen)", rashi_hi: "à¤®à¥€à¤¨ (Pisces)",
                 letters: ["di", "du", "th", "jha", "yna", "de", "do", "cha", "chi"],
                 nakshatras: ["Purva Bhadrapada", "Uttara Bhadrapada", "Revati"],
                 phal_en: "Compassionate, spiritual, and imaginative.",
-                phal_hi: "दयालु, आध्यात्मिक और कल्पनाशील।",
+                phal_hi: "à¤¦à¤¯à¤¾à¤²à¥, à¤†à¤§à¥à¤¯à¤¾à¤¤à¥à¤®à¤¿à¤• à¤”à¤° à¤•à¤²à¥à¤ªà¤¨à¤¾à¤¶à¥€à¤²à¥¤",
                 rashiphal_en: "Spiritual peace and overseas connections. Manage expenses wisely. Intuition will be your best guide.",
-                rashiphal_hi: "आध्यात्मिक शांति मिलेगी और विदेशी संबंध बनेंगे। खर्चों का प्रबंधन समझदारी से करें। अंतर्ज्ञान आपका सबसे अच्छा मार्गदर्शक होगा।"
+                rashiphal_hi: "à¤†à¤§à¥à¤¯à¤¾à¤¤à¥à¤®à¤¿à¤• à¤¶à¤¾à¤‚à¤¤à¤¿ à¤®à¤¿à¤²à¥‡à¤—à¥€ à¤”à¤° à¤µà¤¿à¤¦à¥‡à¤¶à¥€ à¤¸à¤‚à¤¬à¤‚à¤§ à¤¬à¤¨à¥‡à¤‚à¤—à¥‡à¥¤ à¤–à¤°à¥à¤šà¥‹à¤‚ à¤•à¤¾ à¤ªà¥à¤°à¤¬à¤‚à¤§à¤¨ à¤¸à¤®à¤à¤¦à¤¾à¤°à¥€ à¤¸à¥‡ à¤•à¤°à¥‡à¤‚à¥¤ à¤…à¤‚à¤¤à¤°à¥à¤œà¥à¤žà¤¾à¤¨ à¤†à¤ªà¤•à¤¾ à¤¸à¤¬à¤¸à¥‡ à¤…à¤šà¥à¤›à¤¾ à¤®à¤¾à¤°à¥à¤—à¤¦à¤°à¥à¤¶à¤• à¤¹à¥‹à¤—à¤¾à¥¤"
             }
         ];
 
         this.astroDetails = {
-            1: { planet_en: "Sun", planet_hi: "सूर्य", color_en: "Golden", color_hi: "सुनहरा", lucky_nos: "1, 2, 3, 9", fal_en: "Leader...", fal_hi: "नेता..." },
-            2: { planet_en: "Moon", planet_hi: "चन्द्र", color_en: "White", color_hi: "सफेद", lucky_nos: "2, 6, 7", fal_en: "Emotional...", fal_hi: "भावुक..." },
-            3: { planet_en: "Jupiter", planet_hi: "बृहस्पति", color_en: "Yellow", color_hi: "पीला", lucky_nos: "1, 3, 5, 9", fal_en: "Wise...", fal_hi: "ज्ञानी..." },
-            4: { planet_en: "Rahu", planet_hi: "राहू", color_en: "Blue", color_hi: "नीला", lucky_nos: "1, 4, 5, 6", fal_en: "Practical...", fal_hi: "व्यावहारिक..." },
-            5: { planet_en: "Mercury", planet_hi: "बुध", color_en: "Green", color_hi: "हरा", lucky_nos: "1, 5, 6", fal_en: "Intelligent...", fal_hi: "बुद्धिमान..." },
-            6: { planet_en: "Venus", planet_hi: "शुक्र", color_en: "Pink", color_hi: "गुलाबी", lucky_nos: "3, 6, 9", fal_en: "Charming...", fal_hi: "आकर्षक..." },
-            7: { planet_en: "Ketu", planet_hi: "केतु", color_en: "Multi", color_hi: "चितकबरा", lucky_nos: "2, 7", fal_en: "Spiritual...", fal_hi: "आध्यात्मिक..." },
-            8: { planet_en: "Saturn", planet_hi: "शनि", color_en: "Black", color_hi: "काला", lucky_nos: "1, 4, 8", fal_en: "Ambitious...", fal_hi: "महत्वाकांक्षी..." },
-            9: { planet_en: "Mars", planet_hi: "मंगल", color_en: "Red", color_hi: "लाल", lucky_nos: "3, 6, 9", fal_en: "Energetic...", fal_hi: "ऊर्जावान..." }
+            1: { planet_en: "Sun", planet_hi: "à¤¸à¥‚à¤°à¥à¤¯", color_en: "Golden", color_hi: "à¤¸à¥à¤¨à¤¹à¤°à¤¾", lucky_nos: "1, 2, 3, 9", fal_en: "Leader...", fal_hi: "à¤¨à¥‡à¤¤à¤¾..." },
+            2: { planet_en: "Moon", planet_hi: "à¤šà¤¨à¥à¤¦à¥à¤°", color_en: "White", color_hi: "à¤¸à¤«à¥‡à¤¦", lucky_nos: "2, 6, 7", fal_en: "Emotional...", fal_hi: "à¤­à¤¾à¤µà¥à¤•..." },
+            3: { planet_en: "Jupiter", planet_hi: "à¤¬à¥ƒà¤¹à¤¸à¥à¤ªà¤¤à¤¿", color_en: "Yellow", color_hi: "à¤ªà¥€à¤²à¤¾", lucky_nos: "1, 3, 5, 9", fal_en: "Wise...", fal_hi: "à¤œà¥à¤žà¤¾à¤¨à¥€..." },
+            4: { planet_en: "Rahu", planet_hi: "à¤°à¤¾à¤¹à¥‚", color_en: "Blue", color_hi: "à¤¨à¥€à¤²à¤¾", lucky_nos: "1, 4, 5, 6", fal_en: "Practical...", fal_hi: "à¤µà¥à¤¯à¤¾à¤µà¤¹à¤¾à¤°à¤¿à¤•..." },
+            5: { planet_en: "Mercury", planet_hi: "à¤¬à¥à¤§", color_en: "Green", color_hi: "à¤¹à¤°à¤¾", lucky_nos: "1, 5, 6", fal_en: "Intelligent...", fal_hi: "à¤¬à¥à¤¦à¥à¤§à¤¿à¤®à¤¾à¤¨..." },
+            6: { planet_en: "Venus", planet_hi: "à¤¶à¥à¤•à¥à¤°", color_en: "Pink", color_hi: "à¤—à¥à¤²à¤¾à¤¬à¥€", lucky_nos: "3, 6, 9", fal_en: "Charming...", fal_hi: "à¤†à¤•à¤°à¥à¤·à¤•..." },
+            7: { planet_en: "Ketu", planet_hi: "à¤•à¥‡à¤¤à¥", color_en: "Multi", color_hi: "à¤šà¤¿à¤¤à¤•à¤¬à¤°à¤¾", lucky_nos: "2, 7", fal_en: "Spiritual...", fal_hi: "à¤†à¤§à¥à¤¯à¤¾à¤¤à¥à¤®à¤¿à¤•..." },
+            8: { planet_en: "Saturn", planet_hi: "à¤¶à¤¨à¤¿", color_en: "Black", color_hi: "à¤•à¤¾à¤²à¤¾", lucky_nos: "1, 4, 8", fal_en: "Ambitious...", fal_hi: "à¤®à¤¹à¤¤à¥à¤µà¤¾à¤•à¤¾à¤‚à¤•à¥à¤·à¥€..." },
+            9: { planet_en: "Mars", planet_hi: "à¤®à¤‚à¤—à¤²", color_en: "Red", color_hi: "à¤²à¤¾à¤²", lucky_nos: "3, 6, 9", fal_en: "Energetic...", fal_hi: "à¤Šà¤°à¥à¤œà¤¾à¤µà¤¾à¤¨..." }
         };
     }
 
@@ -268,10 +268,10 @@ class AstroEngine {
             name_hi: hName,
 
             // Meaning logic: preserve whatever is in data (might be English or Hindi based on source)
-            meaning: data.meaning || (isHindi ? "डेटाबेस में नहीं मिला" : "Meaning not in database"),
+            meaning: data.meaning || (isHindi ? "à¤¡à¥‡à¤Ÿà¤¾à¤¬à¥‡à¤¸ à¤®à¥‡à¤‚ à¤¨à¤¹à¥€à¤‚ à¤®à¤¿à¤²à¤¾" : "Meaning not in database"),
             meaning_en: data.meaning_en || data.meaning || "Meaning not available", // Attempt to have an En version
             gender: data.gender || "Unknown",
-            origin: data.origin || (isHindi ? "संस्कृत/भारतीय" : "Sanskrit/Indian"),
+            origin: data.origin || (isHindi ? "à¤¸à¤‚à¤¸à¥à¤•à¥ƒà¤¤/à¤­à¤¾à¤°à¤¤à¥€à¤¯" : "Sanskrit/Indian"),
             origin_en: data.origin_en || data.origin || "Sanskrit/Indian",
 
             // Bilingual versions for poster control
@@ -304,20 +304,20 @@ class AstroEngine {
             numFal_hi: astro.fal_hi,
 
             labels: {
-                meaning: isHindi ? "अर्थ" : "Meaning",
-                gender: isHindi ? "लिंग" : "Gender",
-                origin: isHindi ? "मूल" : "Origin",
-                vedicTitle: isHindi ? "🔮 वैदिक ज्योतिष" : "🔮 Vedic Astrology",
-                rashi: isHindi ? "राशि" : "Rashi",
-                nakshatra: isHindi ? "नक्षत्र" : "Nakshatra",
-                personality: isHindi ? "2026 भविष्यवाणी" : "2026 Prediction",
-                rashiphalTitle: isHindi ? "✨ 2026 राशिफल" : "✨ 2026 Horoscope",
-                numTitle: isHindi ? "🔢 अंक ज्योतिष" : "🔢 Numerology",
-                number: isHindi ? "अंक" : "Number",
-                planet: isHindi ? "ग्रह" : "Planet",
-                luckyColor: isHindi ? "शुभ रंग" : "Lucky Color",
-                luckyNos: isHindi ? "शुभ अंक" : "Lucky Numbers",
-                prediction: isHindi ? "भविष्यफल" : "Prediction"
+                meaning: isHindi ? "à¤…à¤°à¥à¤¥" : "Meaning",
+                gender: isHindi ? "à¤²à¤¿à¤‚à¤—" : "Gender",
+                origin: isHindi ? "à¤®à¥‚à¤²" : "Origin",
+                vedicTitle: isHindi ? "ðŸ”® à¤µà¥ˆà¤¦à¤¿à¤• à¤œà¥à¤¯à¥‹à¤¤à¤¿à¤·" : "ðŸ”® Vedic Astrology",
+                rashi: isHindi ? "à¤°à¤¾à¤¶à¤¿" : "Rashi",
+                nakshatra: isHindi ? "à¤¨à¤•à¥à¤·à¤¤à¥à¤°" : "Nakshatra",
+                personality: isHindi ? "2026 à¤­à¤µà¤¿à¤·à¥à¤¯à¤µà¤¾à¤£à¥€" : "2026 Prediction",
+                rashiphalTitle: isHindi ? "âœ¨ 2026 à¤°à¤¾à¤¶à¤¿à¤«à¤²" : "âœ¨ 2026 Horoscope",
+                numTitle: isHindi ? "ðŸ”¢ à¤…à¤‚à¤• à¤œà¥à¤¯à¥‹à¤¤à¤¿à¤·" : "ðŸ”¢ Numerology",
+                number: isHindi ? "à¤…à¤‚à¤•" : "Number",
+                planet: isHindi ? "à¤—à¥à¤°à¤¹" : "Planet",
+                luckyColor: isHindi ? "à¤¶à¥à¤­ à¤°à¤‚à¤—" : "Lucky Color",
+                luckyNos: isHindi ? "à¤¶à¥à¤­ à¤…à¤‚à¤•" : "Lucky Numbers",
+                prediction: isHindi ? "à¤­à¤µà¤¿à¤·à¥à¤¯à¤«à¤²" : "Prediction"
             }
         };
     }
@@ -437,6 +437,13 @@ const favManager = new FavoritesManager();
 window.favManager = favManager;
 window.FavoritesManager = FavoritesManager;
 
+// Notify shortlist hub whenever favorites change
+const _favSave = favManager.save.bind(favManager);
+favManager.save = function () {
+    _favSave();
+    document.dispatchEvent(new CustomEvent('shortlistChanged'));
+};
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -550,10 +557,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sync favorites button between desktop and mobile
     const favBtnDesktop = document.getElementById('fav-view-btn');
-    const favBtnMobile = document.getElementById('fav-view-btn-mobile');
+    const favBtnMobileSync = document.getElementById('fav-view-btn-mobile');
 
-    if (favBtnMobile && favBtnDesktop) {
-        favBtnMobile.addEventListener('click', () => {
+    if (favBtnMobileSync && favBtnDesktop) {
+        favBtnMobileSync.addEventListener('click', () => {
             favBtnDesktop.click();
         });
     }
@@ -675,7 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: lang } }));
 
         const inp = document.getElementById("hero-search-input");
-        if (inp) inp.placeholder = lang === "hi" ? "उदा: आरव, अद्विक..." : "e.g., Aarav, Advik...";
+        if (inp) inp.placeholder = lang === "hi" ? "à¤‰à¤¦à¤¾: à¤†à¤°à¤µ, à¤…à¤¦à¥à¤µà¤¿à¤•..." : "e.g., Aarav, Advik...";
 
         // If name finder is visible, reload names for currently selected gender so JSON file/language updates instantly
         try {
@@ -745,7 +752,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="detail-grid" style="text-align: left; margin-top: 20px;">
                 <p><strong>${L.meaning}:</strong> ${data.meaning}</p>
-                <p><strong>${L.gender}:</strong> ${getLanguage() === 'hi' ? (data.gender === 'Boy' ? 'लड़का' : 'लड़की') : data.gender}</p> 
+                <p><strong>${L.gender}:</strong> ${getLanguage() === 'hi' ? (data.gender === 'Boy' ? 'à¤²à¤¡à¤¼à¤•à¤¾' : 'à¤²à¤¡à¤¼à¤•à¥€') : data.gender}</p> 
                 <p><strong>${L.origin}:</strong> ${data.origin}</p>
                 <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ddd;">
                 <h3>${L.vedicTitle}</h3>
@@ -1007,13 +1014,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     const isHindi = getLanguage() === 'hi';
                     const msg = isHindi
-                        ? "जल्दी आ रहा है, कृपया प्रतीक्षा करें, हम आपके धैर्य की सराहना करते हैं।"
+                        ? "à¤œà¤²à¥à¤¦à¥€ à¤† à¤°à¤¹à¤¾ à¤¹à¥ˆ, à¤•à¥ƒà¤ªà¤¯à¤¾ à¤ªà¥à¤°à¤¤à¥€à¤•à¥à¤·à¤¾ à¤•à¤°à¥‡à¤‚, à¤¹à¤® à¤†à¤ªà¤•à¥‡ à¤§à¥ˆà¤°à¥à¤¯ à¤•à¥€ à¤¸à¤°à¤¾à¤¹à¤¨à¤¾ à¤•à¤°à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤"
                         : "Coming soon, please wait, we appreciate your patience.";
 
                     detailsBox.innerHTML = `
                         <div style="text-align: center; padding: 40px;">
                             <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-primary); margin-bottom: 20px;"></i>
-                            <h3 style="color: var(--text-dark);">${isHindi ? "परिणाम नहीं मिला" : "No Result Found"}</h3>
+                            <h3 style="color: var(--text-dark);">${isHindi ? "à¤ªà¤°à¤¿à¤£à¤¾à¤® à¤¨à¤¹à¥€à¤‚ à¤®à¤¿à¤²à¤¾" : "No Result Found"}</h3>
                             <p style="font-size: 1.2rem; color: var(--text-medium); margin-top: 10px;">${msg}</p>
                         </div>
                     `;
@@ -1273,7 +1280,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (favBtn) {
         favBtn.onclick = () => {
-            openWishlistPanel();
+            openShortlistPanel();
         };
     }
 
@@ -1341,196 +1348,304 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- WISHLIST PANEL (PRODUCTS) ---
-    class WishlistManager {
-        constructor() {
-            this.storageKey = 'naamin_wishlist_v1';
-            this.items = this.load();
-        }
-
-        load() {
-            try {
-                return JSON.parse(localStorage.getItem(this.storageKey)) || [];
-            } catch (e) {
-                return [];
-            }
-        }
-
-        save() {
-            localStorage.setItem(this.storageKey, JSON.stringify(this.items));
-        }
-
-        has(id) {
-            return this.items.some(item => item.id === id);
-        }
-
-        add(item) {
-            if (!this.has(item.id)) {
-                this.items.unshift(item);
-                this.save();
-            }
-        }
-
-        remove(id) {
-            this.items = this.items.filter(item => item.id !== id);
-            this.save();
-        }
-
-        clear() {
-            this.items = [];
-            this.save();
-        }
-    }
-
-    const wishlist = new WishlistManager();
-    const wishlistPanel = document.getElementById('wishlist-panel');
-    const wishlistBackdrop = document.getElementById('wishlist-backdrop');
-    const wishlistCloseBtn = document.getElementById('wishlist-close');
-    const wishlistItems = document.getElementById('wishlist-items');
-    const wishlistViewBtn = document.getElementById('wishlist-view-btn');
+    // --- NAME SHORTLIST HUB ---
+    const shortlistPanel = document.getElementById('shortlist-panel');
+    const shortlistBackdrop = document.getElementById('shortlist-backdrop');
+    const shortlistCloseBtn = document.getElementById('shortlist-close');
+    const shortlistTopGrid = document.getElementById('shortlist-top-grid');
+    const shortlistCompareGrid = document.getElementById('shortlist-compare-grid');
+    const shortlistList = document.getElementById('shortlist-list');
+    const shortlistEmpty = document.getElementById('shortlist-empty');
+    const shortlistTop = document.getElementById('shortlist-top');
+    const shortlistCompare = document.getElementById('shortlist-compare');
+    const shortlistCopyBtn = document.getElementById('shortlist-copy-btn');
+    const shortlistShareBtn = document.getElementById('shortlist-share-btn');
     const favBtnMobile = document.getElementById('fav-view-btn-mobile');
 
-    function openWishlistPanel() {
-        if (!wishlistPanel) {
-            window.location.href = 'wishlist.html';
-            return;
+    const shortlistMetaKey = 'naamin_shortlist_meta_v1';
+    const shortlistFinalKey = 'naamin_shortlist_final_v1';
+
+    function loadShortlistMeta() {
+        try {
+            return JSON.parse(localStorage.getItem(shortlistMetaKey)) || {};
+        } catch (e) {
+            return {};
         }
-        wishlistPanel.classList.add('open');
-        wishlistPanel.setAttribute('aria-hidden', 'false');
-        renderWishlist();
     }
 
-    function closeWishlistPanel() {
-        if (!wishlistPanel) return;
-        wishlistPanel.classList.remove('open');
-        wishlistPanel.setAttribute('aria-hidden', 'true');
+    function saveShortlistMeta(meta) {
+        localStorage.setItem(shortlistMetaKey, JSON.stringify(meta));
     }
 
-    function updateWishlistCount() {
-        const countDesktop = document.getElementById('fav-count');
-        const countMobile = document.getElementById('fav-count-mobile');
-        if (countDesktop) countDesktop.textContent = wishlist.items.length;
-        if (countMobile) countMobile.textContent = wishlist.items.length;
+    let shortlistMeta = loadShortlistMeta();
+    let finalName = localStorage.getItem(shortlistFinalKey) || '';
+
+    function getItemName(item) {
+        return item?.name || item?.Name || '';
     }
 
-    function renderWishlist() {
-        if (!wishlistItems) return;
-        wishlistItems.innerHTML = '';
+    function getItemMeaning(item) {
+        return item?.meaning || item?.Meaning || 'Meaning coming soon';
+    }
 
-        if (wishlist.items.length === 0) {
-            wishlistItems.innerHTML = `
-                <div class="wishlist-empty">
-                    <i class="far fa-heart"></i>
-                    <p>Your wishlist is empty</p>
-                    <span>Save your favorite looks for later.</span>
-                </div>
-            `;
-            updateWishlistCount();
-            return;
+    function ensureMeta(name) {
+        if (!shortlistMeta[name]) {
+            shortlistMeta[name] = { category: 'Modern', notes: '', compare: false };
         }
+    }
 
-        wishlist.items.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'wishlist-item';
-            row.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div>
-                    <h4>${item.name}</h4>
-                    <div class="wishlist-item-price">${item.price}</div>
-                    <div class="wishlist-item-actions">
-                        <button class="remove-btn">❌ Remove</button>
-                        <button class="move-btn">Move to Cart</button>
+    function openShortlistPanel() {
+        if (!shortlistPanel) return;
+        shortlistPanel.classList.add('open');
+        shortlistPanel.setAttribute('aria-hidden', 'false');
+        renderShortlist();
+    }
+
+    function closeShortlistPanel() {
+        if (!shortlistPanel) return;
+        shortlistPanel.classList.remove('open');
+        shortlistPanel.setAttribute('aria-hidden', 'true');
+    }
+
+    function renderShortlist() {
+        if (!shortlistList || !shortlistTopGrid || !shortlistCompareGrid || !shortlistEmpty) return;
+        shortlistTopGrid.innerHTML = '';
+        shortlistCompareGrid.innerHTML = '';
+        shortlistList.innerHTML = '';
+
+        const list = Array.isArray(favManager.favorites) ? favManager.favorites : [];
+
+        if (list.length === 0) {
+            shortlistEmpty.style.display = 'block';
+            if (shortlistTop) shortlistTop.style.display = 'none';
+            if (shortlistCompare) shortlistCompare.style.display = 'none';
+            shortlistList.style.display = 'grid';
+
+            const suggestions = [
+                { name: 'Aarav', meaning: 'Peaceful', category: 'Modern', image: 'baby_aarav_1768672098297.png' },
+                { name: 'Ananya', meaning: 'Unique', category: 'Unique', image: 'baby_ananya_1768672114695.png' },
+                { name: 'Diya', meaning: 'Lamp', category: 'Spiritual', image: 'baby_diya_1768672149752.png' },
+                { name: 'Vihaan', meaning: 'Dawn', category: 'Modern', image: 'baby_vihaan_1768672167983.png' }
+            ];
+
+            shortlistList.innerHTML = `
+                <div class="shortlist-suggestions">
+                    <h4 class="shortlist-suggestions-title">Suggested baby names</h4>
+                    <div class="shortlist-suggestions-grid">
+                        ${suggestions.map(item => {
+                            const id = `${item.name}`.toLowerCase().replace(/\\s+/g, '-');
+                            return `
+                                <div class="shortlist-suggest-card">
+                                    <img src="${item.image}" alt="${item.name}">
+                                    <div class="shortlist-suggest-info">
+                                        <div class="shortlist-suggest-name">${item.name}</div>
+                                        <div class="shortlist-suggest-meta">${item.meaning}</div>
+                                        <div class="shortlist-suggest-tag">${item.category}</div>
+                                        <button class="shortlist-suggest-btn" data-suggest-id="${id}" data-name="${item.name}" data-meaning="${item.meaning}" data-category="${item.category}">Save Name</button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
             `;
 
-            row.querySelector('.remove-btn').onclick = (e) => {
-                e.stopPropagation();
-                wishlist.remove(item.id);
-                renderWishlist();
-                syncWishlistButtons();
-            };
-
-            row.querySelector('.move-btn').onclick = (e) => {
-                e.stopPropagation();
-                moveToCart(item);
-                wishlist.remove(item.id);
-                renderWishlist();
-                syncWishlistButtons();
-            };
-
-            wishlistItems.appendChild(row);
-        });
-
-        updateWishlistCount();
-    }
-
-    function moveToCart(item) {
-        const cartKey = 'naamin_cart_v1';
-        let cart = [];
-        try {
-            cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-        } catch (e) {
-            cart = [];
+            document.querySelectorAll('.shortlist-suggest-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const item = {
+                        name: btn.getAttribute('data-name'),
+                        meaning: btn.getAttribute('data-meaning'),
+                        category: btn.getAttribute('data-category')
+                    };
+                    favManager.toggle(item);
+                    favManager.save();
+                });
+            });
+            return;
         }
-        cart.unshift(item);
-        localStorage.setItem(cartKey, JSON.stringify(cart));
-    }
+        shortlistEmpty.style.display = 'none';
+        if (shortlistTop) shortlistTop.style.display = 'block';
+        shortlistList.style.display = 'grid';
 
-    function syncWishlistButtons() {
-        document.querySelectorAll('.wishlist-add-btn').forEach(btn => {
-            const id = btn.getAttribute('data-product-id');
-            const active = wishlist.has(id);
-            btn.classList.toggle('active', active);
-            const icon = btn.querySelector('i');
-            if (icon) icon.className = active ? 'fas fa-heart' : 'far fa-heart';
+        // Top Picks (first 3)
+        list.slice(0, 3).forEach(item => {
+            const name = getItemName(item);
+            const card = document.createElement('div');
+            card.className = 'shortlist-top-card';
+            card.innerHTML = `
+                <span class="shortlist-top-name">${name}</span>
+                ${finalName === name ? '<span class="shortlist-final-badge">Final</span>' : ''}
+            `;
+            shortlistTopGrid.appendChild(card);
         });
-        updateWishlistCount();
-    }
 
-    if (wishlistBackdrop) {
-        wishlistBackdrop.addEventListener('click', closeWishlistPanel);
-    }
+        // Compare section (2–3 selected)
+        const compareItems = list.filter(item => {
+            const name = getItemName(item);
+            return shortlistMeta[name]?.compare;
+        }).slice(0, 3);
 
-    if (wishlistCloseBtn) {
-        wishlistCloseBtn.addEventListener('click', closeWishlistPanel);
-    }
+        if (compareItems.length >= 2) {
+            if (shortlistCompare) shortlistCompare.style.display = 'block';
+            compareItems.forEach(item => {
+                const name = getItemName(item);
+                const meaning = getItemMeaning(item);
+                const category = shortlistMeta[name]?.category || 'Modern';
+                const card = document.createElement('div');
+                card.className = 'shortlist-compare-card';
+                card.innerHTML = `
+                    <h5>${name}</h5>
+                    <div class="shortlist-compare-meta">Meaning: ${meaning}</div>
+                    <div class="shortlist-compare-meta">Category: ${category}</div>
+                `;
+                shortlistCompareGrid.appendChild(card);
+            });
+        }
 
-    if (favBtnMobile) {
-        favBtnMobile.addEventListener('click', () => {
-            openWishlistPanel();
-        });
-    }
+        // Full list
+        list.forEach(item => {
+            const name = getItemName(item);
+            if (!name) return;
+            ensureMeta(name);
 
-    if (wishlistViewBtn) {
-        wishlistViewBtn.addEventListener('click', () => {
-            window.location.href = 'wishlist.html';
-        });
-    }
+            const meaning = getItemMeaning(item);
+            const category = shortlistMeta[name].category || 'Modern';
+            const notes = shortlistMeta[name].notes || '';
+            const compareChecked = shortlistMeta[name].compare ? 'checked' : '';
 
-    document.querySelectorAll('.wishlist-add-btn').forEach(btn => {
-        const name = btn.getAttribute('data-product-name');
-        const price = btn.getAttribute('data-product-price');
-        const image = btn.getAttribute('data-product-image');
-        const id = `${name}`.toLowerCase().replace(/\\s+/g, '-');
-        btn.setAttribute('data-product-id', id);
+            const row = document.createElement('div');
+            row.className = `shortlist-item ${finalName === name ? 'final' : ''}`;
+            row.innerHTML = `
+                <div class="shortlist-item-header">
+                    <div>
+                        <div class="shortlist-item-title">${name}</div>
+                        <div class="shortlist-item-meta">${meaning}</div>
+                    </div>
+                    ${finalName === name ? '<span class="shortlist-final-badge">Final</span>' : ''}
+                </div>
+                <div class="shortlist-controls">
+                    <select class="shortlist-select" data-role="category">
+                        <option ${category === 'Modern' ? 'selected' : ''}>Modern</option>
+                        <option ${category === 'Spiritual' ? 'selected' : ''}>Spiritual</option>
+                        <option ${category === 'Unique' ? 'selected' : ''}>Unique</option>
+                    </select>
+                    <label class="shortlist-btn">
+                        <input type="checkbox" data-role="compare" ${compareChecked} /> Compare
+                    </label>
+                    <button class="shortlist-btn primary" data-role="final">Mark Final</button>
+                    <button class="shortlist-btn" data-role="remove">Remove</button>
+                </div>
+                <div class="shortlist-notes">
+                    <textarea data-role="notes" placeholder="Add a note...">${notes}</textarea>
+                </div>
+            `;
 
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const item = { id, name, price, image };
-            if (wishlist.has(id)) {
-                wishlist.remove(id);
-            } else {
-                wishlist.add(item);
+            const categorySelect = row.querySelector('[data-role="category"]');
+            const compareCheckbox = row.querySelector('[data-role="compare"]');
+            const finalBtn = row.querySelector('[data-role="final"]');
+            const removeBtn = row.querySelector('[data-role="remove"]');
+            const notesBox = row.querySelector('[data-role="notes"]');
+
+            if (categorySelect) {
+                categorySelect.addEventListener('change', () => {
+                    shortlistMeta[name].category = categorySelect.value;
+                    saveShortlistMeta(shortlistMeta);
+                    renderShortlist();
+                });
             }
-            renderWishlist();
-            syncWishlistButtons();
+
+            if (compareCheckbox) {
+                compareCheckbox.addEventListener('change', () => {
+                    const selectedCount = list.filter(it => shortlistMeta[getItemName(it)]?.compare).length;
+                    if (compareCheckbox.checked && selectedCount >= 3) {
+                        compareCheckbox.checked = false;
+                        alert('You can compare up to 3 names.');
+                        return;
+                    }
+                    shortlistMeta[name].compare = compareCheckbox.checked;
+                    saveShortlistMeta(shortlistMeta);
+                    renderShortlist();
+                });
+            }
+
+            if (finalBtn) {
+                finalBtn.addEventListener('click', () => {
+                    finalName = name;
+                    localStorage.setItem(shortlistFinalKey, finalName);
+                    renderShortlist();
+                });
+            }
+
+            if (removeBtn) {
+                removeBtn.addEventListener('click', () => {
+                    favManager.toggle(item);
+                    favManager.save();
+                });
+            }
+
+            if (notesBox) {
+                notesBox.addEventListener('input', () => {
+                    shortlistMeta[name].notes = notesBox.value;
+                    saveShortlistMeta(shortlistMeta);
+                });
+            }
+
+            shortlistList.appendChild(row);
         });
+    }
+
+    function buildShareText() {
+        const list = Array.isArray(favManager.favorites) ? favManager.favorites : [];
+        if (list.length === 0) return 'No names saved yet.';
+        return list.map(item => {
+            const name = getItemName(item);
+            const meaning = getItemMeaning(item);
+            const category = shortlistMeta[name]?.category || 'Modern';
+            return `${name} — ${meaning} (${category})`;
+        }).join('\n');
+    }
+
+    if (shortlistCopyBtn) {
+        shortlistCopyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(buildShareText());
+                shortlistCopyBtn.textContent = 'Copied!';
+                setTimeout(() => shortlistCopyBtn.textContent = 'Copy', 1200);
+            } catch (e) {
+                alert('Copy failed. Please try again.');
+            }
+        });
+    }
+
+    if (shortlistShareBtn) {
+        shortlistShareBtn.addEventListener('click', async () => {
+            const text = buildShareText();
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: 'Naamin Shortlist', text });
+                } catch (e) { }
+            } else {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    shortlistShareBtn.textContent = 'Copied!';
+                    setTimeout(() => shortlistShareBtn.textContent = 'Share', 1200);
+                } catch (e) {
+                    alert('Share not supported on this device.');
+                }
+            }
+        });
+    }
+
+    if (shortlistBackdrop) shortlistBackdrop.addEventListener('click', closeShortlistPanel);
+    if (shortlistCloseBtn) shortlistCloseBtn.addEventListener('click', closeShortlistPanel);
+
+    if (favBtnMobile) favBtnMobile.addEventListener('click', openShortlistPanel);
+
+    document.addEventListener('shortlistChanged', () => {
+        if (shortlistPanel?.classList.contains('open')) renderShortlist();
     });
-
-    syncWishlistButtons();
-
-    // --- NAAMIN TYPING ANIMATION (GUARANTEED LOOP) ---
+// --- NAAMIN TYPING ANIMATION (GUARANTEED LOOP) ---
     const typeNaam = document.getElementById("type-naam");
     const typeIn = document.getElementById("type-in");
 
@@ -1812,3 +1927,12 @@ updateBabyCarouselLanguage();
 
     setInterval(rotate, 5000);
 })();
+
+
+
+
+
+
+
+
+

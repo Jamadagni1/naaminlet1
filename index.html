@@ -84,7 +84,7 @@
         <div class="nav-actions desktop-only">
             <button id="language-toggle" class="btn" style="font-size:12px; padding:6px 10px;"
                 title="Toggle language">ENG/HIN</button>
-            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
+            <button id="fav-view-btn" class="btn btn-fav" type="button" title="Wishlist" aria-label="Open wishlist">
                 <i class="fas fa-heart"></i>
                 <span id="fav-count">0</span>
             </button>
@@ -135,7 +135,7 @@
             <!-- Mobile Actions -->
             <div class="mobile-actions">
                 <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
-                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn">
+                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn" type="button" aria-label="Open wishlist">
                     <i class="fas fa-heart"></i>
                     <span id="fav-count-mobile">0</span>
                 </button>
@@ -172,8 +172,9 @@
                 </div>
                 <div class="collection-grid">
                     <article class="collection-card">
-                        <button class="wishlist-add-btn" data-product-name="Men's Kurta Set" data-product-price="₹4,999"
-                            data-product-image="IMG2.jpeg" aria-label="Add to wishlist">
+                        <button class="wishlist-add-btn" type="button" data-product-name="Men's Kurta Set"
+                            data-product-price="₹4,999" data-product-image="IMG2.jpeg" aria-label="Add to wishlist"
+                            aria-pressed="false" title="Add to wishlist">
                             <i class="far fa-heart"></i>
                         </button>
                         <img src="IMG2.jpeg" alt="Men's designer kurta sets" loading="lazy" decoding="async">
@@ -185,8 +186,9 @@
                         </div>
                     </article>
                     <article class="collection-card">
-                        <button class="wishlist-add-btn" data-product-name="Women's Saree Edit" data-product-price="₹6,499"
-                            data-product-image="IMG3.jpeg" aria-label="Add to wishlist">
+                        <button class="wishlist-add-btn" type="button" data-product-name="Women's Saree Edit"
+                            data-product-price="₹6,499" data-product-image="IMG3.jpeg" aria-label="Add to wishlist"
+                            aria-pressed="false" title="Add to wishlist">
                             <i class="far fa-heart"></i>
                         </button>
                         <img src="IMG3.jpeg" alt="Women's saree and lehenga edit" loading="lazy" decoding="async">
@@ -198,8 +200,9 @@
                         </div>
                     </article>
                     <article class="collection-card">
-                        <button class="wishlist-add-btn" data-product-name="Festive Ensemble" data-product-price="₹7,999"
-                            data-product-image="IMG4.jpeg" aria-label="Add to wishlist">
+                        <button class="wishlist-add-btn" type="button" data-product-name="Festive Ensemble"
+                            data-product-price="₹7,999" data-product-image="IMG4.jpeg" aria-label="Add to wishlist"
+                            aria-pressed="false" title="Add to wishlist">
                             <i class="far fa-heart"></i>
                         </button>
                         <img src="IMG4.jpeg" alt="Festive wear for weddings and celebrations" loading="lazy" decoding="async">
@@ -211,8 +214,9 @@
                         </div>
                     </article>
                     <article class="collection-card">
-                        <button class="wishlist-add-btn" data-product-name="Casual Ethnic Wear" data-product-price="₹3,499"
-                            data-product-image="IMG5.jpeg" aria-label="Add to wishlist">
+                        <button class="wishlist-add-btn" type="button" data-product-name="Casual Ethnic Wear"
+                            data-product-price="₹3,499" data-product-image="IMG5.jpeg" aria-label="Add to wishlist"
+                            aria-pressed="false" title="Add to wishlist">
                             <i class="far fa-heart"></i>
                         </button>
                         <img src="IMG5.jpeg" alt="Casual ethnic wear for everyday elegance" loading="lazy" decoding="async">
@@ -299,32 +303,33 @@
     <footer>
         <div class="footer-grid">
             <div>
-                <h3 data-en="Quick Links" data-hi="à¤¤à¥à¤µà¤°à¤¿à¤¤ à¤²à¤¿à¤‚à¤•"></h3><a href="index.html" data-en="Home"
-                    data-hi="à¤¹à¥‹à¤®"></a><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚"></a><a
-                    href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚"></a><a href="contact.html"
-                    data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚"></a>
+                <h3 data-en="Quick Links" data-hi="à¤¤à¥à¤µà¤°à¤¿à¤¤ à¤²à¤¿à¤‚à¤•">Quick Links</h3>
+                <a href="index.html" data-en="Home" data-hi="à¤¹à¥‹à¤®">Home</a>
+                <a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a>
+                <a href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a>
+                <a href="contact.html" data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a>
             </div>
             <div>
-                <h3 data-en="Our Services" data-hi="à¤¹à¤®à¤¾à¤°à¥€ à¤¸à¥‡à¤µà¤¾à¤à¤‚"></h3><a href="services.html" data-en="Baby Naming"
-                    data-hi="à¤¶à¤¿à¤¶à¥ à¤¨à¤¾à¤®à¤•à¤°à¤£"></a><a href="services.html" data-en="Company Naming"
-                    data-hi="à¤•à¤‚à¤ªà¤¨à¥€ à¤¨à¤¾à¤®à¤•à¤°à¤£"></a><a href="services.html" data-en="Motto Creation"
-                    data-hi="à¤‰à¤¦à¥à¤˜à¥‹à¤· à¤¨à¤¿à¤°à¥à¤®à¤¾à¤£"></a>
+                <h3 data-en="Our Services" data-hi="à¤¹à¤®à¤¾à¤°à¥€ à¤¸à¥‡à¤µà¤¾à¤à¤‚">Our Services</h3>
+                <a href="services.html" data-en="Baby Naming" data-hi="à¤¶à¤¿à¤¶à¥ à¤¨à¤¾à¤®à¤•à¤°à¤£">Baby Naming</a>
+                <a href="services.html" data-en="Company Naming" data-hi="à¤•à¤‚à¤ªà¤¨à¥€ à¤¨à¤¾à¤®à¤•à¤°à¤£">Company Naming</a>
+                <a href="services.html" data-en="Motto Creation" data-hi="à¤‰à¤¦à¥à¤˜à¥‹à¤· à¤¨à¤¿à¤°à¥à¤®à¤¾à¤£">Motto Creation</a>
             </div>
             <div>
-                <h3 data-en="Follow Us" data-hi="à¤¹à¤®à¥‡à¤‚ à¤«à¥‰à¤²à¥‹ à¤•à¤°à¥‡à¤‚"></h3>
+                <h3 data-en="Follow Us" data-hi="à¤¹à¤®à¥‡à¤‚ à¤«à¥‰à¤²à¥‹ à¤•à¤°à¥‡à¤‚">Follow Us</h3>
                 <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
                 <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
                 <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
             </div>
             <div>
-                <h3 data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤•"></h3>
+                <h3 data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤•">Contact</h3>
                 <p><a href="tel:+919413678955">+91 94136 78955</a></p>
                 <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
-                <p data-en="Hyderabad, Telangana, India" data-hi="à¤¹à¥ˆà¤¦à¤°à¤¾à¤¬à¤¾à¤¦, à¤¤à¥‡à¤²à¤‚à¤—à¤¾à¤¨à¤¾, à¤­à¤¾à¤°à¤¤"></p>
+                <p data-en="Hyderabad, Telangana, India" data-hi="à¤¹à¥ˆà¤¦à¤°à¤¾à¤¬à¤¾à¤¦, à¤¤à¥‡à¤²à¤‚à¤—à¤¾à¤¨à¤¾, à¤­à¤¾à¤°à¤¤">Hyderabad, Telangana, India</p>
             </div>
         </div>
-        <p class="copyrights" data-en="Â© 2025 Naamin. All rights reserved."
-            data-hi="Â© à¥¨à¥¦à¥¨à¥« à¤¨à¤¾à¤®à¤¿à¤¨à¥¤ à¤¸à¤­à¥€ à¤…à¤§à¤¿à¤•à¤¾à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤à¥¤"></p>
+        <p class="copyrights" data-en="© 2025 Naamin. All rights reserved."
+            data-hi="Â© à¥¨à¥¦à¥¨à¥« à¤¨à¤¾à¤®à¤¿à¤¨à¥¤ à¤¸à¤­à¥€ à¤…à¤§à¤¿à¤•à¤¾à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤à¥¤">© 2025 Naamin. All rights reserved.</p>
     </footer>
 
     <a href="https://wa.me/9413678955?text=Hello" class="whatsapp-float" target="_blank">
@@ -350,27 +355,42 @@
         </div>
     </div>
 
-    <div class="wishlist-panel" id="wishlist-panel" aria-hidden="true">
-        <div class="wishlist-backdrop" id="wishlist-backdrop"></div>
-        <aside class="wishlist-drawer" role="dialog" aria-modal="true" aria-label="Wishlist">
-            <div class="wishlist-header">
+    <div class="wishlist-panel shortlist-panel" id="shortlist-panel" aria-hidden="true">
+        <div class="wishlist-backdrop" id="shortlist-backdrop"></div>
+        <aside class="wishlist-drawer shortlist-drawer" role="dialog" aria-modal="true" aria-label="Name Shortlist Hub">
+            <div class="wishlist-header shortlist-header">
                 <div>
-                    <h3>Wishlist</h3>
-                    <p>Saved pieces curated for you</p>
+                    <h3>Name Shortlist Hub</h3>
+                    <p>Save, compare, and finalize baby names</p>
                 </div>
-                <button class="wishlist-close" id="wishlist-close" aria-label="Close wishlist">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="wishlist-body" id="wishlist-items">
-                <div class="wishlist-empty">
-                    <i class="far fa-heart"></i>
-                    <p>Your wishlist is empty</p>
-                    <span>Save your favorite looks for later.</span>
+                <div class="shortlist-header-actions">
+                    <button class="shortlist-share-btn" id="shortlist-copy-btn" type="button" title="Copy shortlist">Copy</button>
+                    <button class="shortlist-share-btn" id="shortlist-share-btn" type="button" title="Share shortlist">Share</button>
+                    <button class="wishlist-close" id="shortlist-close" aria-label="Close shortlist">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
             </div>
-            <div class="wishlist-footer">
-                <button class="btn btn-login wishlist-view-btn" id="wishlist-view-btn">View Wishlist Page</button>
+            <div class="wishlist-body shortlist-body">
+                <div class="shortlist-top" id="shortlist-top">
+                    <h4>Top Picks</h4>
+                    <div class="shortlist-top-grid" id="shortlist-top-grid"></div>
+                </div>
+
+                <div class="shortlist-compare" id="shortlist-compare">
+                    <h4>Compare Names</h4>
+                    <div class="shortlist-compare-grid" id="shortlist-compare-grid"></div>
+                </div>
+
+                <div class="shortlist-list" id="shortlist-list"></div>
+
+                <div class="shortlist-empty" id="shortlist-empty">
+                    <div class="wishlist-empty-icon">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <h4 class="wishlist-empty-title">Your shortlist is empty</h4>
+                    <p class="wishlist-empty-copy">Tap hearts on names to save them here.</p>
+                </div>
             </div>
         </aside>
     </div>
