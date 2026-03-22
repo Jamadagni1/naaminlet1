@@ -1,4 +1,5 @@
 import { createFooter, createNavbar, productCardTemplate } from "./storefront-components.js";
+import { hydrateSiteAuthNav } from "./site-auth.js";
 import { mockSiteContent } from "./storefront-data.js";
 import { clearWishlist, getWishlist, removeWishlistItem } from "./storefront-store.js";
 
@@ -6,6 +7,7 @@ const root = document.getElementById("wishlist-app");
 
 renderShell();
 renderWishlist();
+hydrateSiteAuthNav();
 wireWishlistPage();
 
 function renderShell() {
@@ -26,7 +28,7 @@ function renderShell() {
                 <div id="wishlist-empty-state" class="empty-state" hidden>
                     <i class="fa-regular fa-heart"></i>
                     <h3>Your shortlist is empty</h3>
-                    <p>Start saving names and services from the homepage and they’ll show up here instantly.</p>
+                    <p>Start saving names and services from the homepage and they'll show up here instantly.</p>
                 </div>
                 <div id="wishlist-grid" class="catalog-grid"></div>
             </section>

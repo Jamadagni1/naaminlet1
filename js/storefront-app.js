@@ -1,6 +1,7 @@
 import { loadStorefrontData } from "./storefront-api.js";
 import { createFooter, createNavbar, detailModalTemplate, productCardTemplate } from "./storefront-components.js";
 import { mockSiteContent } from "./storefront-data.js";
+import { hydrateSiteAuthNav } from "./site-auth.js";
 import { getWishlist, isWishlisted, toggleWishlist } from "./storefront-store.js";
 
 const app = document.getElementById("app");
@@ -30,6 +31,7 @@ async function loadPage() {
         populateFilterOptions(data.catalog);
         renderCatalog();
         updateWishlistBadge();
+        await hydrateSiteAuthNav();
         revealSections();
     } catch (error) {
         console.error(error);
@@ -112,9 +114,13 @@ function renderShell(content) {
                 </div>
 
                 <div id="catalog-empty" class="empty-state" hidden>
-                    <i class="fa-regular fa-folder-open"></i>
-                    <h3>No results found</h3>
-                    <p>Try adjusting your search or switching to another category.</p>
+                    <div class="empty-state-icon">
+                        <i class="fa-regular fa-folder-open"></i>
+                    </div>
+                    <h3>No close matches yet</h3>
+                    <p id="catalog-empty-copy">Try adjusting your search or switching to another category.</p>
+                    <div class="empty-state-actions" id="catalog-empty-actions"></div>
+                    <div class="empty-state-recommendations" id="catalog-empty-recommendations"></div>
                 </div>
 
                 <div id="catalog-grid" class="catalog-grid"></div>
@@ -205,6 +211,25 @@ function wireGlobalUi() {
             return;
         }
 
+        const resetButton = event.target.closest("[data-action='reset-filters']");
+        if (resetButton) {
+            resetFilters();
+            return;
+        }
+
+        const suggestionButton = event.target.closest("[data-action='quick-filter']");
+        if (suggestionButton) {
+            applyQuickFilter(suggestionButton.dataset.value, suggestionButton.dataset.filterType);
+            return;
+        }
+
+        const recommendedButton = event.target.closest("[data-action='open-recommendation']");
+        if (recommendedButton) {
+            const item = state.allItems.find((entry) => entry.id === recommendedButton.dataset.id);
+            if (item) openModal(item);
+            return;
+        }
+
         if (event.target.closest("[data-close-modal]")) {
             closeModal();
         }
@@ -252,9 +277,10 @@ function renderCatalog() {
     const grid = document.getElementById("catalog-grid");
     const empty = document.getElementById("catalog-empty");
     const sourceIndicator = document.getElementById("data-source-indicator");
-    sourceIndicator.textContent = state.dataSource === "firestore" ? "Firestore" : "Mock API fallback";
+    sourceIndicator.textContent = state.dataSource === "supabase" ? "Supabase" : "Mock API fallback";
 
     grid.innerHTML = state.filteredItems.map((item) => productCardTemplate(item, isWishlisted(item.id))).join("");
+    updateEmptyState();
     empty.hidden = state.filteredItems.length !== 0;
     grid.setAttribute("aria-live", "polite");
 }
@@ -288,8 +314,152 @@ function setLoading(isLoading) {
 function renderEmptyState(message) {
     const empty = document.getElementById("catalog-empty");
     empty.hidden = false;
-    empty.querySelector("p").textContent = message;
+    empty.querySelector("#catalog-empty-copy").textContent = message;
+    updateEmptyState(message);
     document.getElementById("catalog-grid").innerHTML = "";
+}
+
+function updateEmptyState(customMessage = "") {
+    const emptyCopy = document.getElementById("catalog-empty-copy");
+    const actionsRoot = document.getElementById("catalog-empty-actions");
+    const recommendationsRoot = document.getElementById("catalog-empty-recommendations");
+    if (!emptyCopy || !actionsRoot || !recommendationsRoot) return;
+
+    if (state.filteredItems.length) {
+        emptyCopy.textContent = customMessage || "Try adjusting your search or switching to another category.";
+        actionsRoot.innerHTML = "";
+        recommendationsRoot.innerHTML = "";
+        return;
+    }
+
+    emptyCopy.textContent = customMessage || buildEmptyMessage();
+    actionsRoot.innerHTML = buildEmptyActions();
+    recommendationsRoot.innerHTML = buildEmptyRecommendations();
+}
+
+function buildEmptyMessage() {
+    if (state.search && state.category !== "All") {
+        return `Nothing matched "${state.search}" in ${state.category}. Try a broader keyword or jump into one of the curated picks below.`;
+    }
+
+    if (state.search) {
+        return `Nothing matched "${state.search}" yet. Try one of the popular naming routes below instead of starting over.`;
+    }
+
+    if (state.category !== "All") {
+        return `There is nothing in ${state.category} right now. You can reset filters or explore another naming path below.`;
+    }
+
+    return "Try adjusting your search or switching to another category.";
+}
+
+function buildEmptyActions() {
+    const actions = [
+        `<button class="btn btn-secondary empty-state-btn" data-action="reset-filters">Show all collections</button>`
+    ];
+
+    if (state.search) {
+        actions.push(`<button class="btn btn-secondary empty-state-btn" data-action="quick-filter" data-filter-type="search" data-value="">Clear search</button>`);
+    }
+
+    getSuggestionChips().forEach((chip) => {
+        actions.push(`
+            <button class="empty-suggestion-chip" data-action="quick-filter" data-filter-type="${chip.type}" data-value="${chip.value}">
+                ${chip.label}
+            </button>
+        `);
+    });
+
+    return actions.join("");
+}
+
+function getSuggestionChips() {
+    const suggestions = [];
+    const categories = [...new Set(state.allItems.map((item) => item.category))];
+
+    if (state.category !== "All") {
+        suggestions.push({ type: "category", value: "All", label: "Browse all" });
+    }
+
+    ["Boy Names", "Girl Names", "Services", "Gifting"].forEach((category) => {
+        if (categories.includes(category) && category !== state.category) {
+            suggestions.push({ type: "category", value: category, label: category });
+        }
+    });
+
+    if (state.search) {
+        const keywordSuggestions = [
+            { type: "search", value: "vedic", label: "Try: vedic" },
+            { type: "search", value: "shortlist", label: "Try: shortlist" },
+            { type: "search", value: "poster", label: "Try: poster" }
+        ];
+        keywordSuggestions.forEach((entry) => suggestions.push(entry));
+    }
+
+    return suggestions.slice(0, 5);
+}
+
+function buildEmptyRecommendations() {
+    const recommendedItems = getRecommendedItems();
+    if (!recommendedItems.length) return "";
+
+    return `
+        <div class="empty-recommendations-head">
+            <span class="eyebrow">Better starting points</span>
+            <strong>Popular picks parents usually open next</strong>
+        </div>
+        <div class="empty-recommendation-grid">
+            ${recommendedItems.map((item) => `
+                <article class="empty-recommendation-card">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy" decoding="async">
+                    <div>
+                        <p>${item.category}</p>
+                        <h4>${item.title}</h4>
+                        <span>${item.tag}</span>
+                    </div>
+                    <button class="btn btn-card" data-action="open-recommendation" data-id="${item.id}">View details</button>
+                </article>
+            `).join("")}
+        </div>
+    `;
+}
+
+function getRecommendedItems() {
+    if (!state.allItems.length) return [];
+
+    const categoryMatches = state.category === "All"
+        ? []
+        : state.allItems.filter((item) => item.category === state.category);
+
+    const pool = categoryMatches.length ? categoryMatches : state.allItems;
+    return pool.slice(0, 3);
+}
+
+function resetFilters() {
+    state.category = "All";
+    state.search = "";
+
+    const categoryFilter = document.getElementById("category-filter");
+    const searchInput = document.getElementById("search-input");
+
+    if (categoryFilter) categoryFilter.value = "All";
+    if (searchInput) searchInput.value = "";
+
+    applyFilters();
+}
+
+function applyQuickFilter(value = "", filterType = "search") {
+    if (filterType === "category") {
+        state.category = value || "All";
+        const categoryFilter = document.getElementById("category-filter");
+        if (categoryFilter) categoryFilter.value = state.category;
+    } else {
+        state.search = (value || "").toLowerCase();
+        const searchInput = document.getElementById("search-input");
+        if (searchInput) searchInput.value = value || "";
+    }
+
+    applyFilters();
 }
 
 function openModal(item) {

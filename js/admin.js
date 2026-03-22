@@ -1,4 +1,4 @@
-import { mockCatalog, mockSiteContent } from "./storefront-data.js";
+import { mockCatalog, mockFeaturePages, mockSiteContent } from "./storefront-data.js";
 import { supabase } from "./supabase-client.js";
 
 const app = document.getElementById("admin-app");
@@ -8,8 +8,10 @@ const state = {
     isAdmin: false,
     sections: [],
     catalog: [],
+    featurePages: [],
     activeSectionKey: "hero",
-    activeCatalogSlug: null
+    activeCatalogSlug: null,
+    activeFeatureSlug: "aura"
 };
 
 renderShell();
@@ -72,6 +74,17 @@ function renderShell() {
                     <div class="admin-card">
                         <div class="admin-actions" style="justify-content:space-between; align-items:center;">
                             <div>
+                                <h2>Feature Pages</h2>
+                                <p class="admin-help">Aura and future dynamic pages are controlled here.</p>
+                            </div>
+                            <button class="admin-btn secondary" id="new-feature-btn">New Feature</button>
+                        </div>
+                        <div class="admin-list" id="feature-list"></div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-actions" style="justify-content:space-between; align-items:center;">
+                            <div>
                                 <h2>Catalog Items</h2>
                                 <p class="admin-help">These cards power the public homepage catalog.</p>
                             </div>
@@ -118,6 +131,46 @@ function renderShell() {
                         </div>
                         <div class="admin-actions" style="margin-top:16px;">
                             <button class="admin-btn primary" id="save-section-btn">Save Section</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-actions" style="justify-content:space-between; align-items:center;">
+                            <div>
+                                <h2>Feature Page Editor</h2>
+                                <p class="admin-help">Use JSON payload for plans, FAQs, stats, CTAs, and page sections.</p>
+                            </div>
+                            <span class="admin-badge" id="active-feature-badge">aura</span>
+                        </div>
+                        <div class="admin-form-row">
+                            <div class="admin-field">
+                                <label for="feature-slug">Slug</label>
+                                <input id="feature-slug" type="text" placeholder="aura">
+                            </div>
+                            <div class="admin-checkbox">
+                                <input id="feature-published" type="checkbox" checked>
+                                <label for="feature-published">Published</label>
+                            </div>
+                            <div class="admin-field">
+                                <label for="feature-eyebrow">Eyebrow</label>
+                                <input id="feature-eyebrow" type="text">
+                            </div>
+                            <div class="admin-field">
+                                <label for="feature-title">Title</label>
+                                <input id="feature-title" type="text">
+                            </div>
+                            <div class="admin-field">
+                                <label for="feature-description">Description</label>
+                                <textarea id="feature-description"></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label for="feature-payload">Payload JSON</label>
+                                <textarea id="feature-payload"></textarea>
+                            </div>
+                        </div>
+                        <div class="admin-actions" style="margin-top:16px;">
+                            <button class="admin-btn primary" id="save-feature-btn">Save Feature Page</button>
+                            <button class="admin-btn danger" id="delete-feature-btn">Delete Feature</button>
                         </div>
                     </div>
 
@@ -207,11 +260,17 @@ function bindStaticEvents() {
     });
     document.getElementById("refresh-dashboard-btn").addEventListener("click", loadDashboard);
     document.getElementById("save-section-btn").addEventListener("click", saveSection);
+    document.getElementById("save-feature-btn").addEventListener("click", saveFeaturePage);
     document.getElementById("save-catalog-btn").addEventListener("click", saveCatalogItem);
+    document.getElementById("delete-feature-btn").addEventListener("click", deleteFeaturePage);
     document.getElementById("delete-catalog-btn").addEventListener("click", deleteCatalogItem);
     document.getElementById("new-catalog-btn").addEventListener("click", () => {
         state.activeCatalogSlug = null;
         fillCatalogForm();
+    });
+    document.getElementById("new-feature-btn").addEventListener("click", () => {
+        state.activeFeatureSlug = null;
+        fillFeatureForm();
     });
     document.getElementById("seed-defaults-btn").addEventListener("click", seedDefaults);
 }
@@ -273,22 +332,32 @@ async function checkAdmin(userId) {
 }
 
 async function loadDashboard() {
-    const [sectionsResult, catalogResult] = await Promise.all([
+    const [sectionsResult, catalogResult, featurePagesResult] = await Promise.all([
         supabase.from("site_sections").select("*").order("section_key", { ascending: true }),
-        supabase.from("catalog_items").select("*").order("sort_order", { ascending: true })
+        supabase.from("catalog_items").select("*").order("sort_order", { ascending: true }),
+        supabase.from("feature_pages").select("*").order("slug", { ascending: true })
     ]);
 
     if (sectionsResult.error) throw sectionsResult.error;
     if (catalogResult.error) throw catalogResult.error;
+    if (featurePagesResult.error) throw featurePagesResult.error;
 
     state.sections = sectionsResult.data || [];
     state.catalog = catalogResult.data || [];
+    state.featurePages = featurePagesResult.data || [];
 
     renderSectionList();
+    renderFeatureList();
     renderCatalogList();
 
     const firstSection = state.sections[0]?.section_key || "hero";
     selectSection(firstSection);
+
+    if (state.featurePages.length) {
+        selectFeaturePage(state.featurePages[0].slug);
+    } else {
+        selectFeaturePage("aura");
+    }
 
     if (state.catalog.length) {
         selectCatalog(state.catalog[0].slug);
@@ -319,6 +388,31 @@ function renderSectionList() {
     });
 }
 
+function renderFeatureList() {
+    const list = document.getElementById("feature-list");
+    list.innerHTML = "";
+
+    if (!state.featurePages.length) {
+        list.innerHTML = `<div class="admin-empty">No feature pages yet. Seed defaults to start with Aura.</div>`;
+        return;
+    }
+
+    state.featurePages.forEach((page) => {
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = `admin-list-item ${state.activeFeatureSlug === page.slug ? "is-active" : ""}`;
+        row.innerHTML = `
+            <div>
+                <h4>${page.slug}</h4>
+                <p>${page.title || "No title yet"}</p>
+            </div>
+            <span class="admin-badge">${page.published ? "Live" : "Draft"}</span>
+        `;
+        row.addEventListener("click", () => selectFeaturePage(page.slug));
+        list.appendChild(row);
+    });
+}
+
 function renderCatalogList() {
     const list = document.getElementById("catalog-list");
     list.innerHTML = "";
@@ -335,7 +429,7 @@ function renderCatalogList() {
         row.innerHTML = `
             <div>
                 <h4>${item.title}</h4>
-                <p>${item.category} • ${item.item_type}</p>
+                <p>${item.category} &middot; ${item.item_type}</p>
             </div>
             <span class="admin-badge">${item.is_published ? "Live" : "Draft"}</span>
         `;
@@ -357,11 +451,28 @@ function selectSection(key) {
     document.getElementById("section-published").checked = section.published !== false;
 }
 
+function selectFeaturePage(slug) {
+    state.activeFeatureSlug = slug;
+    renderFeatureList();
+    const page = state.featurePages.find((entry) => entry.slug === slug) || buildMockFeaturePage(slug || "aura");
+    fillFeatureForm(page);
+}
+
 function selectCatalog(slug) {
     state.activeCatalogSlug = slug;
     renderCatalogList();
     const item = state.catalog.find((entry) => entry.slug === slug);
     fillCatalogForm(item);
+}
+
+function fillFeatureForm(page = null) {
+    document.getElementById("active-feature-badge").textContent = page?.slug || "new feature";
+    document.getElementById("feature-slug").value = page?.slug || "";
+    document.getElementById("feature-eyebrow").value = page?.eyebrow || "";
+    document.getElementById("feature-title").value = page?.title || "";
+    document.getElementById("feature-description").value = page?.description || "";
+    document.getElementById("feature-payload").value = JSON.stringify(page?.payload || {}, null, 2);
+    document.getElementById("feature-published").checked = page?.published !== false;
 }
 
 function fillCatalogForm(item = null) {
@@ -411,6 +522,41 @@ async function saveSection() {
     await loadDashboard();
 }
 
+async function saveFeaturePage() {
+    const slug = document.getElementById("feature-slug").value.trim();
+    if (!slug) {
+        alert("Feature slug is required.");
+        return;
+    }
+
+    let payload = {};
+    try {
+        const payloadText = document.getElementById("feature-payload").value.trim();
+        payload = payloadText ? JSON.parse(payloadText) : {};
+    } catch (error) {
+        alert("Feature payload must be valid JSON.");
+        return;
+    }
+
+    const record = {
+        slug,
+        eyebrow: document.getElementById("feature-eyebrow").value.trim(),
+        title: document.getElementById("feature-title").value.trim(),
+        description: document.getElementById("feature-description").value.trim(),
+        payload,
+        published: document.getElementById("feature-published").checked
+    };
+
+    const { error } = await supabase.from("feature_pages").upsert(record, { onConflict: "slug" });
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    await loadDashboard();
+    selectFeaturePage(slug);
+}
+
 async function saveCatalogItem() {
     const slug = document.getElementById("catalog-slug").value.trim();
     if (!slug) {
@@ -445,6 +591,25 @@ async function saveCatalogItem() {
     selectCatalog(slug);
 }
 
+async function deleteFeaturePage() {
+    const slug = document.getElementById("feature-slug").value.trim();
+    if (!slug) {
+        alert("Select a feature page first.");
+        return;
+    }
+
+    if (!window.confirm("Delete this feature page?")) return;
+
+    const { error } = await supabase.from("feature_pages").delete().eq("slug", slug);
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    state.activeFeatureSlug = null;
+    await loadDashboard();
+}
+
 async function deleteCatalogItem() {
     const slug = document.getElementById("catalog-slug").value.trim();
     if (!slug) {
@@ -465,7 +630,7 @@ async function deleteCatalogItem() {
 }
 
 async function seedDefaults() {
-    if (!window.confirm("Seed default site sections and catalog items into Supabase? Existing rows with the same keys/slugs will be updated.")) {
+    if (!window.confirm("Seed default site sections, feature pages, and catalog items into Supabase? Existing rows with the same keys/slugs will be updated.")) {
         return;
     }
 
@@ -476,6 +641,15 @@ async function seedDefaults() {
         description: value.description || "",
         payload: value.payload || {},
         published: true
+    }));
+
+    const featureRows = Object.values(mockFeaturePages).map((page) => ({
+        slug: page.slug,
+        eyebrow: page.eyebrow || "",
+        title: page.title || "",
+        description: page.description || "",
+        payload: page.payload || {},
+        published: page.published !== false
     }));
 
     const catalogRows = mockCatalog.map((item, index) => ({
@@ -495,13 +669,19 @@ async function seedDefaults() {
         sort_order: index
     }));
 
-    const [sectionsResult, catalogResult] = await Promise.all([
+    const [sectionsResult, featureResult, catalogResult] = await Promise.all([
         supabase.from("site_sections").upsert(sectionRows, { onConflict: "section_key" }),
+        supabase.from("feature_pages").upsert(featureRows, { onConflict: "slug" }),
         supabase.from("catalog_items").upsert(catalogRows, { onConflict: "slug" })
     ]);
 
     if (sectionsResult.error) {
         alert(sectionsResult.error.message);
+        return;
+    }
+
+    if (featureResult.error) {
+        alert(featureResult.error.message);
         return;
     }
 
@@ -522,5 +702,17 @@ function buildMockSection(key) {
         description: source?.description || "",
         payload: source?.payload || {},
         published: true
+    };
+}
+
+function buildMockFeaturePage(slug) {
+    const source = mockFeaturePages[slug] || mockFeaturePages.aura || {};
+    return {
+        slug: source.slug || slug,
+        eyebrow: source.eyebrow || "",
+        title: source.title || "",
+        description: source.description || "",
+        payload: source.payload || {},
+        published: source.published !== false
     };
 }

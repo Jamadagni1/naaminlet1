@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up | Naamin</title>
+  <script src="js/local-dev-origin.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -37,9 +38,9 @@
           <span>Naam<span>in</span></span>
         </div>
         <h2>Create account</h2>
-        <p class="auth-subcopy">Your account will be created in Supabase Auth.</p>
+        <p class="auth-subcopy">Your account will be created in Naamin Auth.</p>
 
-        <form id="signup-form" class="auth-form">
+        <form id="signup-form" class="auth-form" novalidate>
           <input id="signup-name" type="text" placeholder="Full name" required>
           <input id="signup-email" type="email" placeholder="Email address" required>
           <input id="signup-password" type="password" placeholder="Password (min 8 characters)" required>
@@ -47,8 +48,40 @@
           <button type="submit" class="auth-btn primary">Create Account</button>
         </form>
 
-        <button id="google-auth-btn" class="auth-btn secondary" type="button">Continue with Google</button>
+        <div id="google-auth-section">
+          <div class="auth-divider"><span>or continue with</span></div>
+          <button id="google-auth-btn" class="auth-btn secondary" type="button">Continue with Google</button>
+          <p id="google-auth-help" class="auth-helper"></p>
+        </div>
         <p id="auth-message" role="alert" aria-live="polite"></p>
+
+        <div class="auth-assurance">
+          <div class="auth-assurance-grid">
+            <article class="auth-assurance-card">
+              <i class="fa-regular fa-heart"></i>
+              <div>
+                <strong>Shortlist sync</strong>
+                <span>Save names and revisit them across sessions.</span>
+              </div>
+            </article>
+            <article class="auth-assurance-card">
+              <i class="fa-solid fa-shield-heart"></i>
+              <div>
+                <strong>Secure account</strong>
+                <span>Managed through Naamin account auth with email login.</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="auth-journey">
+            <p class="auth-journey-kicker">What happens next</p>
+            <div class="auth-journey-steps">
+              <div><span>1</span><p>Create your account and save your first shortlist.</p></div>
+              <div><span>2</span><p>Explore boy names, girl names, blends, and keepsakes.</p></div>
+              <div><span>3</span><p>Come back anytime to compare your final picks.</p></div>
+            </div>
+          </div>
+        </div>
 
         <div class="auth-switch">
           Already have an account?

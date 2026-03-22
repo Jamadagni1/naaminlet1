@@ -18,18 +18,29 @@ where email = 'your-admin-email@example.com';
 5. The public site at `index.html` will start reading:
    - `site_sections`
    - `catalog_items`
+   - `feature_pages`
 
-6. Login and signup pages are now wired to Supabase Auth:
+6. Admin/content pages are wired to Supabase. The public user auth pages now use the Firebase project already configured in the repo:
    - [login.html](c:\Users\user\OneDrive\Desktop\NAAMIN\naaminlet1\login.html)
    - [signup.html](c:\Users\user\OneDrive\Desktop\NAAMIN\naaminlet1\signup.html)
 
-7. If you want Google login, enable Google in Supabase Auth and add these redirect URLs in Auth settings:
-   - `http://127.0.0.1:5500/naaminlet1/login.html`
-   - `http://127.0.0.1:5500/naaminlet1/signup.html`
-   - plus your production URLs later
+7. To enable Google login in Supabase Auth:
+   - In Google Cloud Console, create an OAuth client of type `Web application`.
+   - Add these Authorized JavaScript origins:
+     - `http://127.0.0.1:5500`
+     - your production origin later, for example `https://yourdomain.com`
+   - In Supabase Dashboard go to `Authentication -> Providers -> Google`.
+   - Copy the Supabase callback URL shown on that Google provider screen into Google Cloud as an Authorized redirect URI.
+   - Paste your Google `Client ID` and `Client Secret` into the same Supabase Google provider screen and enable the provider.
+   - In `Authentication -> URL Configuration`, allow these redirect URLs:
+     - `http://127.0.0.1:5500/naaminlet1/login.html`
+     - `http://127.0.0.1:5500/naaminlet1/signup.html`
+     - your production auth URLs later
+   - Once the provider is enabled, the website's Google button will be able to redirect into the Supabase Google auth flow.
 
 8. Public reads are protected by RLS:
    - only `published = true` / `is_published = true` rows are exposed publicly
+   - `feature_pages.published = true` rows are exposed publicly
    - only users in `admin_users` can write
 
 9. Supabase client config is already wired in:

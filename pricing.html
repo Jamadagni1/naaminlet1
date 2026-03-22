@@ -1,204 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <script>
-        (() => {
-            const preferredLang = localStorage.getItem("language") || "en";
-            document.documentElement.lang = preferredLang;
-        })();
-    </script>
-    <style>
-        body {
-            visibility: hidden;
-        }
-    </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aura Plans - Naamin</title>
-    <meta name="description" content="Explore Aura plans and frequently asked questions about our naming services." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Naamin</title>
+    <meta name="description"
+        content="Explore the Aura experience from Naamin: guided naming support, curated plans, and premium naming clarity for modern families.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="storefront.css">
 </head>
 
-<body data-theme="light">
-
-    <nav class="navbar">
-        <!-- Logo -->
-        <div class="logo">Naam<span class="logo-in">in</span></div>
-
-        <!-- Desktop Navigation Links -->
-        <ul class="nav-links desktop-only">
-            <li><a href="index.html" data-en="Home" data-hi="à¤¹à¥‹à¤®">Home</a></li>
-            <li><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a></li>
-            <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤¸à¥‡ à¤¬à¤šà¥à¤šà¥‡ à¤¤à¤•">Parents to
-                    Child</a></li>
-
-            <!-- Dropdown -->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-en="More" data-hi="à¤…à¤§à¤¿à¤•">
-                    More <span class="arrow">â–¼</span>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a href="popular-names.html" data-en="Popular Names" data-hi="à¤²à¥‹à¤•à¤ªà¥à¤°à¤¿à¤¯ à¤¨à¤¾à¤®">Popular Names</a>
-                    </li>
-                    <li><a href="unique-names.html" data-en="Unique Names" data-hi="à¤…à¤¦à¥à¤µà¤¿à¤¤à¥€à¤¯ à¤¨à¤¾à¤®">Unique Names</a></li>
-                    <li><a href="famous-personalities.html" data-en="Famous Personalities"
-                            data-hi="à¤ªà¥à¤°à¤¸à¤¿à¤¦à¥à¤§ à¤¹à¤¸à¥à¤¤à¤¿à¤¯à¤¾à¤‚">Famous Personalities</a></li>
-                    <li><a href="more/motto-for-everything/index.html" data-en="Motto Generator"
-                            data-hi="à¤†à¤¦à¤°à¥à¤¶ à¤µà¤¾à¤•à¥à¤¯ à¤œà¤¨à¤°à¥‡à¤Ÿà¤°">Motto Generator</a></li>
-                    <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="à¤°à¤¾à¤¶à¤¿ à¤šà¤•à¥à¤° à¤–à¥‹à¤œà¤•">Zodiac
-                            Finder</a></li>
-                    <li><a href="product.html" data-en="Products" data-hi="à¤‰à¤¤à¥à¤ªà¤¾à¤¦">Products</a></li>
-
-
-
-                    <li><a href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a></li>
-                    <li><a href="pricing.html" class="active" data-en="Aura" data-hi="à¤†à¤­à¤¾">Aura</a></li>
-                    <li><a href="careers.html" data-en="Careers" data-hi="à¤•à¤°à¤¿à¤¯à¤°">Careers</a></li>
-                    <li><a href="blog.html" data-en="Blog" data-hi="à¤¬à¥à¤²à¥‰à¤—">Blog</a></li>
-                    <li><a href="contact.html" data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <!-- Desktop Actions -->
-        <div class="nav-actions desktop-only">
-            <button id="language-toggle" class="btn" style="font-size:12px; padding:6px 10px;"
-                title="Toggle language">ENG/HIN</button>
-            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
-                <i class="fas fa-heart"></i>
-                <span id="fav-count">0</span>
-            </button>
-            <a href="login.html" class="btn btn-login">Log in</a>
-            <a href="signup.html" class="btn btn-signup">Sign up</a>
-        </div>
-
-        <!-- Hamburger Icon (Mobile Only) -->
-        <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Mobile Menu (Hidden by default) -->
-        <div class="mobile-menu" id="mobile-menu">
-            <ul class="mobile-nav-links">
-                <li><a href="index.html" data-en="Home" data-hi="à¤¹à¥‹à¤®">Home</a></li>
-                <li><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a></li>
-                <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤¸à¥‡ à¤¬à¤šà¥à¤šà¥‡ à¤¤à¤•">Parents to
-                        Child</a></li>
-
-                <!-- Mobile Dropdown -->
-                <li class="mobile-dropdown">
-                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="à¤…à¤§à¤¿à¤•">More <span
-                            class="arrow">â–¼</span></a>
-                    <ul class="mobile-dropdown-menu">
-                        <li><a href="popular-names.html" data-en="Popular Names" data-hi="à¤²à¥‹à¤•à¤ªà¥à¤°à¤¿à¤¯ à¤¨à¤¾à¤®">Popular
-                                Names</a></li>
-                        <li><a href="unique-names.html" data-en="Unique Names" data-hi="à¤…à¤¦à¥à¤µà¤¿à¤¤à¥€à¤¯ à¤¨à¤¾à¤®">Unique Names</a>
-                        </li>
-                        <li><a href="famous-personalities.html" data-en="Famous Personalities"
-                                data-hi="à¤ªà¥à¤°à¤¸à¤¿à¤¦à¥à¤§ à¤¹à¤¸à¥à¤¤à¤¿à¤¯à¤¾à¤‚">Famous Personalities</a></li>
-                        <li><a href="more/motto-for-everything/index.html" data-en="Motto Generator"
-                                data-hi="à¤†à¤¦à¤°à¥à¤¶ à¤µà¤¾à¤•à¥à¤¯ à¤œà¤¨à¤°à¥‡à¤Ÿà¤°">Motto Generator</a></li>
-                        <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder"
-                                data-hi="à¤°à¤¾à¤¶à¤¿ à¤šà¤•à¥à¤° à¤–à¥‹à¤œà¤•">Zodiac Finder</a></li>
-                        <li><a href="product.html" data-en="Products" data-hi="à¤‰à¤¤à¥à¤ªà¤¾à¤¦">Products</a></li>
-
-                        <li><a href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a></li>
-                        <li><a href="pricing.html" class="active" data-en="Aura" data-hi="à¤†à¤­à¤¾">Aura</a></li>
-                        <li><a href="careers.html" data-en="Careers" data-hi="à¤•à¤°à¤¿à¤¯à¤°">Careers</a></li>
-                        <li><a href="blog.html" data-en="Blog" data-hi="à¤¬à¥à¤²à¥‰à¤—">Blog</a></li>
-                        <li><a href="contact.html" data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- Mobile Actions -->
-            <div class="mobile-actions">
-                <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
-                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn">
-                    <i class="fas fa-heart"></i>
-                    <span id="fav-count-mobile">0</span>
-                </button>
-                <a href="login.html" class="btn btn-login mobile-btn">Log in</a>
-                <a href="signup.html" class="btn btn-signup mobile-btn">Sign up</a>
-            </div>
-        </div>
-    </nav>
-
-    <main>
-        <section id="pricing" class="section" data-feature-root data-feature-layout="pricing">
-    <div class="content-wrapper">
-        <h2 data-feature-title>Our Aura Plans</h2>
-        <p data-feature-description class="section-subtitle">Explore Aura plans and frequently asked questions about our naming services.</p>
-        <div class="pricing-grid" data-feature-sections></div>
-    </div>
-</section>
-
-    </main>
-
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <h3 data-en="Quick Links" data-hi="à¤¤à¥à¤µà¤°à¤¿à¤¤ à¤²à¤¿à¤‚à¤•">Quick Links</h3><a href="index.html" data-en="Home"
-                    data-hi="à¤¹à¥‹à¤®">Home</a><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a><a
-                    href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a><a href="contact.html"
-                    data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a>
-            </div>
-            <div>
-                <h3 data-en="Our Services" data-hi="à¤¹à¤®à¤¾à¤°à¥€ à¤¸à¥‡à¤µà¤¾à¤à¤‚">Our Services</h3><a href="services.html"
-                    data-en="Baby Naming" data-hi="à¤¶à¤¿à¤¶à¥ à¤¨à¤¾à¤®à¤•à¤°à¤£">Baby Naming</a><a href="services.html"
-                    data-en="Company Naming" data-hi="à¤•à¤‚à¤ªà¤¨à¥€ à¤¨à¤¾à¤®à¤•à¤°à¤£">Company Naming</a><a href="services.html"
-                    data-en="Motto Creation" data-hi="à¤‰à¤¦à¥à¤˜à¥‹à¤· à¤¨à¤¿à¤°à¥à¤®à¤¾à¤£">Motto Creation</a>
-            </div>
-            <div>
-                <h3 data-en="Follow Us" data-hi="à¤¹à¤®à¥‡à¤‚ à¤«à¥‰à¤²à¥‹ à¤•à¤°à¥‡à¤‚">Follow Us</h3>
-                <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
-                <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
-                <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
-            </div>
-            <div>
-                <h3 data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤•">Contact</h3>
-                <p><a href="tel:+919413678955">+91 94136 78955</a></p>
-                <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
-                <p data-en="Hyderabad, Telangana, India" data-hi="à¤¹à¥ˆà¤¦à¤°à¤¾à¤¬à¤¾à¤¦, à¤¤à¥‡à¤²à¤‚à¤—à¤¾à¤¨à¤¾, à¤­à¤¾à¤°à¤¤">Hyderabad, Telangana, India
-                </p>
-            </div>
-        </div>
-        <p class="copyrights" data-en="Â© 2025 Naamin. All rights reserved."
-            data-hi="Â© à¥¨à¥¦à¥¨à¥« à¤¨à¤¾à¤®à¤¿à¤¨à¥¤ à¤¸à¤­à¥€ à¤…à¤§à¤¿à¤•à¤¾à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤à¥¤">Â© 2025 Naamin. All rights reserved.</p>
-    </footer>
-
-    <a href="https://wa.me/9413678955" class="whatsapp-float" target="_blank">
-        <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
-    </a>
-    <button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Scroll to top"><i
-            class="fas fa-arrow-up"></i></button>
-
-    <script type="module">
-        import { subscribeFeatureDoc, readCachedFeature } from "./js/fetchData.js";
-        import { renderFeaturePage, renderFeatureError } from "./js/render.js";
-
-        const root = document.querySelector("[data-feature-root]");
-        const pageId = "aura";
-
-        const cached = readCachedFeature(pageId);
-        if (cached) renderFeaturePage(root, cached);
-
-        subscribeFeatureDoc(
-            pageId,
-            (data) => renderFeaturePage(root, data),
-            () => renderFeatureError(root)
-        );
-    </script>
-    <script src="script.js?v=debug" defer></script>
-    <script src="navbar_fix.js?v=capture_fix"></script>
+<body data-feature-page="aura">
+    <div id="feature-app"></div>
+    <script type="module" src="js/feature-page.js"></script>
 </body>
 
 </html>

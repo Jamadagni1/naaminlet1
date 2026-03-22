@@ -1,5 +1,5 @@
 import { supabase } from "./supabase-client.js";
-import { mockCatalog, mockHighlights, mockSiteContent, mockTestimonials } from "./storefront-data.js";
+import { mockCatalog, mockFeaturePages, mockHighlights, mockSiteContent, mockTestimonials } from "./storefront-data.js";
 
 function normalizeCatalogItem(item) {
     return {
@@ -40,6 +40,17 @@ function fallbackData() {
     };
 }
 
+function normalizeFeaturePage(page, slug) {
+    return {
+        slug: page.slug || slug || "feature",
+        eyebrow: page.eyebrow || "",
+        title: page.title || "Untitled feature page",
+        description: page.description || "",
+        payload: page.payload || {},
+        published: page.published !== false
+    };
+}
+
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -77,5 +88,32 @@ export async function loadStorefrontData() {
         console.warn("Falling back to mock storefront data", error);
         await delay(400);
         return fallbackData();
+    }
+}
+
+export async function loadFeaturePage(slug) {
+    try {
+        const { data, error } = await supabase
+            .from("feature_pages")
+            .select("*")
+            .eq("slug", slug)
+            .eq("published", true)
+            .maybeSingle();
+
+        if (error) throw error;
+        if (!data) throw new Error(`Feature page not found for ${slug}`);
+
+        return {
+            source: "supabase",
+            page: normalizeFeaturePage(data, slug)
+        };
+    } catch (error) {
+        console.warn(`Falling back to mock feature page for ${slug}`, error);
+        await delay(250);
+        const fallback = mockFeaturePages[slug];
+        return {
+            source: "mock",
+            page: normalizeFeaturePage(fallback || {}, slug)
+        };
     }
 }

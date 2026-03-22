@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log In | Naamin</title>
+  <script src="js/local-dev-origin.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -37,16 +38,48 @@
           <span>Naam<span>in</span></span>
         </div>
         <h2>Log in</h2>
-        <p class="auth-subcopy">Use your Supabase account credentials to continue.</p>
+        <p class="auth-subcopy">Use your Naamin account credentials to continue.</p>
 
-        <form id="login-form" class="auth-form">
+        <form id="login-form" class="auth-form" novalidate>
           <input id="login-email" type="email" placeholder="Email address" required>
           <input id="login-password" type="password" placeholder="Password" required>
           <button type="submit" class="auth-btn primary">Log In</button>
         </form>
 
-        <button id="google-auth-btn" class="auth-btn secondary" type="button">Continue with Google</button>
+        <div id="google-auth-section">
+          <div class="auth-divider"><span>or continue with</span></div>
+          <button id="google-auth-btn" class="auth-btn secondary" type="button">Continue with Google</button>
+          <p id="google-auth-help" class="auth-helper"></p>
+        </div>
         <p id="auth-message" role="alert" aria-live="polite"></p>
+
+        <div class="auth-assurance">
+          <div class="auth-assurance-grid">
+            <article class="auth-assurance-card">
+              <i class="fa-solid fa-book-open"></i>
+              <div>
+                <strong>Your saved list</strong>
+                <span>Open your shortlist and continue from where you left off.</span>
+              </div>
+            </article>
+            <article class="auth-assurance-card">
+              <i class="fa-solid fa-sparkles"></i>
+              <div>
+                <strong>Premium naming flow</strong>
+                <span>Keep consultations, keepsakes, and favorites in one place.</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="auth-journey">
+            <p class="auth-journey-kicker">Inside your account</p>
+            <div class="auth-journey-steps">
+              <div><span><i class="fa-solid fa-heart"></i></span><p>Track shortlisted names in one clean place.</p></div>
+              <div><span><i class="fa-solid fa-layer-group"></i></span><p>Compare packs, services, and meaningful options faster.</p></div>
+              <div><span><i class="fa-solid fa-gift"></i></span><p>Return to keepsakes and ceremony-ready ideas anytime.</p></div>
+            </div>
+          </div>
+        </div>
 
         <div class="auth-switch">
           Don't have an account?

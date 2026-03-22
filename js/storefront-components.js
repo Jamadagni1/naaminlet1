@@ -1,6 +1,8 @@
 export function createNavbar(currentPath = "index.html") {
     const isWishlist = currentPath.includes("wishlist");
-    const sectionBase = isWishlist ? "index.html" : "";
+    const isAura = currentPath.includes("pricing");
+    const isHome = !isWishlist && !isAura;
+    const sectionBase = isHome ? "" : "index.html";
 
     return `
         <header class="site-shell">
@@ -18,14 +20,15 @@ export function createNavbar(currentPath = "index.html") {
 
                 <div class="nav-panel" id="nav-panel">
                     <div class="nav-links">
-                        <a href="index.html" class="${!isWishlist ? "is-active" : ""}">Home</a>
+                        <a href="index.html" class="${isHome ? "is-active" : ""}">Home</a>
                         <a href="${sectionBase}#catalog">Names</a>
+                        <a href="pricing.html" class="${isAura ? "is-active" : ""}">Aura</a>
                         <a href="${sectionBase}#experience">Services</a>
                         <a href="${sectionBase}#footer-contact">Contact</a>
                     </div>
 
                     <div class="nav-actions">
-                        <a href="wishlist.html" class="nav-icon-link ${isWishlist ? "is-active" : ""}" aria-label="Wishlist">
+                        <a href="wishlist.html" class="nav-icon-link ${isWishlist ? "is-active" : ""}" aria-label="Shortlist">
                             <i class="fa-solid fa-heart"></i>
                             <span id="wishlist-count-badge">0</span>
                         </a>
@@ -172,7 +175,7 @@ export function detailModalTemplate(item, wishlisted) {
                     ${item.highlights.map((point) => `<div><i class="fa-solid fa-check"></i><span>${point}</span></div>`).join("")}
                 </div>
                 <div class="detail-actions">
-                    <a href="wishlist.html" class="btn btn-secondary">Open Wishlist</a>
+                    <a href="wishlist.html" class="btn btn-secondary">Open Shortlist</a>
                     <a href="contact.html" class="btn btn-primary">Book Naming Help</a>
                 </div>
             </div>

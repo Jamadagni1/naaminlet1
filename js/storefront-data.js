@@ -162,6 +162,7 @@ export const mockSiteContent = {
             quickLinks: [
                 { label: "Home", href: "index.html" },
                 { label: "Names", href: "index.html#catalog" },
+                { label: "Aura", href: "pricing.html" },
                 { label: "Services", href: "index.html#experience" },
                 { label: "Shortlist", href: "wishlist.html" }
             ],
@@ -178,5 +179,100 @@ export const mockSiteContent = {
             bottomLeft: "&copy; 2026 Naamin. All rights reserved.",
             bottomRight: "Designed for a premium naming and gifting experience."
         }
+    }
+};
+
+export const mockFeaturePages = {
+    aura: {
+        slug: "aura",
+        eyebrow: "Aura experience",
+        title: "A guided premium naming layer for families who want more than a random list.",
+        description: "Aura brings consultation, curated direction, and keepsake-ready presentation into one calmer naming journey.",
+        payload: {
+            primaryCta: { label: "Start with Aura", href: "signup.html" },
+            secondaryCta: { label: "Explore names first", href: "index.html#catalog" },
+            stats: [
+                { value: "1:1", label: "guided direction" },
+                { value: "Modern + rooted", label: "naming approach" },
+                { value: "Shortlist-ready", label: "final delivery" }
+            ],
+            spotlight: {
+                eyebrow: "What Aura adds",
+                title: "More clarity, less overwhelm.",
+                copy: "For parents who want expert support, stronger curation, and a more memorable naming experience."
+            },
+            pillars: [
+                {
+                    icon: "fa-solid fa-feather-pointed",
+                    title: "Curated options",
+                    description: "Names are shaped around sound, meaning, recall value, and family preferences."
+                },
+                {
+                    icon: "fa-solid fa-star-and-crescent",
+                    title: "Vedic guidance when needed",
+                    description: "Blend modern taste with nakshatra, syllable, or meaning-based direction."
+                },
+                {
+                    icon: "fa-solid fa-gift",
+                    title: "Presentation that feels special",
+                    description: "Turn the chosen name into a beautiful keepsake or celebration-ready reveal."
+                }
+            ],
+            plans: [
+                {
+                    name: "Aura Start",
+                    price: "Rs. 999",
+                    description: "A lightweight guided shortlist for parents who want cleaner options fast.",
+                    badge: "Best for starting",
+                    features: ["Curated shortlist", "Meaning notes", "Final recommendation"]
+                },
+                {
+                    name: "Aura Signature",
+                    price: "Rs. 1,999",
+                    description: "A more premium consultation layer with parent-name blend and naming strategy support.",
+                    badge: "Most chosen",
+                    features: ["Custom naming direction", "Parent-name blend ideas", "Premium shortlist sheet"]
+                },
+                {
+                    name: "Aura Ceremony",
+                    price: "Rs. 2,999",
+                    description: "Naming guidance plus a keepsake-ready output for announcements, posters, or gifting.",
+                    badge: "Full experience",
+                    features: ["Naming consultation", "Keepsake concept", "Celebration-ready presentation"]
+                }
+            ],
+            process: [
+                {
+                    step: "01",
+                    title: "Tell us your direction",
+                    description: "Share preferred sounds, roots, style, family references, or astrological inputs."
+                },
+                {
+                    step: "02",
+                    title: "Receive a curated route",
+                    description: "We shape names into a tighter shortlist rather than leaving you to sort endless options."
+                },
+                {
+                    step: "03",
+                    title: "Finalize with confidence",
+                    description: "Compare finalists, choose the strongest option, and turn it into a keepsake if you want."
+                }
+            ],
+            faq: [
+                {
+                    question: "Is Aura only for Vedic naming?",
+                    answer: "No. Aura can be modern-first, meaning-first, or Vedic-guided depending on your preference."
+                },
+                {
+                    question: "Can parents bring their own shortlist?",
+                    answer: "Yes. Aura works well for both starting from scratch and reviewing an existing shortlist."
+                },
+                {
+                    question: "Do you include keepsake ideas too?",
+                    answer: "Yes. We can pair the final name with a poster, reveal concept, or celebration-oriented output."
+                }
+            ]
+        },
+        published: true
     }
 };
