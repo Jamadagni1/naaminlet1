@@ -1,224 +1,157 @@
-﻿import { firebaseConfig, auth, db } from "./firebase-config.js";
-import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const ADMIN_EMAILS = [
-  // "admin@example.com"
-];
-
-const ADMIN_REDIRECT = "admin.html";
-const USER_REDIRECT = "index.html";
+import { supabase } from "./js/supabase-client.js";
 
 const form = document.querySelector("form");
 const messageEl = document.getElementById("auth-message");
 const mode = document.body?.dataset?.auth || "";
 
+const showMessage = (text, type = "info") => {
+    if (!messageEl) return;
+    messageEl.textContent = text;
+    messageEl.dataset.type = type;
+};
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const showMessage = (text, type = "info") => {
-  if (!messageEl) return;
-  messageEl.textContent = text;
-  messageEl.dataset.type = type;
-};
+function validateEmail(email) {
+    return emailRegex.test(email);
+}
 
-const isConfigPlaceholder = () => {
-  if (!firebaseConfig || !firebaseConfig.apiKey) return true;
-  return String(firebaseConfig.apiKey).includes("YOUR_");
-};
+function validatePassword(password) {
+    return String(password).length >= 8;
+}
 
-const normalizeRole = (email) => {
-  if (!email) return "user";
-  return ADMIN_EMAILS.includes(email.toLowerCase()) ? "admin" : "user";
-};
+function pageUrl(fileName) {
+    return new URL(fileName, window.location.href).toString();
+}
 
-const validateEmail = (email) => emailRegex.test(email);
+async function isAdminUser(userId) {
+    const { data, error } = await supabase.from("admin_users").select("user_id").eq("user_id", userId).maybeSingle();
+    if (error) {
+        console.error(error);
+        return false;
+    }
+    return Boolean(data);
+}
 
-const validatePassword = (password) => String(password).length >= 8;
+async function redirectForUser(user) {
+    const isAdmin = await isAdminUser(user.id);
+    window.location.href = isAdmin ? "admin.html" : "index.html";
+}
 
-const getUserRole = async (uid) => {
-  const ref = doc(db, "users", uid);
-  const snap = await getDoc(ref);
-  if (!snap.exists()) return "user";
-  return snap.data()?.role || "user";
-};
+async function bootSession() {
+    const { data } = await supabase.auth.getSession();
+    const user = data.session?.user;
+    if (user) {
+        await redirectForUser(user);
+    }
+}
 
-const safeRedirect = (role) => {
-  const target = role === "admin" ? ADMIN_REDIRECT : USER_REDIRECT;
-  if (role === "admin") {
-    fetch(target, { method: "HEAD" }).then((res) => {
-      window.location.href = res.ok ? target : USER_REDIRECT;
-    }).catch(() => {
-      window.location.href = USER_REDIRECT;
-    });
-  } else {
-    window.location.href = USER_REDIRECT;
-  }
-};
-
-const handleAuthError = (err) => {
-  const code = err?.code || "";
-  switch (code) {
-    case "auth/email-already-in-use":
-      return "Email already exists. Please log in instead.";
-    case "auth/invalid-email":
-      return "Invalid email format.";
-    case "auth/user-not-found":
-      return "User not found. Please sign up first.";
-    case "auth/wrong-password":
-      return "Wrong password. Please try again.";
-    case "auth/invalid-credential":
-      return "Invalid credentials. Please try again.";
-    case "auth/weak-password":
-      return "Password should be at least 8 characters.";
-    case "auth/popup-closed-by-user":
-      return "Google sign-in was closed before completing.";
-    default:
-      return err?.message || "Something went wrong. Please try again.";
-  }
-};
-
-if (isConfigPlaceholder()) {
-  showMessage("Firebase config is missing. Update firebase-config.js with your project keys.", "error");
+function authErrorMessage(error) {
+    const code = error?.code || "";
+    switch (code) {
+        case "email_exists":
+        case "user_already_exists":
+            return "This email already exists. Please log in instead.";
+        case "invalid_credentials":
+            return "Invalid email or password.";
+        case "weak_password":
+            return "Password must be at least 8 characters.";
+        default:
+            return error?.message || "Something went wrong. Please try again.";
+    }
 }
 
 if (form) {
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    showMessage("", "info");
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        showMessage("", "info");
 
-    if (isConfigPlaceholder()) {
-      showMessage("Please set Firebase keys in firebase-config.js before continuing.", "error");
-      return;
-    }
+        try {
+            if (mode === "signup") {
+                const name = document.getElementById("signup-name")?.value?.trim() || "";
+                const email = document.getElementById("signup-email")?.value?.trim() || "";
+                const password = document.getElementById("signup-password")?.value || "";
+                const confirm = document.getElementById("signup-confirm")?.value || "";
 
-    try {
-      if (mode === "signup") {
-        const name = document.getElementById("signup-name")?.value?.trim() || "";
-        const email = document.getElementById("signup-email")?.value?.trim() || "";
-        const password = document.getElementById("signup-password")?.value || "";
-        const confirm = document.getElementById("signup-confirm")?.value || "";
+                if (!name || !email || !password || !confirm) {
+                    showMessage("Please fill in all fields.", "error");
+                    return;
+                }
+                if (!validateEmail(email)) {
+                    showMessage("Please enter a valid email address.", "error");
+                    return;
+                }
+                if (!validatePassword(password)) {
+                    showMessage("Password must be at least 8 characters.", "error");
+                    return;
+                }
+                if (password !== confirm) {
+                    showMessage("Passwords do not match.", "error");
+                    return;
+                }
 
-        if (!name || !email || !password || !confirm) {
-          showMessage("Please fill in all fields.", "error");
-          return;
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { full_name: name },
+                        emailRedirectTo: pageUrl("login.html")
+                    }
+                });
+
+                if (error) throw error;
+
+                if (data.session?.user) {
+                    showMessage("Account created. Redirecting...", "success");
+                    await redirectForUser(data.session.user);
+                    return;
+                }
+
+                showMessage("Account created. Please verify your email before logging in.", "success");
+            }
+
+            if (mode === "login") {
+                const email = document.getElementById("login-email")?.value?.trim() || "";
+                const password = document.getElementById("login-password")?.value || "";
+
+                if (!email || !password) {
+                    showMessage("Please enter your email and password.", "error");
+                    return;
+                }
+                if (!validateEmail(email)) {
+                    showMessage("Please enter a valid email address.", "error");
+                    return;
+                }
+
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+
+                showMessage("Logged in. Redirecting...", "success");
+                await redirectForUser(data.user);
+            }
+        } catch (error) {
+            showMessage(authErrorMessage(error), "error");
         }
-        if (!validateEmail(email)) {
-          showMessage("Please enter a valid email address.", "error");
-          return;
-        }
-        if (!validatePassword(password)) {
-          showMessage("Password must be at least 8 characters.", "error");
-          return;
-        }
-        if (password !== confirm) {
-          showMessage("Passwords do not match.", "error");
-          return;
-        }
-
-        const cred = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(cred.user, { displayName: name });
-
-        const role = normalizeRole(email);
-        await setDoc(doc(db, "users", cred.user.uid), {
-          name,
-          email,
-          role,
-          provider: "password",
-          createdAt: serverTimestamp()
-        });
-
-        showMessage("Account created successfully. Redirecting...", "success");
-        safeRedirect(role);
-      } else if (mode === "login") {
-        const email = document.getElementById("login-email")?.value?.trim() || "";
-        const password = document.getElementById("login-password")?.value || "";
-
-        if (!email || !password) {
-          showMessage("Please enter your email and password.", "error");
-          return;
-        }
-        if (!validateEmail(email)) {
-          showMessage("Please enter a valid email address.", "error");
-          return;
-        }
-
-        const cred = await signInWithEmailAndPassword(auth, email, password);
-        const role = await getUserRole(cred.user.uid);
-        showMessage("Logged in. Redirecting...", "success");
-        safeRedirect(role);
-      }
-    } catch (err) {
-      showMessage(handleAuthError(err), "error");
-    }
-  });
+    });
 }
 
 const googleBtn = document.getElementById("google-auth-btn");
 if (googleBtn) {
-  googleBtn.addEventListener("click", async () => {
-    showMessage("", "info");
+    googleBtn.addEventListener("click", async () => {
+        showMessage("Redirecting to Google...", "info");
+        const redirectTarget = mode === "signup" ? "signup.html" : "login.html";
 
-    if (isConfigPlaceholder()) {
-      showMessage("Please set Firebase keys in firebase-config.js before continuing.", "error");
-      return;
-    }
-
-    try {
-      const provider = new GoogleAuthProvider();
-      const cred = await signInWithPopup(auth, provider);
-      const user = cred.user;
-      const role = normalizeRole(user.email);
-
-      const ref = doc(db, "users", user.uid);
-      const snap = await getDoc(ref);
-      if (!snap.exists()) {
-        await setDoc(ref, {
-          name: user.displayName || "",
-          email: user.email || "",
-          role,
-          provider: "google",
-          createdAt: serverTimestamp()
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: pageUrl(redirectTarget)
+            }
         });
-      }
 
-      showMessage("Signed in with Google. Redirecting...", "success");
-      safeRedirect(role);
-    } catch (err) {
-      showMessage(handleAuthError(err), "error");
-    }
-  });
+        if (error) {
+            showMessage(authErrorMessage(error), "error");
+        }
+    });
 }
 
-const logoutBtn = document.getElementById("logout-btn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = USER_REDIRECT;
-  });
-}
-
-onAuthStateChanged(auth, async (user) => {
-  const authGate = document.querySelector("[data-auth-gate]");
-  if (!authGate) return;
-
-  if (!user) {
-    authGate.textContent = "Please log in to continue.";
-    return;
-  }
-
-  const role = await getUserRole(user.uid);
-  authGate.textContent = `Signed in as ${user.email} (${role})`;
-});
+bootSession();

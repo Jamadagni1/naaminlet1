@@ -51,6 +51,32 @@ GenderTheme.init();
 document.body.style.visibility = "visible";
 document.body.style.opacity = "1";
 
+function repairMojibakeText(value) {
+    if (typeof value !== "string" || !value) return value;
+    if (!/[ÃÂà-áâãäåçèéêëìíîïðñòóôõö]/.test(value)) return value;
+
+    try {
+        // Fix UTF-8 text that was decoded as latin1/win1252, e.g. "à¤¹à¥‹à¤®" -> "होम".
+        const bytes = Uint8Array.from(Array.from(value, ch => ch.charCodeAt(0) & 0xff));
+        return new TextDecoder("utf-8", { fatal: false }).decode(bytes);
+    } catch (error) {
+        console.debug("repairMojibakeText: decode skipped", error);
+        return value;
+    }
+}
+
+function repairMojibakeDeep(value) {
+    if (typeof value === "string") return repairMojibakeText(value);
+    if (Array.isArray(value)) return value.map(repairMojibakeDeep);
+    if (!value || typeof value !== "object") return value;
+
+    const repaired = {};
+    Object.entries(value).forEach(([key, nestedValue]) => {
+        repaired[key] = repairMojibakeDeep(nestedValue);
+    });
+    return repaired;
+}
+
 // Comprehensive English to Hindi Name Mapping & Transliteration
 function getHindiName(englishName) {
     if (!englishName) return "";
@@ -66,7 +92,7 @@ function getHindiName(englishName) {
         'Diya': 'à¤¦à¥€à¤¯à¤¾', 'Isha': 'à¤ˆà¤¶à¤¾', 'Kavya': 'à¤•à¤¾à¤µà¥à¤¯à¤¾', 'Prisha': 'à¤ªà¥à¤°à¤¿à¤¶à¤¾'
     };
 
-    if (preciseMapping[englishName]) return preciseMapping[englishName];
+    if (preciseMapping[englishName]) return repairMojibakeText(preciseMapping[englishName]);
 
     // 2. Fallback: Phonetic Transliteration logic
     const phoneticMap = {
@@ -96,7 +122,7 @@ function getHindiName(englishName) {
         }
     }
 
-    return result || englishName;
+    return repairMojibakeText(result || englishName);
 }
 window.getHindiName = getHindiName;
 
@@ -261,7 +287,7 @@ class AstroEngine {
         // Get Hindi Name if available in data, or fallback to mapping
         const hName = data.hindiName || data.hindi_name || data.name_hindi || getHindiName(safeName) || "";
 
-        return {
+        return repairMojibakeDeep({
             ...data,
             name: safeName, // English Name
             name_en: safeName,
@@ -319,7 +345,7 @@ class AstroEngine {
                 luckyNos: isHindi ? "à¤¶à¥à¤­ à¤…à¤‚à¤•" : "Lucky Numbers",
                 prediction: isHindi ? "à¤­à¤µà¤¿à¤·à¥à¤¯à¤«à¤²" : "Prediction"
             }
-        };
+        });
     }
 }
 
@@ -674,7 +700,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (el.getAttribute('href') && el.getAttribute('href').includes('popular-names')) {
                     console.log("Script.js: Translating Popular Names element to: " + text);
                 }
-                el.textContent = text;
+                const repairedText = repairMojibakeText(text);
+                const arrow = el.querySelector(".arrow");
+
+                if (arrow) {
+                    let labelNode = null;
+                    for (const node of el.childNodes) {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            labelNode = node;
+                            break;
+                        }
+                    }
+
+                    if (labelNode) {
+                        labelNode.nodeValue = repairedText + " ";
+                    } else {
+                        el.insertBefore(document.createTextNode(repairedText + " "), arrow);
+                    }
+                } else {
+                    el.textContent = repairedText;
+                }
             }
         });
 
@@ -682,7 +727,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: lang } }));
 
         const inp = document.getElementById("hero-search-input");
-        if (inp) inp.placeholder = lang === "hi" ? "à¤‰à¤¦à¤¾: à¤†à¤°à¤µ, à¤…à¤¦à¥à¤µà¤¿à¤•..." : "e.g., Aarav, Advik...";
+        if (inp) inp.placeholder = repairMojibakeText(lang === "hi" ? "à¤‰à¤¦à¤¾: à¤†à¤°à¤µ, à¤…à¤¦à¥à¤µà¤¿à¤•..." : "e.g., Aarav, Advik...");
 
         // If name finder is visible, reload names for currently selected gender so JSON file/language updates instantly
         try {
@@ -1013,14 +1058,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     showDetails(detailsBox, smartData);
                 } else {
                     const isHindi = getLanguage() === 'hi';
-                    const msg = isHindi
+                    const msg = repairMojibakeText(isHindi
                         ? "à¤œà¤²à¥à¤¦à¥€ à¤† à¤°à¤¹à¤¾ à¤¹à¥ˆ, à¤•à¥ƒà¤ªà¤¯à¤¾ à¤ªà¥à¤°à¤¤à¥€à¤•à¥à¤·à¤¾ à¤•à¤°à¥‡à¤‚, à¤¹à¤® à¤†à¤ªà¤•à¥‡ à¤§à¥ˆà¤°à¥à¤¯ à¤•à¥€ à¤¸à¤°à¤¾à¤¹à¤¨à¤¾ à¤•à¤°à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤"
-                        : "Coming soon, please wait, we appreciate your patience.";
+                        : "Coming soon, please wait, we appreciate your patience.");
+                    const title = repairMojibakeText(isHindi ? "à¤ªà¤°à¤¿à¤£à¤¾à¤® à¤¨à¤¹à¥€à¤‚ à¤®à¤¿à¤²à¤¾" : "No Result Found");
 
                     detailsBox.innerHTML = `
                         <div style="text-align: center; padding: 40px;">
                             <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-primary); margin-bottom: 20px;"></i>
-                            <h3 style="color: var(--text-dark);">${isHindi ? "à¤ªà¤°à¤¿à¤£à¤¾à¤® à¤¨à¤¹à¥€à¤‚ à¤®à¤¿à¤²à¤¾" : "No Result Found"}</h3>
+                            <h3 style="color: var(--text-dark);">${title}</h3>
                             <p style="font-size: 1.2rem; color: var(--text-medium); margin-top: 10px;">${msg}</p>
                         </div>
                     `;

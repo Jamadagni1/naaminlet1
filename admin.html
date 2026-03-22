@@ -1,69 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naamin Admin - Feature Pages</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .admin-grid { display: grid; gap: 24px; }
-    .admin-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
-    .admin-row { display: grid; gap: 8px; margin-bottom: 12px; }
-    .admin-row input, .admin-row textarea, .admin-row select { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #e6dff0; font-family: inherit; }
-    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .admin-btn { padding: 8px 14px; border-radius: 999px; border: none; cursor: pointer; background: #2d2236; color: #fff; }
-    .admin-btn.secondary { background: #6c5a7d; }
-    .admin-btn.danger { background: #a04646; }
-    .section-list { display: grid; gap: 12px; }
-    .section-item { border: 1px solid #eee4f4; border-radius: 12px; padding: 12px; }
-    .section-item h4 { margin: 0 0 8px; font-size: 0.95rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naamin Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
-  <main class="section">
-    <div class="content-wrapper">
-      <h2>Feature Pages Admin</h2>
-      <p>Manage dynamic feature pages like Aura, Zodiac, etc.</p>
-
-      <div class="admin-grid">
-        <div class="admin-card">
-          <h3>Create / Edit Feature</h3>
-          <div class="admin-row">
-            <label>Page ID (e.g., aura, zodiac)</label>
-            <input id="feature-id" placeholder="aura" />
-          </div>
-          <div class="admin-row">
-            <label>Title</label>
-            <input id="feature-title" placeholder="Aura Plans" />
-          </div>
-          <div class="admin-row">
-            <label>Description</label>
-            <textarea id="feature-description" rows="3" placeholder="Short description..."></textarea>
-          </div>
-          <div class="admin-row">
-            <label>Sections</label>
-            <div id="sections-container" class="section-list"></div>
-            <div class="admin-actions">
-              <button class="admin-btn secondary" id="add-section-btn">Add Section</button>
-            </div>
-          </div>
-          <div class="admin-actions">
-            <button class="admin-btn" id="save-feature-btn">Save / Update</button>
-            <button class="admin-btn danger" id="delete-feature-btn">Delete</button>
-          </div>
-        </div>
-
-        <div class="admin-card">
-          <h3>Live Pages</h3>
-          <div id="feature-list"></div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <script type="module" src="js/admin.js"></script>
+    <div id="admin-app"></div>
+    <script type="module" src="js/admin.js"></script>
 </body>
+
 </html>
