@@ -658,16 +658,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateContent(lang) {
         console.log("Script.js: updateContent called with lang:", lang);
+
+        const WIN1252_REVERSE = {
+            8364: 128, 8218: 130, 402: 131, 8222: 132, 8230: 133, 8224: 134, 8225: 135,
+            710: 136, 8240: 137, 352: 138, 8249: 139, 338: 140, 381: 142,
+            8216: 145, 8217: 146, 8220: 147, 8221: 148, 8226: 149, 8211: 150, 8212: 151,
+            732: 152, 8482: 153, 353: 154, 8250: 155, 339: 156, 382: 158, 376: 159
+        };
+
+        function normalizeMaybeMojibake(text) {
+            if (!text) return text;
+
+            // Only attempt decoding for common mojibake markers seen in this repo.
+            if (!/(?:Â|Ã|â|à¤|à¥)/.test(text)) return text;
+
+            try {
+                const bytes = new Uint8Array(text.length);
+                for (let i = 0; i < text.length; i++) {
+                    const code = text.charCodeAt(i);
+                    if (code <= 255) {
+                        bytes[i] = code;
+                        continue;
+                    }
+                    const mapped = WIN1252_REVERSE[code];
+                    if (mapped === undefined) return text;
+                    bytes[i] = mapped;
+                }
+
+                const decoded = new TextDecoder('utf-8').decode(bytes);
+
+                if (!decoded || decoded === text) return text;
+                if (decoded.includes('�')) return text;
+
+                const devanagariCount = (decoded.match(/[\u0900-\u097F]/g) || []).length;
+                if (devanagariCount > 0) return decoded;
+
+                // Fix common symbol mojibake like "Â©" -> "©", "â€™" -> "’", "â–¼" -> "▼"
+                if (/(?:Â|Ã|â)/.test(text) && !/(?:Â|Ã|â)/.test(decoded)) return decoded;
+
+                return text;
+            } catch (_e) {
+                return text;
+            }
+        }
+
+        function setTextPreserveChildren(el, translated) {
+            // If element contains child elements (icons/spans), don't wipe them with textContent.
+            const hasElementChildren = Array.from(el.childNodes).some(n => n.nodeType === 1);
+            if (!hasElementChildren) {
+                el.textContent = translated;
+                return;
+            }
+
+            let textNode = null;
+            for (let i = 0; i < el.childNodes.length; i++) {
+                const n = el.childNodes[i];
+                if (n.nodeType === 3 && n.nodeValue.trim().length > 0) {
+                    textNode = n;
+                    break;
+                }
+            }
+
+            const suffix = translated.endsWith(' ') ? '' : ' ';
+            if (textNode) {
+                textNode.nodeValue = translated + suffix;
+            } else {
+                el.insertBefore(document.createTextNode(translated + suffix), el.firstChild);
+            }
+        }
+
         document.documentElement.lang = lang;
         localStorage.setItem("language", lang);
         const translatableElements = document.querySelectorAll("[data-en]");
         translatableElements.forEach(el => {
-            const text = el.getAttribute(lang === "hi" ? "data-hi" : "data-en");
+            const raw = el.getAttribute(lang === "hi" ? "data-hi" : "data-en");
+            const text = normalizeMaybeMojibake(raw);
             if (text) {
                 if (el.getAttribute('href') && el.getAttribute('href').includes('popular-names')) {
                     console.log("Script.js: Translating Popular Names element to: " + text);
                 }
-                el.textContent = text;
+                setTextPreserveChildren(el, text);
             }
         });
 
@@ -1388,7 +1458,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const wishlistCloseBtn = document.getElementById('wishlist-close');
     const wishlistItems = document.getElementById('wishlist-items');
     const wishlistViewBtn = document.getElementById('wishlist-view-btn');
-    const favBtnMobile = document.getElementById('fav-view-btn-mobile');
+    const wishlistFavBtnMobile = document.getElementById('fav-view-btn-mobile');
 
     function openWishlistPanel() {
         if (!wishlistPanel) {
@@ -1496,8 +1566,8 @@ document.addEventListener("DOMContentLoaded", () => {
         wishlistCloseBtn.addEventListener('click', closeWishlistPanel);
     }
 
-    if (favBtnMobile) {
-        favBtnMobile.addEventListener('click', () => {
+    if (wishlistFavBtnMobile) {
+        wishlistFavBtnMobile.addEventListener('click', () => {
             openWishlistPanel();
         });
     }

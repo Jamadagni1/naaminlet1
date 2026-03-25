@@ -9,8 +9,46 @@
         const lang = getLang();
         console.log("Navbar Fix: Applying translation for", lang);
 
+        const WIN1252_REVERSE = {
+            8364: 128, 8218: 130, 402: 131, 8222: 132, 8230: 133, 8224: 134, 8225: 135,
+            710: 136, 8240: 137, 352: 138, 8249: 139, 338: 140, 381: 142,
+            8216: 145, 8217: 146, 8220: 147, 8221: 148, 8226: 149, 8211: 150, 8212: 151,
+            732: 152, 8482: 153, 353: 154, 8250: 155, 339: 156, 382: 158, 376: 159
+        };
+
+        function normalizeMaybeMojibake(text) {
+            if (!text) return text;
+            if (!/(?:Â|Ã|â|à¤|à¥)/.test(text)) return text;
+
+            try {
+                const bytes = new Uint8Array(text.length);
+                for (let i = 0; i < text.length; i++) {
+                    const code = text.charCodeAt(i);
+                    if (code <= 255) {
+                        bytes[i] = code;
+                        continue;
+                    }
+                    const mapped = WIN1252_REVERSE[code];
+                    if (mapped === undefined) return text;
+                    bytes[i] = mapped;
+                }
+
+                const decoded = new TextDecoder('utf-8').decode(bytes);
+                if (!decoded || decoded === text) return text;
+                if (decoded.includes('�')) return text;
+
+                const devanagariCount = (decoded.match(/[\u0900-\u097F]/g) || []).length;
+                if (devanagariCount > 0) return decoded;
+                if (/(?:Â|Ã|â)/.test(text) && !/(?:Â|Ã|â)/.test(decoded)) return decoded;
+                return text;
+            } catch (_e) {
+                return text;
+            }
+        }
+
         document.querySelectorAll(".navbar [data-en]").forEach(el => {
-            const text = el.getAttribute(lang === "hi" ? "data-hi" : "data-en");
+            const raw = el.getAttribute(lang === "hi" ? "data-hi" : "data-en");
+            const text = normalizeMaybeMojibake(raw);
 
             // Special handling for "More" dropdown to preserve the arrow
             if (el.classList.contains("dropdown-toggle") || el.classList.contains("mobile-dropdown-toggle")) {
