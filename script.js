@@ -1343,7 +1343,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (favBtn) {
         favBtn.onclick = () => {
-            openWishlistPanel();
+            if (favOverlay) {
+                favOverlay.style.display = 'flex';
+                renderFavoritesList();
+                return;
+            }
+
+            const onWishlistPage = /(^|\/)wishlist\.html$/i.test(window.location.pathname || '');
+            if (onWishlistPage) {
+                const target = document.getElementById('wishlist-section') || document.querySelector('main');
+                if (target && typeof target.scrollIntoView === 'function') {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return;
+            }
+
+            window.location.href = 'wishlist.html';
         };
     }
 
