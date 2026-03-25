@@ -10,6 +10,7 @@ const USER_REDIRECT = "index.html";
 const form = document.querySelector("form");
 const messageEl = document.getElementById("auth-message");
 const mode = document.body?.dataset?.auth || "";
+const isAuthScreen = mode === "login" || mode === "signup";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,6 +35,19 @@ const getUserRole = async (user) => normalizeRole(user?.email);
 
 const getAuthReturnUrl = () => {
   return new URL(window.location.pathname, window.location.origin).toString();
+};
+
+const getUrlParam = (key) => {
+  const searchParams = new URLSearchParams(window.location.search);
+  if (searchParams.has(key)) {
+    return searchParams.get(key);
+  }
+
+  const hash = window.location.hash.startsWith("#")
+    ? window.location.hash.slice(1)
+    : window.location.hash;
+  const hashParams = new URLSearchParams(hash);
+  return hashParams.get(key);
 };
 
 const clearAuthParamsFromUrl = () => {
@@ -88,6 +102,14 @@ const handleAuthError = (err) => {
       }
       return err?.message || "Something went wrong. Please try again.";
   }
+};
+
+const isMissingSessionError = (err) => {
+  const message = String(err?.message || "").toLowerCase();
+  return (
+    err?.name === "AuthSessionMissingError" ||
+    message.includes("auth session missing")
+  );
 };
 
 if (isConfigPlaceholder()) {
@@ -202,13 +224,24 @@ if (googleBtn) {
 
     try {
       showMessage("Redirecting to Google...", "success");
-      const { error } = await supabase.auth.signInWithOAuth({
+      const redirectTo = getAuthReturnUrl();
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: getAuthReturnUrl()
+          redirectTo,
+          queryParams: {
+            prompt: "select_account"
+          },
+          skipBrowserRedirect: true
         }
       });
       if (error) throw error;
+
+      if (!data?.url) {
+        throw new Error("Google sign-in could not be started.");
+      }
+
+      window.location.assign(data.url);
     } catch (err) {
       showMessage(handleAuthError(err), "error");
     }
@@ -226,20 +259,23 @@ if (logoutBtn) {
 const syncAuthUi = async () => {
   if (isConfigPlaceholder()) return;
 
-  const params = new URLSearchParams(window.location.search);
-  const authError = params.get("error_description") || params.get("error");
+  const authError = getUrlParam("error_description") || getUrlParam("error");
   if (authError) {
     showMessage(decodeURIComponent(authError), "error");
     clearAuthParamsFromUrl();
+    return;
   }
 
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabase.auth.getSession();
   if (error) {
+    if (isMissingSessionError(error)) {
+      return;
+    }
     showMessage(handleAuthError(error), "error");
     return;
   }
 
-  const user = data.user || null;
+  const user = data.session?.user || null;
   const authGate = document.querySelector("[data-auth-gate]");
 
   if (authGate) {
@@ -251,7 +287,7 @@ const syncAuthUi = async () => {
     }
   }
 
-  if (user && (mode === "login" || mode === "signup")) {
+  if (user && isAuthScreen) {
     const role = await getUserRole(user);
     clearAuthParamsFromUrl();
     safeRedirect(role);
@@ -260,6 +296,13 @@ const syncAuthUi = async () => {
 
 supabase.auth.onAuthStateChange(async (_event, session) => {
   const authGate = document.querySelector("[data-auth-gate]");
+  if (session?.user && isAuthScreen) {
+    const role = await getUserRole(session.user);
+    clearAuthParamsFromUrl();
+    safeRedirect(role);
+    return;
+  }
+
   if (!authGate) return;
 
   if (!session?.user) {

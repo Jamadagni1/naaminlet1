@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const root = process.cwd();
+const host = '127.0.0.1';
+const port = Number(process.env.PORT) || 3000;
 const mime = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -32,6 +34,6 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(8000, '127.0.0.1', () => {
-  console.log('Server running on http://localhost:8000');
+server.listen(port, host, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
