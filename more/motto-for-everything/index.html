@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (() => {
+            const preferredLang = localStorage.getItem("language") || "en";
+            document.documentElement.lang = preferredLang;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motto Generator - Naamin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+    <nav class="navbar">
+        <!-- Logo -->
+        <div class="logo">Naam<span class="logo-in">in</span></div>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links desktop-only">
+            <li><a href="../../index.html" data-en="Home" data-hi="होम">Home</a></li>
+            <li><a href="../../about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+            <li><a href="../../parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चा">Parents to
+                    Child</a></li>
+
+            <!-- Dropdown -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-en="More" data-hi="अधिक">
+                    More <span class="arrow">▼</span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="../../popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular
+                            Names</a></li>
+                    <li><a href="../../unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a>
+                    </li>
+                    <li><a href="../../famous-personalities.html" data-en="Famous Personalities"
+                            data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                    <li><a href="index.html" class="active" data-en="Motto Generator" data-hi="आदर्श वाक्य जनरेटर">Motto
+                            Generator</a></li>
+                    <li><a href="../zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="राशि चक्र खोजक">Zodiac
+                            Finder</a></li>
+                    <li><a href="../../product.html" data-en="Products" data-hi="उत्पाद">Products</a></li>
+
+                    <li><a href="../../services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                    <li><a href="../../pricing.html" data-en="Aura" data-hi="आभा">Aura</a></li>
+                    <li><a href="../../careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                    <li><a href="../../blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                    <li><a href="../../contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Desktop Actions -->
+        <div class="nav-actions desktop-only">
+            <button id="language-toggle" class="btn" style="font-size:12px; padding:6px 10px;"
+                title="Toggle language">ENG/HIN</button>
+            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span id="fav-count">0</span>
+            </button>
+            <a href="../../login.html" class="btn btn-login">Log in</a>
+            <a href="../../signup.html" class="btn btn-signup">Sign up</a>
+        </div>
+
+        <!-- Hamburger Icon (Mobile Only) -->
+        <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="../../index.html" data-en="Home" data-hi="होम">Home</a></li>
+                <li><a href="../../about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+                <li><a href="../../parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चा">Parents to
+                        Child</a></li>
+
+                <!-- Mobile Dropdown -->
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="अधिक">More <span
+                            class="arrow">▼</span></a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="../../popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular
+                                Names</a></li>
+                        <li><a href="../../unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique
+                                Names</a>
+                        </li>
+                        <li><a href="../../famous-personalities.html" data-en="Famous Personalities"
+                                data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                        <li><a href="index.html" class="active" data-en="Motto Generator"
+                                data-hi="आदर्श वाक्य जनरेटर">Motto Generator</a></li>
+                        <li><a href="../zodiac-finder/index.html" data-en="Zodiac Finder"
+                                data-hi="राशि चक्र खोजक">Zodiac Finder</a></li>
+                        <li><a href="../../product.html" data-en="Products" data-hi="उत्पाद">Products</a></li>
+
+                        <li><a href="../../services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                        <li><a href="../../pricing.html" data-en="Aura" data-hi="आभा">Aura</a></li>
+                        <li><a href="../../careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                        <li><a href="../../blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                        <li><a href="../../contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions">
+                <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
+                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn">
+                    <i class="fas fa-heart"></i>
+                    <span id="fav-count-mobile">0</span>
+                </button>
+                <a href="../../login.html" class="btn btn-login mobile-btn">Log in</a>
+                <a href="../../signup.html" class="btn btn-signup mobile-btn">Sign up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="motto-page">
+        <div class="motto-hero">
+            <h1 class="premium-title" data-en="Motto for Everything" data-hi="हर चीज के लिए आदर्श वाक्य">Motto for
+                Everything</h1>
+            <p class="section-subtitle" data-en="Crafting the perfect words for your most meaningful moments."
+                data-hi="आपके सबसे सार्थक क्षणों के लिए सही शब्दों को तैयार करना।">Crafting the perfect words for your
+                most meaningful moments.</p>
+        </div>
+
+
+        <section class="motto-container">
+            <div class="motto-card glass">
+                <form id="motto-form">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="motto-type" data-en="What is this for?" data-hi="यह किसके लिए है?">What is this
+                                for?</label>
+                            <select id="motto-type" required>
+                                <option value="Baby Name Motto" data-en="Baby Name Motto"
+                                    data-hi="शिशु नाम आदर्श वाक्य">Baby Name Motto</option>
+                                <option value="Brand Motto" data-en="Brand Motto" data-hi="ब्रांड आदर्श वाक्य">Brand
+                                    Motto</option>
+                                <option value="Business Motto" data-en="Business Motto" data-hi="व्यापार आदर्श वाक्य">
+                                    Business Motto</option>
+                                <option value="Personal Life Motto" data-en="Personal Life Motto"
+                                    data-hi="व्यक्तिगत जीवन आदर्श वाक्य">Personal Life Motto</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="user-input" data-en="Name / Keyword / Theme" data-hi="नाम / कीवर्ड / थीम">Name /
+                                Keyword / Theme</label>
+                            <input type="text" id="user-input" placeholder="e.g. LunaWave or Courage" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="tone" data-en="Tone (Optional)" data-hi="टोन (वैकल्पिक)">Tone (Optional)</label>
+                            <input type="text" id="tone" placeholder="e.g. Modern, Inspiring, Minimal">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-generate">
+                        <span class="btn-text" data-en="Inspire Me" data-hi="मुझे प्रेरित करें">Inspire Me</span>
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="results-section" class="results-section" style="display: none;">
+                <div class="results-overlay"></div>
+                <div class="results-content">
+                    <div class="results-header">
+                        <h2>Your Curated Mottos</h2>
+                        <button id="copy-all" class="btn-icon" title="Copy All"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <div id="motto-list" class="motto-list">
+                        <!-- Mottos will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading-spinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p data-en="Consulting the muses..." data-hi="विचार-मंथन कर रहे हैं...">Consulting the muses...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3><a href="../../index.html"
+                    data-en="Home" data-hi="होम">Home</a><a href="../../about.html" data-en="About"
+                    data-hi="हमारे बारे में">About</a><a href="../../services.html" data-en="Services"
+                    data-hi="सेवाएं">Services</a><a href="../../contact.html" data-en="Contact"
+                    data-hi="संपर्क करें">Contact</a>
+            </div>
+            <div>
+                <h3 data-en="Our Services" data-hi="हमारी सेवाएं">Our Services</h3><a href="../../services.html"
+                    data-en="Baby Naming" data-hi="शिशु नामकरण">Baby Naming</a><a href="../../services.html"
+                    data-en="Company Naming" data-hi="कंपनी नामकरण">Company Naming</a><a href="../../services.html"
+                    data-en="Motto Creation" data-hi="उद्घोष निर्माण">Motto Creation</a>
+            </div>
+            <div>
+                <h3 data-en="Follow Us" data-hi="हमें फॉलो करें">Follow Us</h3>
+                <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
+            </div>
+            <div>
+                <h3 data-en="Contact" data-hi="संपर्क">Contact</h3>
+                <p><a href="tel:+919413678955">+91 94136 78955</a></p>
+                <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
+                <p data-en="Hyderabad, Telangana, India" data-hi="हैदराबाद, तेलंगाना, भारत">Hyderabad, Telangana, India
+                </p>
+            </div>
+        </div>
+        <p class="copyrights" data-en="© 2025 Naamin. All rights reserved."
+            data-hi="© २०२५ नामिन। सभी अधिकार सुरक्षित।">© 2025 Naamin. All rights reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/9413678955?text=Hello" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+    </a>
+
+    <script src="../../hindi-transliterate.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naamin | Ethnic Fashion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="preloader.css">
+
+    <link rel="stylesheet" href="poster-styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+    <script src="script.js?v=debug" defer></script>
+
+
+    <script>
+        (() => {
+            const preferredLang = localStorage.getItem("language") || "en";
+            document.documentElement.lang = preferredLang;
+        })();
+    </script>
+</head>
+
+<body data-theme="light" style="visibility: visible !important; opacity: 1 !important;">
+
+    <script>
+        (function () {
+            // Insert preloader markup and load preloader script quickly.
+            // CSS is already linked in <head> for fastest paint.
+            fetch('preloader.html').then(function (r) { return r.text(); }).then(function (html) {
+                document.body.insertAdjacentHTML('afterbegin', html);
+                var s = document.createElement('script'); s.src = 'preloader.js'; s.async = true; document.body.appendChild(s);
+            }).catch(function () { /* fail silently */ });
+        })();
+    </script>
+
+    <nav class="navbar">
+        <!-- Logo -->
+        <div class="logo">Naam<span class="logo-in">in</span></div>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links desktop-only">
+            <li><a href="index.html" data-en="Home" data-hi="à¤¹à¥‹à¤®">Home</a></li>
+            <li><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a></li>
+            <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤¸à¥‡ à¤¬à¤šà¥à¤šà¤¾">Parents to Child</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-en="More" data-hi="à¤…à¤§à¤¿à¤•">
+                    More <span class="arrow">â–¼</span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="popular-names.html" data-en="Popular Names" data-hi="à¤²à¥‹à¤•à¤ªà¥à¤°à¤¿à¤¯ à¤¨à¤¾à¤®">Popular Names</a>
+                    </li>
+                    <li><a href="unique-names.html" data-en="Unique Names" data-hi="à¤…à¤¦à¥à¤µà¤¿à¤¤à¥€à¤¯ à¤¨à¤¾à¤®">Unique Names</a></li>
+                    <li><a href="famous-personalities.html" data-en="Famous Personalities"
+                            data-hi="à¤ªà¥à¤°à¤¸à¤¿à¤¦à¥à¤§ à¤¹à¤¸à¥à¤¤à¤¿à¤¯à¤¾à¤‚">Famous Personalities</a></li>
+                    <li><a href="more/motto-for-everything/index.html" data-en="Motto Generator"
+                            data-hi="à¤†à¤¦à¤°à¥à¤¶ à¤µà¤¾à¤•à¥à¤¯ à¤œà¤¨à¤°à¥‡à¤Ÿà¤°">Motto Generator</a></li>
+                    <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="à¤°à¤¾à¤¶à¤¿ à¤šà¤•à¥à¤° à¤–à¥‹à¤œà¤•">Zodiac
+                            Finder</a></li>
+                    <li><a href="product.html" data-en="Products" data-hi="à¤‰à¤¤à¥à¤ªà¤¾à¤¦">Products</a></li>
+
+                    <li><a href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a></li>
+                    <li><a href="pricing.html" data-en="Aura" data-hi="à¤†à¤­à¤¾">Aura</a></li>
+                    <li><a href="careers.html" data-en="Careers" data-hi="à¤•à¤°à¤¿à¤¯à¤°">Careers</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-hi="à¤¬à¥à¤²à¥‰à¤—">Blog</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Desktop Actions -->
+        <div class="nav-actions desktop-only">
+            <button id="language-toggle" class="btn" style="font-size:12px; padding:6px 10px;"
+                title="Toggle language">ENG/HIN</button>
+            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span id="fav-count">0</span>
+            </button>
+            <a href="login.html" class="btn btn-login">Log in</a>
+            <a href="signup.html" class="btn btn-signup">Sign up</a>
+        </div>
+
+        <!-- Hamburger Icon (Mobile Only) -->
+        <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html" data-en="Home" data-hi="à¤¹à¥‹à¤®">Home</a></li>
+                <li><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a></li>
+                <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤¸à¥‡ à¤¬à¤šà¥à¤šà¤¾">Parents to
+                        Child</a></li>
+
+                <!-- Mobile Dropdown -->
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="à¤…à¤§à¤¿à¤•">More <span
+                            class="arrow">â–¼</span></a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="popular-names.html" data-en="Popular Names" data-hi="à¤²à¥‹à¤•à¤ªà¥à¤°à¤¿à¤¯ à¤¨à¤¾à¤®">Popular
+                                Names</a></li>
+                        <li><a href="unique-names.html" data-en="Unique Names" data-hi="à¤…à¤¦à¥à¤µà¤¿à¤¤à¥€à¤¯ à¤¨à¤¾à¤®">Unique Names</a>
+                        </li>
+                        <li><a href="famous-personalities.html" data-en="Famous Personalities"
+                                data-hi="à¤ªà¥à¤°à¤¸à¤¿à¤¦à¥à¤§ à¤¹à¤¸à¥à¤¤à¤¿à¤¯à¤¾à¤‚">Famous Personalities</a></li>
+                        <li><a href="more/motto-for-everything/index.html" data-en="Motto Generator"
+                                data-hi="à¤†à¤¦à¤°à¥à¤¶ à¤µà¤¾à¤•à¥à¤¯ à¤œà¤¨à¤°à¥‡à¤Ÿà¤°">Motto Generator</a></li>
+                        <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder"
+                                data-hi="à¤°à¤¾à¤¶à¤¿ à¤šà¤•à¥à¤° à¤–à¥‹à¤œà¤•">Zodiac Finder</a></li>
+                        <li><a href="product.html" data-en="Products" data-hi="à¤‰à¤¤à¥à¤ªà¤¾à¤¦">Products</a></li>
+
+
+                        <li><a href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a></li>
+                        <li><a href="pricing.html" data-en="Aura" data-hi="à¤†à¤­à¤¾">Aura</a></li>
+                        <li><a href="careers.html" data-en="Careers" data-hi="à¤•à¤°à¤¿à¤¯à¤°">Careers</a></li>
+                        <li><a href="blog.html" data-en="Blog" data-hi="à¤¬à¥à¤²à¥‰à¤—">Blog</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions">
+                <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
+                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn">
+                    <i class="fas fa-heart"></i>
+                    <span id="fav-count-mobile">0</span>
+                </button>
+                <a href="login.html" class="btn btn-login mobile-btn">Log in</a>
+                <a href="signup.html" class="btn btn-signup mobile-btn">Sign up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero-ethnic" class="hero-ethnic">
+            <div class="hero-media">
+                <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="IMG1.jpeg">
+                    <source src="assets/hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-eyebrow">Naamin Ethnic Couture</span>
+                <h1>Elevate Your Ethnic Elegance</h1>
+                <p>Timeless designs crafted for modern India</p>
+                <div class="hero-actions">
+                    <a href="#collection" class="btn btn-signup hero-cta">Explore Collection</a>
+                    <a href="product.html" class="btn btn-login hero-secondary">View Lookbook</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="collection" class="section section-luxe">
+            <div class="content-wrapper">
+                <div class="section-header-center">
+                    <h2>Our Collection</h2>
+                    <p class="section-subtitle">A refined edit of silhouettes for every celebration, every day, and every story.</p>
+                </div>
+                <div class="collection-grid">
+                    <article class="collection-card">
+                        <button class="wishlist-add-btn" data-product-name="Men's Kurta Set" data-product-price="₹4,999"
+                            data-product-image="IMG2.jpeg" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="IMG2.jpeg" alt="Men's designer kurta sets" loading="lazy" decoding="async">
+                        <div class="collection-content">
+                            <h3>Men</h3>
+                            <p>Crafted kurtas and bandhgala sets with contemporary detailing.</p>
+                            <p class="collection-price">₹4,999</p>
+                            <a class="card-cta" href="product.html">Shop Men</a>
+                        </div>
+                    </article>
+                    <article class="collection-card">
+                        <button class="wishlist-add-btn" data-product-name="Women's Saree Edit" data-product-price="₹6,499"
+                            data-product-image="IMG3.jpeg" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="IMG3.jpeg" alt="Women's saree and lehenga edit" loading="lazy" decoding="async">
+                        <div class="collection-content">
+                            <h3>Women</h3>
+                            <p>Sarees and lehengas with luxe fabrics and heritage craftsmanship.</p>
+                            <p class="collection-price">₹6,499</p>
+                            <a class="card-cta" href="product.html">Shop Women</a>
+                        </div>
+                    </article>
+                    <article class="collection-card">
+                        <button class="wishlist-add-btn" data-product-name="Festive Ensemble" data-product-price="₹7,999"
+                            data-product-image="IMG4.jpeg" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="IMG4.jpeg" alt="Festive wear for weddings and celebrations" loading="lazy" decoding="async">
+                        <div class="collection-content">
+                            <h3>Festive</h3>
+                            <p>Statement ensembles designed for weddings and grand gatherings.</p>
+                            <p class="collection-price">₹7,999</p>
+                            <a class="card-cta" href="product.html">Shop Festive</a>
+                        </div>
+                    </article>
+                    <article class="collection-card">
+                        <button class="wishlist-add-btn" data-product-name="Casual Ethnic Wear" data-product-price="₹3,499"
+                            data-product-image="IMG5.jpeg" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="IMG5.jpeg" alt="Casual ethnic wear for everyday elegance" loading="lazy" decoding="async">
+                        <div class="collection-content">
+                            <h3>Casual</h3>
+                            <p>Easy silhouettes with refined touches for effortless everyday wear.</p>
+                            <p class="collection-price">₹3,499</p>
+                            <a class="card-cta" href="product.html">Shop Casual</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-choose" class="section section-luxe">
+            <div class="content-wrapper">
+                <div class="section-header-center">
+                    <h2>Why Choose Us</h2>
+                    <p class="section-subtitle">Luxury that feels personal, premium finishing, and heritage-inspired craftsmanship.</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-gem"></i>
+                        <h3>Artisan Craft</h3>
+                        <p>Hand-finished detailing inspired by Indian textile traditions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-leaf"></i>
+                        <h3>Pure Fabrics</h3>
+                        <p>Breathable, skin-friendly fabrics designed for all-day comfort.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Modern Silhouettes</h3>
+                        <p>Contemporary cuts that flatter every body with elegance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-people-group"></i>
+                        <h3>Personal Styling</h3>
+                        <p>Expert recommendations to help you curate your festive look.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section section-luxe">
+            <div class="content-wrapper">
+                <div class="section-header-center">
+                    <h2>Testimonials</h2>
+                    <p class="section-subtitle">Loved by modern Indian families and fashion-forward clients.</p>
+                </div>
+                <div class="testimonial-grid" data-rotate>
+                    <article class="testimonial-card active">
+                        <p>“Naamin’s festive edit made my wedding events unforgettable. The fit, the fabric, the finish — everything felt bespoke.”</p>
+                        <h4>Ritika S., Delhi</h4>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>“Elegant silhouettes and such refined detailing. I’ve never received more compliments on a kurta set.”</p>
+                        <h4>Arjun M., Jaipur</h4>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>“The styling team helped me build a capsule wardrobe for festive season. Premium and effortless.”</p>
+                        <h4>Meera K., Mumbai</h4>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="brand-story" class="section section-luxe">
+            <div class="content-wrapper story-grid">
+                <div class="story-copy">
+                    <h2>Refined Heritage, Modern India</h2>
+                    <p>Naamin blends timeless Indian craft with clean, contemporary design. Each piece is made to feel celebratory yet effortless — from intimate rituals to grand celebrations.</p>
+                    <p>Discover collections that honor heritage while styling effortlessly for today’s modern wardrobe.</p>
+                    <a href="about.html" class="btn btn-signup">Our Story</a>
+                </div>
+                <div class="story-image">
+                    <img src="IMG2.jpeg" alt="Naamin ethnic wear craftsmanship" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 data-en="Quick Links" data-hi="à¤¤à¥à¤µà¤°à¤¿à¤¤ à¤²à¤¿à¤‚à¤•"></h3><a href="index.html" data-en="Home"
+                    data-hi="à¤¹à¥‹à¤®"></a><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚"></a><a
+                    href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚"></a><a href="contact.html"
+                    data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚"></a>
+            </div>
+            <div>
+                <h3 data-en="Our Services" data-hi="à¤¹à¤®à¤¾à¤°à¥€ à¤¸à¥‡à¤µà¤¾à¤à¤‚"></h3><a href="services.html" data-en="Baby Naming"
+                    data-hi="à¤¶à¤¿à¤¶à¥ à¤¨à¤¾à¤®à¤•à¤°à¤£"></a><a href="services.html" data-en="Company Naming"
+                    data-hi="à¤•à¤‚à¤ªà¤¨à¥€ à¤¨à¤¾à¤®à¤•à¤°à¤£"></a><a href="services.html" data-en="Motto Creation"
+                    data-hi="à¤‰à¤¦à¥à¤˜à¥‹à¤· à¤¨à¤¿à¤°à¥à¤®à¤¾à¤£"></a>
+            </div>
+            <div>
+                <h3 data-en="Follow Us" data-hi="à¤¹à¤®à¥‡à¤‚ à¤«à¥‰à¤²à¥‹ à¤•à¤°à¥‡à¤‚"></h3>
+                <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
+            </div>
+            <div>
+                <h3 data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤•"></h3>
+                <p><a href="tel:+919413678955">+91 94136 78955</a></p>
+                <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
+                <p data-en="Hyderabad, Telangana, India" data-hi="à¤¹à¥ˆà¤¦à¤°à¤¾à¤¬à¤¾à¤¦, à¤¤à¥‡à¤²à¤‚à¤—à¤¾à¤¨à¤¾, à¤­à¤¾à¤°à¤¤"></p>
+            </div>
+        </div>
+        <p class="copyrights" data-en="Â© 2025 Naamin. All rights reserved."
+            data-hi="Â© à¥¨à¥¦à¥¨à¥« à¤¨à¤¾à¤®à¤¿à¤¨à¥¤ à¤¸à¤­à¥€ à¤…à¤§à¤¿à¤•à¤¾à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤à¥¤"></p>
+    </footer>
+
+    <a href="https://wa.me/9413678955?text=Hello" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+    </a>
+
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="fav-overlay" class="fav-overlay" style="display: none;">
+        <div class="fav-modal">
+            <div class="fav-header">
+                <h3 data-en="Your Shortlist" data-hi="à¤ªà¤¸à¤‚à¤¦à¥€à¤¦à¤¾ à¤¨à¤¾à¤®">Your Shortlist</h3>
+                <button id="close-fav-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="fav-body" id="fav-list-container">
+                <p style="text-align:center; color:var(--text-medium);">No names saved yet.</p>
+            </div>
+            <div class="fav-footer">
+                <button id="clear-fav-btn" data-en="Clear All" data-hi="à¤¸à¤­à¥€ à¤¹à¤Ÿà¤¾à¤à¤‚">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="wishlist-panel" id="wishlist-panel" aria-hidden="true">
+        <div class="wishlist-backdrop" id="wishlist-backdrop"></div>
+        <aside class="wishlist-drawer" role="dialog" aria-modal="true" aria-label="Wishlist">
+            <div class="wishlist-header">
+                <div>
+                    <h3>Wishlist</h3>
+                    <p>Saved pieces curated for you</p>
+                </div>
+                <button class="wishlist-close" id="wishlist-close" aria-label="Close wishlist">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="wishlist-body" id="wishlist-items">
+                <div class="wishlist-empty">
+                    <i class="far fa-heart"></i>
+                    <p>Your wishlist is empty</p>
+                    <span>Save your favorite looks for later.</span>
+                </div>
+            </div>
+            <div class="wishlist-footer">
+                <button class="btn btn-login wishlist-view-btn" id="wishlist-view-btn">View Wishlist Page</button>
+            </div>
+        </aside>
+    </div>
+
+
+    <!-- Hidden Poster Generator -->
+    <div id="poster-generator-container">
+        <div id="poster-card" class="premium-variant">
+            <!-- Decorative and watermark icons -->
+            <div class="p-seal">âœ“</div>
+
+            <!-- TOP BRANDING SECTION -->
+            <div class="p-header">
+                <h1 class="p-brand-name">NAAMIN</h1>
+                <div class="p-subtitle">NAMING SOLUTIONS</div>
+            </div>
+
+            <!-- HERO NAME SECTION -->
+            <div class="p-hero-section">
+                <h2 class="p-name-en" id="poster-name-en">NAME</h2>
+                <div class="p-name-hi" id="poster-name-hi">à¤¨à¤¾à¤®</div>
+                <div class="p-meaning" id="poster-meaning">Meaning placeholder</div>
+            </div>
+
+            <!-- IDENTITY ROW (Grid with Icons) -->
+            <div class="p-identity-row">
+                <div class="p-identity-item">
+                    <i class="fas fa-venus-mars p-identity-icon"></i>
+                    <span class="p-identity-text" id="poster-gender">BOY</span>
+                </div>
+                <div class="p-identity-item">
+                    <i class="fas fa-book p-identity-icon"></i>
+                    <span class="p-identity-text" id="poster-origin">SANSKRIT</span>
+                </div>
+                <div class="p-identity-item">
+                    <i class="fas fa-star p-identity-icon"></i>
+                    <span class="p-identity-text" id="poster-nakshatra">ASHWANI</span>
+                </div>
+                <div class="p-identity-item">
+                    <i class="fas fa-moon p-identity-icon"></i>
+                    <span class="p-identity-text" id="poster-rashi">ARIES</span>
+                </div>
+            </div>
+
+            <!-- NUMEROLOGY SECTION -->
+            <div class="p-soft-panel">
+                <div class="p-panel-title">NUMEROLOGY</div>
+                <div class="p-numerology-content">
+                    Number <strong id="poster-number">3</strong> &nbsp;|&nbsp;
+                    Planet <strong id="poster-planet">Jupiter</strong> &nbsp;|&nbsp;
+                    Color <strong id="poster-color">Yellow</strong>
+                </div>
+            </div>
+
+            <!-- PREDICTION SECTION -->
+            <div class="p-prediction-section">
+                <div class="p-prediction-title"><span id="poster-year">2026</span> PREDICTION</div>
+                <div class="p-prediction-text" id="poster-prediction">
+                    Career growth will be steady through discipline. Rewards follow patience. Real estate investments
+                    look favorable.
+                </div>
+            </div>
+
+            <!-- FOOTER SECTION -->
+            <div class="p-footer">
+                <div class="p-quote">"A name is the first gift you give your child."</div>
+                <a href="https://naamin.com" class="p-cta">WWW.NAAMIN.COM</a>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-grid">
+                <div>
+                    <h3 data-en="Quick Links" data-hi="à¤¤à¥à¤µà¤°à¤¿à¤¤ à¤²à¤¿à¤‚à¤•">Quick Links</h3><a href="index.html" data-en="Home"
+                        data-hi="à¤¹à¥‹à¤®">Home</a><a href="about.html" data-en="About" data-hi="à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚">About</a><a
+                        href="services.html" data-en="Services" data-hi="à¤¸à¥‡à¤µà¤¾à¤à¤‚">Services</a><a href="contact.html"
+                        data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚">Contact</a>
+                </div>
+                <div>
+                    <h3 data-en="Our Services" data-hi="à¤¹à¤®à¤¾à¤°à¥€ à¤¸à¥‡à¤µà¤¾à¤à¤‚">Our Services</h3><a href="services.html"
+                        data-en="Baby Naming" data-hi="à¤¶à¤¿à¤¶à¥ à¤¨à¤¾à¤®à¤•à¤°à¤£">Baby Naming</a><a href="services.html"
+                        data-en="Company Naming" data-hi="à¤•à¤‚à¤ªà¤¨à¥€ à¤¨à¤¾à¤®à¤•à¤°à¤£">Company Naming</a><a href="services.html"
+                        data-en="Motto Creation" data-hi="à¤‰à¤¦à¥à¤˜à¥‹à¤· à¤¨à¤¿à¤°à¥à¤®à¤¾à¤£">Motto Creation</a>
+                </div>
+                <div>
+                    <h3 data-en="Follow Us" data-hi="à¤¹à¤®à¥‡à¤‚ à¤«à¥‰à¤²à¥‹ à¤•à¤°à¥‡à¤‚">Follow Us</h3>
+                    <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a>
+                    </p>
+                    <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
+                    <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
+                </div>
+                <div>
+                    <h3 data-en="Contact" data-hi="à¤¸à¤‚à¤ªà¤°à¥à¤•">Contact</h3>
+                    <p><a href="tel:+919413678955">+91 94136 78955</a></p>
+                    <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
+                    <p data-en="Hyderabad, Telangana, India" data-hi="à¤¹à¥ˆà¤¦à¤°à¤¾à¤¬à¤¾à¤¦, à¤¤à¥‡à¤²à¤‚à¤—à¤¾à¤¨à¤¾, à¤­à¤¾à¤°à¤¤">Hyderabad, Telangana,
+                        India
+                    </p>
+                </div>
+            </div>
+            <p class="copyrights" data-en="Â© 2025 Naamin. All rights reserved."
+                data-hi="Â© à¥¨à¥¦à¥¨à¥« à¤¨à¤¾à¤®à¤¿à¤¨à¥¤ à¤¸à¤­à¥€ à¤…à¤§à¤¿à¤•à¤¾à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤à¥¤">Â© 2025 Naamin. All rights reserved.</p>
+        </footer>
+
+
+
+
+        <script>
+            // Preloader behavior: show at least minDuration, then fade out after page load
+            (function () {
+                const pre = document.getElementById('naamin-preloader');
+                if (!pre) return;
+                const minDuration = 500; // minimum visible time in ms
+                const maxWait = 2500; // fallback max wait in ms
+                const start = Date.now();
+                let hidden = false;
+
+                function doHide() {
+                    if (hidden) return; hidden = true;
+                    pre.style.transition = 'opacity 420ms ease, visibility 420ms';
+                    pre.style.opacity = '0';
+                    pre.style.visibility = 'hidden';
+                    document.body.style.overflow = '';
+                    setTimeout(() => { try { pre.remove(); } catch (e) { } }, 520);
+                }
+
+                window.addEventListener('load', () => {
+                    const elapsed = Date.now() - start;
+                    const wait = Math.max(0, minDuration - elapsed);
+                    setTimeout(doHide, wait);
+                });
+
+                // Fallback: if page doesn't load quickly, ensure preloader hides after maxWait
+                setTimeout(doHide, maxWait);
+
+                // Prevent scroll while preloader active
+                document.body.style.overflow = 'hidden';
+            })();
+        </script>
+
+
+
+</body>
+
+</html>
+
+
