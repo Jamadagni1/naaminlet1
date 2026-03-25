@@ -50,6 +50,19 @@ const getUrlParam = (key) => {
   return hashParams.get(key);
 };
 
+const hasAuthCallbackParams = () => {
+  return [
+    "access_token",
+    "refresh_token",
+    "token_type",
+    "expires_in",
+    "expires_at",
+    "provider_token",
+    "provider_refresh_token",
+    "code"
+  ].some((key) => Boolean(getUrlParam(key)));
+};
+
 const clearAuthParamsFromUrl = () => {
   if (!window.location.search && !window.location.hash) return;
   window.history.replaceState({}, document.title, window.location.pathname);
@@ -259,6 +272,7 @@ if (logoutBtn) {
 const syncAuthUi = async () => {
   if (isConfigPlaceholder()) return;
 
+  const hasCallbackParams = hasAuthCallbackParams();
   const authError = getUrlParam("error_description") || getUrlParam("error");
   if (authError) {
     showMessage(decodeURIComponent(authError), "error");
@@ -287,16 +301,21 @@ const syncAuthUi = async () => {
     }
   }
 
-  if (user && isAuthScreen) {
+  if (user && isAuthScreen && hasCallbackParams) {
     const role = await getUserRole(user);
     clearAuthParamsFromUrl();
     safeRedirect(role);
+    return;
+  }
+
+  if (user && isAuthScreen) {
+    showMessage(`Already signed in as ${user.email}.`, "success");
   }
 };
 
-supabase.auth.onAuthStateChange(async (_event, session) => {
+supabase.auth.onAuthStateChange(async (event, session) => {
   const authGate = document.querySelector("[data-auth-gate]");
-  if (session?.user && isAuthScreen) {
+  if (session?.user && isAuthScreen && hasAuthCallbackParams()) {
     const role = await getUserRole(session.user);
     clearAuthParamsFromUrl();
     safeRedirect(role);
