@@ -616,6 +616,79 @@ header {
     animation: sheen 0.8s ease;
 }
 
+.profile-menu {
+    position: relative;
+    display: none;
+    align-items: center;
+}
+
+.profile-toggle {
+    cursor: pointer;
+}
+
+.profile-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-gradient);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.profile-label {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 180px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--border-color-light);
+    box-shadow: 0 16px 32px rgba(31, 27, 46, 0.12);
+    padding: 8px;
+    display: none;
+    z-index: 1600;
+}
+
+.profile-menu.open .profile-dropdown {
+    display: block;
+}
+
+.profile-dropdown-link {
+    width: 100%;
+    display: block;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-dark);
+    text-decoration: none;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+}
+
+.profile-dropdown-link:hover {
+    background: rgba(108, 43, 217, 0.08);
+    color: var(--accent-primary);
+}
+
+.mobile-profile-menu {
+    width: 100%;
+    display: none;
+    gap: 10px;
+}
+
 @media (max-width:700px) {
     .nav-actions {
         display: none
