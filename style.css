@@ -470,6 +470,14 @@ header {
     width: calc(100% - 20px);
 }
 
+/* Keep dropdown label + arrow aligned */
+.navbar .nav-links .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
 /* Dropdown specific */
 .dropdown .dropdown-menu {
     position: absolute;
@@ -512,24 +520,25 @@ header {
 /* Dropdown Icon Styling (Font Awesome) */
 /* Dropdown Icon Styling (Native Arrow) */
 .dropdown .dropdown-toggle .arrow {
-    font-size: 12px !important;
+    font-size: 0.75em !important;
     font-family: Arial, sans-serif !important;
     /* Ensure glyph exists */
     display: inline-block !important;
-    vertical-align: middle;
-    margin-left: 6px;
+    line-height: 1 !important;
+    margin-left: 0 !important;
     color: inherit !important;
     opacity: 1 !important;
     visibility: visible !important;
     border: none !important;
     width: auto !important;
     height: auto !important;
-    transition: transform 0.3s ease;
+    transform: translateY(1px);
+    transition: transform 0.2s ease;
 }
 
 /* Rotate the arrow when dropdown is open */
 .dropdown.open .dropdown-toggle .arrow {
-    transform: rotate(180deg);
+    transform: translateY(1px) rotate(180deg);
 }
 
 .dropdown.open .dropdown-menu {
@@ -1679,8 +1688,20 @@ footer {
         transition: transform 0.3s ease;
     }
 
+    .mobile-dropdown-toggle .arrow {
+        font-size: 0.9rem;
+        line-height: 1;
+        display: inline-block;
+        transform: translateY(1px);
+        transition: transform 0.2s ease;
+    }
+
     .mobile-dropdown.open .mobile-dropdown-toggle i {
         transform: rotate(180deg);
+    }
+
+    .mobile-dropdown.open .mobile-dropdown-toggle .arrow {
+        transform: translateY(1px) rotate(180deg);
     }
 
     .mobile-dropdown-menu {
