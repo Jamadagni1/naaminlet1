@@ -1447,7 +1447,7 @@ footer {
     border-top: 5px solid transparent;
     border-image: var(--accent-gradient) 1;
     text-align: center;
-    color: var(--text-medium);
+    color: rgba(255, 255, 255, 0.78);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -1471,7 +1471,7 @@ footer {
 
 .footer-grid a,
 .footer-grid p {
-    color: var(--text-medium);
+    color: rgba(255, 255, 255, 0.72);
     transition: var(--transition-smooth);
     font-weight: 500;
     font-size: 1rem;
@@ -1486,7 +1486,7 @@ footer {
 }
 
 .copyrights {
-    color: #a0a0a0;
+    color: rgba(255, 255, 255, 0.55);
     font-size: 0.9rem;
     margin-top: 40px;
 }
