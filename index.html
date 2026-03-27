@@ -92,6 +92,14 @@
             <a href="signup.html" class="btn btn-signup">Sign up</a>
         </div>
 
+        <!-- Mobile Header Actions (visible without opening hamburger) -->
+        <div class="mobile-header-actions mobile-only">
+            <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn" aria-label="Shortlist">
+                <i class="fas fa-heart"></i>
+                <span id="fav-count-mobile">0</span>
+            </button>
+        </div>
+
         <!-- Hamburger Icon (Mobile Only) -->
         <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
             <i class="fas fa-bars"></i>
@@ -135,10 +143,6 @@
             <!-- Mobile Actions -->
             <div class="mobile-actions">
                 <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
-                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn">
-                    <i class="fas fa-heart"></i>
-                    <span id="fav-count-mobile">0</span>
-                </button>
                 <a href="login.html" class="btn btn-login mobile-btn">Log in</a>
                 <a href="signup.html" class="btn btn-signup mobile-btn">Sign up</a>
             </div>
@@ -161,6 +165,179 @@
                 </div>
             </section>
 
+            <section id="slideshow-section">
+                <div class="slideshow-container" aria-label="Baby photos slideshow">
+                    <img class="slide active" src="slide1.jpeg" alt="Baby photo 1" loading="lazy" decoding="async">
+                    <img class="slide" src="slide2.jpeg" alt="Baby photo 2" loading="lazy" decoding="async">
+                    <img class="slide" src="slide3.jpeg" alt="Baby photo 3" loading="lazy" decoding="async">
+                    <img class="slide" src="slide4.jpeg" alt="Baby photo 4" loading="lazy" decoding="async">
+                    <img class="slide" src="slide5.jpeg" alt="Baby photo 5" loading="lazy" decoding="async">
+
+                    <button class="slide-nav slide-prev" type="button" aria-label="Previous slide">❮</button>
+                    <button class="slide-nav slide-next" type="button" aria-label="Next slide">❯</button>
+
+                    <div class="slide-dots" aria-label="Slideshow dots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                        <span class="dot" data-slide="3"></span>
+                        <span class="dot" data-slide="4"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="baby-showcase">
+                <div class="content-wrapper">
+                    <div class="section-header-center">
+                        <h2 data-en="Baby Name Inspiration" data-hi="बेबी नाम प्रेरणा">Baby Name Inspiration</h2>
+                        <p class="section-subtitle"
+                            data-en="A quick gallery of adorable moments — tap hearts to build your shortlist."
+                            data-hi="प्यारे पलों की गैलरी — दिल पर टैप करके अपनी शॉर्टलिस्ट बनाएं।">
+                            A quick gallery of adorable moments — tap hearts to build your shortlist.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="baby-carousel-container">
+                    <button class="carousel-nav carousel-prev" type="button" aria-label="Previous babies">❮</button>
+                    <button class="carousel-nav carousel-next" type="button" aria-label="Next babies">❯</button>
+
+                    <div class="baby-carousel" aria-label="Baby inspiration carousel">
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_aarav_1768672098297.png" alt="Baby Aarav"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Aarav</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Peaceful</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Calm</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_ananya_1768672114695.png" alt="Baby Ananya"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Ananya</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Unique</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Bright</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_vihaan_1768672167983.png" alt="Baby Vihaan"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Vihaan</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Dawn</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Energetic</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_saanvi_1768672196713.png" alt="Baby Saanvi"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Saanvi</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Goddess Lakshmi</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Indian</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Grace</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_rohan_1768672211667.png" alt="Baby Rohan"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Rohan</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Ascending</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Brave</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_prisha_1768672228626.png" alt="Baby Prisha"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Prisha</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Beloved</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Indian</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Kind</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_arjun_1768672131352.png" alt="Baby Arjun"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Arjun</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Bright</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Focus</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_diya_1768672149752.png" alt="Baby Diya"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Diya</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Light</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Indian</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Warm</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_kavya_1768672262082.png" alt="Baby Kavya"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Kavya</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Poetry</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Creative</div>
+                            </div>
+                        </article>
+
+                        <article class="baby-card">
+                            <div class="baby-image-wrapper">
+                                <img class="baby-image" src="baby_aditya_1768672245206.png" alt="Baby Aditya"
+                                    loading="lazy" decoding="async">
+                            </div>
+                            <div class="baby-info">
+                                <div class="baby-name">Aditya</div>
+                                <div class="baby-meaning"><i class="fas fa-heart"></i> Sun</div>
+                                <div class="baby-origin"><i class="fas fa-globe"></i> Sanskrit</div>
+                                <div class="baby-trait"><i class="fas fa-sun"></i> Leader</div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="carousel-dots" aria-label="Carousel dots"></div>
+                </div>
+            </section>
+  
         <section id="name-finder" class="section">
             <div class="content-wrapper">
                 <h2 data-en="Name Finder" data-hi="नाम खोजें">Name Finder</h2>

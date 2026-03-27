@@ -1555,6 +1555,12 @@ footer {
     display: none !important;
 }
 
+.mobile-header-actions {
+    margin-left: auto;
+    align-items: center;
+    gap: 10px;
+}
+
 /* Desktop navbar - default state */
 @media (min-width: 1025px) {
     .desktop-only {
@@ -3160,13 +3166,12 @@ h1#card-name {
 /* ================== ETHNIC FASHION HOMEPAGE ================== */
 .hero-ethnic {
     position: relative;
-    min-height: 90vh;
+    min-height: calc(100vh - var(--header-height));
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     overflow: hidden;
-    padding-top: var(--header-height);
 }
 
 .hero-media {
@@ -3818,6 +3823,7 @@ h1#card-name {
 .layout-shell {
     display: flex;
     align-items: stretch;
+    padding-top: var(--header-height);
 }
 
 .layout-main {
