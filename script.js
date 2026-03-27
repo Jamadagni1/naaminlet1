@@ -403,6 +403,9 @@ class FavoritesManager {
     save() {
         localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
         this.updateHeaderCount();
+        try {
+            document.dispatchEvent(new CustomEvent('favoritesUpdated'));
+        } catch (e) { }
     }
 
     toggle(nameObj) {
@@ -1401,8 +1404,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearFavBtn = document.getElementById('clear-fav-btn');
     const favListContainer = document.getElementById('fav-list-container');
 
+    const shortlistHub = document.getElementById('shortlist-hub');
+    const hubShortlist = document.getElementById('hub-shortlist');
+    const hubEmpty = document.getElementById('hub-empty');
+    const hubCopyBtn = document.getElementById('hub-copy-btn');
+    const hubShareBtn = document.getElementById('hub-share-btn');
+    const hubClearBtn = document.getElementById('hub-clear-btn');
+    const hubTopPicksBtn = document.getElementById('hub-top-picks-btn');
+    const hubCompareBtn = document.getElementById('hub-compare-btn');
+
+    function isHubVisible() {
+        if (!shortlistHub) return false;
+        try {
+            return window.getComputedStyle(shortlistHub).display !== 'none';
+        } catch (e) {
+            return true;
+        }
+    }
+
+    function openFavoriteDetails(item) {
+        if (favOverlay) favOverlay.style.display = 'none';
+
+        const section = document.getElementById('name-finder');
+        const listSection = document.querySelector('.name-list-container');
+        const nameDetailsBox = document.querySelector('.name-details');
+        const nameDetailsContainer = document.querySelector('.name-details-container');
+
+        if (section) {
+            window.scrollTo({ top: section.offsetTop - 100, behavior: 'smooth' });
+            if (listSection) listSection.style.display = 'none';
+            if (nameDetailsContainer) nameDetailsContainer.style.display = 'block';
+            try {
+                const smartData = engine.processName(item, getLanguage());
+                showDetails(nameDetailsBox, smartData);
+            } catch (e) { }
+        }
+    }
+
     if (favBtn) {
         favBtn.addEventListener('click', () => {
+            if (isHubVisible()) {
+                shortlistHub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
             if (favOverlay) {
                 favOverlay.style.display = 'flex';
                 renderFavoritesList();
@@ -1465,21 +1509,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Click to view details
             row.onclick = () => {
-                favOverlay.style.display = 'none'; // Close modal
-
-                // Open details logic
-                const section = document.getElementById('name-finder');
-                const listSection = document.querySelector('.name-list-container');
-                const nameDetailsBox = document.querySelector('.name-details');
-                const nameDetailsContainer = document.querySelector('.name-details-container');
-
-                if (section) {
-                    window.scrollTo({ top: section.offsetTop - 100, behavior: 'smooth' });
-                    if (listSection) listSection.style.display = 'none';
-                    if (nameDetailsContainer) nameDetailsContainer.style.display = 'block';
-                    const smartData = engine.processName(item, getLanguage());
-                    showDetails(nameDetailsBox, smartData);
-                }
+                openFavoriteDetails(item);
             };
 
             favListContainer.appendChild(row);
@@ -1487,6 +1517,149 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Product wishlist panel removed (site-wide heart = saved baby-name shortlist).
+
+    function setBtnFeedback(btn, text, ms = 1100) {
+        if (!btn) return;
+        const original = btn.textContent;
+        btn.textContent = text;
+        setTimeout(() => { btn.textContent = original; }, ms);
+    }
+
+    async function copyText(text) {
+        if (!text) return false;
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (e) {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', 'true');
+                ta.style.position = 'fixed';
+                ta.style.top = '-1000px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                return true;
+            } catch (err) {
+                return false;
+            }
+        }
+    }
+
+    function favoriteNamesText() {
+        return (favManager.favorites || [])
+            .map(item => (item && typeof item === 'object') ? (item.name || item.Name) : String(item))
+            .filter(Boolean)
+            .join('\n');
+    }
+
+    function renderShortlistHub() {
+        if (!hubShortlist || !hubEmpty) return;
+        hubShortlist.innerHTML = '';
+
+        const list = favManager.favorites || [];
+        hubEmpty.style.display = list.length ? 'none' : 'block';
+
+        list.slice().reverse().forEach(item => {
+            const name = (item && typeof item === 'object') ? (item.name || item.Name) : String(item);
+            const row = document.createElement('div');
+            row.className = 'hub-item';
+
+            const label = document.createElement('div');
+            label.className = 'hub-item-name';
+            label.textContent = name;
+
+            const actions = document.createElement('div');
+            actions.className = 'hub-item-actions';
+
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'hub-item-btn';
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = (e) => {
+                e.stopPropagation();
+                favManager.toggle(item);
+                favManager.save();
+                renderNames();
+            };
+
+            const openBtn = document.createElement('button');
+            openBtn.className = 'hub-item-btn';
+            openBtn.textContent = 'Open';
+            openBtn.onclick = (e) => {
+                e.stopPropagation();
+                openFavoriteDetails(item);
+            };
+
+            actions.appendChild(removeBtn);
+            actions.appendChild(openBtn);
+
+            row.appendChild(label);
+            row.appendChild(actions);
+            row.onclick = () => openFavoriteDetails(item);
+
+            hubShortlist.appendChild(row);
+        });
+    }
+
+    if (hubCopyBtn) {
+        hubCopyBtn.addEventListener('click', async () => {
+            setBtnFeedback(hubCopyBtn, 'Copying…', 1200);
+            const ok = await copyText(favoriteNamesText());
+            setBtnFeedback(hubCopyBtn, ok ? 'Copied' : 'Failed', 1100);
+        });
+    }
+
+    if (hubShareBtn) {
+        hubShareBtn.addEventListener('click', async () => {
+            const text = favoriteNamesText().replace(/\n/g, ', ');
+            if (!text) {
+                setBtnFeedback(hubShareBtn, 'Empty', 900);
+                return;
+            }
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: 'Naamin Shortlist', text });
+                    setBtnFeedback(hubShareBtn, 'Shared', 1100);
+                    return;
+                } catch (e) { }
+            }
+            const ok = await copyText(text);
+            setBtnFeedback(hubShareBtn, ok ? 'Copied' : 'Failed', 1100);
+        });
+    }
+
+    if (hubClearBtn) {
+        hubClearBtn.addEventListener('click', () => {
+            if (confirm("Are you sure you want to clear all favorites?")) {
+                favManager.clear();
+                renderNames();
+            }
+        });
+    }
+
+    if (hubTopPicksBtn) {
+        hubTopPicksBtn.addEventListener('click', () => {
+            const section = document.getElementById('name-finder');
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    if (hubCompareBtn) {
+        hubCompareBtn.addEventListener('click', () => {
+            window.location.href = 'wishlist.html';
+        });
+    }
+
+    document.addEventListener('favoritesUpdated', () => {
+        renderShortlistHub();
+        if (favOverlay && favOverlay.style.display !== 'none') {
+            renderFavoritesList();
+        }
+    });
+
+    renderShortlistHub();
 
     // --- NAAMIN TYPING ANIMATION (GUARANTEED LOOP) ---
     const typeNaam = document.getElementById("type-naam");

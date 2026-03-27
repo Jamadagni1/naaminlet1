@@ -145,27 +145,21 @@
         </div>
     </nav>
 
-    <main>
-        <section id="hero">
-            <div class="content-wrapper">
-                <h1 class="hero-title" id="naamin-main-title-typing" aria-label="Naamin">
-                    <span id="type-naam" class="brand-black"></span><span id="type-in" class="brand-orange"></span>
-                </h1>
-                <p data-en="Baby naming made meaningful — discover modern, auspicious names with meaning, origin, pronunciation, and deeper insights."
-                    data-hi="बेबी नेमिंग को बनाएं सार्थक — अर्थ, मूल, उच्चारण और गहरे इनसाइट्स के साथ आधुनिक व शुभ नाम खोजें।">
-                    Baby naming made meaningful — discover modern, auspicious names with meaning, origin, pronunciation, and deeper insights.
-                </p>
-
-                <div class="hero-search-container">
-                    <input id="hero-search-input" type="text" inputmode="search" autocomplete="off"
-                        placeholder="e.g., Aarav, Advik..." aria-label="Search a name">
-                    <button id="hero-search-btn" type="button" aria-label="Search"><i class="fas fa-search"></i></button>
+    <main class="layout-shell">
+        <div class="layout-main">
+            <section id="hero-ethnic" class="hero-ethnic">
+                <div class="hero-media">
+                    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="IMG1.jpeg">
+                        <source src="assets/baby-name-hero.mp4" type="video/mp4">
+                    </video>
                 </div>
-
-                <a href="#name-finder" class="cta-button" data-en="Start Name Finder" data-hi="नाम खोजें शुरू करें">Start Name
-                    Finder</a>
-            </div>
-        </section>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <span class="hero-eyebrow">NAAMIN ETHNIC COUTURE</span>
+                    <h1>Elevate Your Ethnic Elegance</h1>
+                    <p>Timeless designs crafted for modern India</p>
+                </div>
+            </section>
 
         <section id="name-finder" class="section">
             <div class="content-wrapper">
@@ -257,6 +251,35 @@
                 </div>
             </div>
         </section>
+        </div>
+
+        <aside class="shortlist-hub" id="shortlist-hub" aria-label="Name Shortlist Hub">
+            <div class="shortlist-hub-header">
+                <div>
+                    <h2>Name Shortlist Hub</h2>
+                    <p>Save, compare, and finalize baby names</p>
+                </div>
+                <div class="shortlist-hub-actions">
+                    <button type="button" class="shortlist-hub-btn" id="hub-copy-btn">Copy</button>
+                    <button type="button" class="shortlist-hub-btn" id="hub-share-btn">Share</button>
+                </div>
+            </div>
+
+            <div class="shortlist-hub-links">
+                <button type="button" class="shortlist-hub-link" id="hub-top-picks-btn">Top Picks</button>
+                <button type="button" class="shortlist-hub-link" id="hub-compare-btn">Compare Names</button>
+            </div>
+
+            <div class="shortlist-hub-body">
+                <h3>Your Shortlist</h3>
+                <div id="hub-shortlist" class="hub-shortlist"></div>
+                <p id="hub-empty" class="hub-empty" style="display:none;">No names saved yet.</p>
+            </div>
+
+            <div class="shortlist-hub-footer">
+                <button type="button" class="shortlist-hub-clear" id="hub-clear-btn">Clear All</button>
+            </div>
+        </aside>
     </main>
 
     <footer>
