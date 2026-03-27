@@ -423,6 +423,11 @@ header {
     animation: fadeUp 0.7s var(--float-ease) both;
 }
 
+.navbar .logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .navbar .logo .logo-in {
     color: var(--accent-primary);
     font-weight: 900
@@ -579,6 +584,12 @@ header {
     transition: transform 0.25s var(--float-ease), box-shadow 0.25s var(--float-ease), color 0.25s ease, background 0.25s ease;
     position: relative;
     overflow: hidden;
+}
+
+.btn-lang {
+    font-size: 12px;
+    padding: 6px 10px;
+    line-height: 1.1;
 }
 
 .btn-login {
@@ -2281,6 +2292,16 @@ footer {
     padding: 2px 6px;
     border-radius: 10px;
     font-weight: bold;
+}
+
+#fav-count-mobile {
+    background: var(--accent-gradient);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+    line-height: 1;
 }
 
 /* Heart Icon inside Name Cards */

@@ -19,10 +19,6 @@
     color: var(--text-main);
 }
 
-.navbar {
-    z-index: 2000 !important;
-}
-
 .zodiac-hero {
     text-align: center;
     padding: 80px 20px 40px;
@@ -242,11 +238,4 @@
         justify-content: center;
     }
 
-    /* Force Hamburger on top */
-    .hamburger-menu {
-        z-index: 3000 !important;
-        pointer-events: auto !important;
-        position: relative;
-        /* Ensure z-index applies */
-    }
 }
