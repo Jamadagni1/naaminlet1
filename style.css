@@ -3987,14 +3987,3 @@ h1#card-name {
         display: none;
     }
 }
-
-/* ================== HOMEPAGE: VIDEO ONLY MODE ================== */
-body.video-only footer,
-body.video-only .whatsapp-float,
-body.video-only #scrollToTopBtn {
-    display: none !important;
-}
-
-body.video-only .layout-main > section:not(#hero-ethnic) {
-    display: none !important;
-}
