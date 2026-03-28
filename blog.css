@@ -24,12 +24,12 @@ body.blog-page .navbar {
   background: rgba(255, 255, 255, 0.92);
 }
 
-body.blog-page header.blog-header {
+body.blog-page .blog-hero {
   text-align: center;
   margin-bottom: 50px;
 }
 
-body.blog-page header.blog-header h1 {
+body.blog-page .blog-hero h1 {
   font-family: 'Lora', serif;
   font-size: 3.5rem;
   font-weight: 700;
@@ -38,7 +38,7 @@ body.blog-page header.blog-header h1 {
   color: var(--text-dark);
 }
 
-body.blog-page header.blog-header p {
+body.blog-page .blog-hero p {
   color: var(--text-medium);
   font-size: 1.25rem;
 }
@@ -184,7 +184,7 @@ body.blog-page .read-more-btn:hover {
     padding: 60px 20px;
   }
 
-  body.blog-page header.blog-header h1 {
+  body.blog-page .blog-hero h1 {
     font-size: 2.5rem;
   }
 
