@@ -191,7 +191,7 @@
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 25px;
     margin-bottom: 30px;
 }
@@ -311,4 +311,37 @@
         justify-content: center;
     }
 
+    .zodiac-card {
+        padding: 26px;
+    }
+
+    .traits-container {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 520px) {
+    .zodiac-page {
+        padding-top: 88px;
+    }
+
+    .zodiac-container {
+        padding: 0 12px 36px;
+    }
+
+    .zodiac-card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .result-box,
+    .traits-box,
+    .result-item {
+        padding: 18px;
+    }
+
+    .result-value,
+    .highlight-text {
+        font-size: 1.45rem;
+    }
 }

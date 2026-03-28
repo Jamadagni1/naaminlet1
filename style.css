@@ -4301,3 +4301,226 @@ footer a[href$="pricing.html"] {
         font-size: 2rem;
     }
 }
+
+/* ================== MOBILE HARDENING (GLOBAL) ================== */
+img,
+video,
+iframe,
+canvas,
+svg {
+    max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .content-wrapper {
+        padding: 44px 28px;
+        border-radius: 20px;
+    }
+
+    .services-grid,
+    .pricing-grid,
+    .contact-info-grid,
+    .counter-grid,
+    .video-grid,
+    .service-gallery,
+    .collection-grid,
+    .feature-grid,
+    .testimonial-grid,
+    .story-grid,
+    .results-grid,
+    .steps-grid,
+    .careers-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    }
+
+    .carousel-nav {
+        display: none;
+    }
+
+    .carousel-dots {
+        margin-top: 18px;
+    }
+
+    .navbar .nav-links:not(.desktop-only):not(.mobile-nav-links) {
+        flex: 1;
+        min-width: 0;
+        gap: 6px;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar .nav-links:not(.desktop-only):not(.mobile-nav-links)::-webkit-scrollbar {
+        display: none;
+    }
+
+    .navbar .nav-links:not(.desktop-only):not(.mobile-nav-links) li {
+        flex: 0 0 auto;
+    }
+
+    .navbar .nav-links:not(.desktop-only):not(.mobile-nav-links) .dropdown-menu {
+        position: fixed;
+        top: calc(var(--header-height) + 8px);
+        left: 12px;
+        right: 12px;
+        max-height: min(65vh, 420px);
+        overflow-y: auto;
+        min-width: auto;
+        border-radius: 12px;
+    }
+
+    .navbar .nav-actions:not(.desktop-only) {
+        gap: 8px;
+        margin-left: 10px;
+        flex: 0 0 auto;
+    }
+
+    .navbar .nav-actions:not(.desktop-only) .btn {
+        padding: 7px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 100px 14px 56px;
+    }
+
+    .content-wrapper,
+    #hero .content-wrapper {
+        padding: 28px 16px;
+        border-radius: 16px;
+    }
+
+    .section-header-center h2,
+    section h2 {
+        font-size: clamp(1.6rem, 6vw, 2.1rem);
+        line-height: 1.25;
+    }
+
+    .section-subtitle,
+    .hero-content p,
+    #hero p {
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
+    .baby-card {
+        min-width: calc(100vw - 56px);
+    }
+
+    .service-card,
+    .pricing-card,
+    .testimonial-card,
+    .careers-card,
+    .role-card,
+    .video-card,
+    .counter-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .mobile-menu {
+        top: var(--header-height);
+        height: calc(100vh - var(--header-height));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        padding: 10px 12px;
+    }
+
+    .navbar .logo {
+        font-size: 1.4rem;
+    }
+
+    .navbar .nav-links:not(.desktop-only):not(.mobile-nav-links) a {
+        font-size: 0.85rem;
+        padding: 8px 8px;
+    }
+
+    .navbar .nav-actions:not(.desktop-only) a {
+        display: none;
+    }
+
+    .navbar .nav-actions:not(.desktop-only) #fav-view-btn {
+        padding: 7px 10px;
+    }
+
+    .counter-number {
+        font-size: 1.75rem;
+    }
+
+    .scrolling-track {
+        gap: 28px;
+        animation-duration: 22s;
+    }
+
+    .scrolling-item {
+        font-size: 0.78rem;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 992px) {
+    .product-page {
+        padding-top: 88px !important;
+    }
+
+    .product-page .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)) !important;
+        gap: 32px !important;
+        padding: 40px 20px !important;
+    }
+
+    .product-page .product-content {
+        padding: 26px 20px !important;
+    }
+
+    .product-page .product-image {
+        height: 300px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-page .product-hero {
+        padding-top: 72px !important;
+        padding-bottom: 34px !important;
+    }
+
+    .product-page .product-grid {
+        padding: 24px 14px 34px !important;
+        gap: 22px !important;
+    }
+
+    .product-page .product-image {
+        height: 250px !important;
+    }
+
+    .product-page .btn-order {
+        width: 100% !important;
+        padding: 14px 16px !important;
+    }
+
+    .product-page .price-tag {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 520px) {
+    .product-page .product-content h2 {
+        font-size: 1.45rem !important;
+    }
+
+    .report-page .report-hero {
+        padding: 36px 14px 26px !important;
+    }
+
+    .report-page .report-grid,
+    .report-page .report-preview {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+}

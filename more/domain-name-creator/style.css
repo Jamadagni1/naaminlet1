@@ -98,3 +98,24 @@ body {
     font-weight: 600;
     color: var(--text-dark);
 }
+
+@media (max-width: 768px) {
+    .domain-page {
+        padding-top: 84px;
+    }
+
+    .domain-hero {
+        padding: 42px 14px 24px;
+    }
+
+    .domain-generator {
+        padding: 14px;
+        gap: 14px;
+    }
+
+    .domain-card,
+    .domain-results {
+        border-radius: 16px;
+        padding: 16px;
+    }
+}

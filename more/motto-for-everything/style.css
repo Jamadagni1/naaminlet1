@@ -220,3 +220,38 @@
         padding: 15px;
     }
 }
+
+@media (max-width: 560px) {
+    .motto-page {
+        padding-top: 88px;
+    }
+
+    .motto-card {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    .results-section {
+        margin-top: 24px;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .motto-item {
+        padding: 14px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .like-btn-motto {
+        margin-left: 0;
+    }
+}

@@ -10,7 +10,7 @@
   <style>
     .wish-container {
       max-width: 900px;
-      margin: 48px auto;
+      margin: calc(var(--header-height) + 24px) auto 48px;
       padding: 0 20px
     }
 
@@ -55,6 +55,19 @@
 
     .remove-btn:hover {
       opacity: 0.9
+    }
+
+    @media (max-width: 700px) {
+      .wish-container {
+        margin-top: calc(var(--header-height) + 18px);
+        padding: 0 14px;
+      }
+
+      .wish-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -221,7 +234,6 @@
   <script src="script.js?v=debug" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="module" src="navbar-auth.js"></script>
-</body>
 </body>
 
 </html>
