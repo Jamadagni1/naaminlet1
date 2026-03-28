@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        (() => {
+            const preferredLang = localStorage.getItem("language") || "en";
+            document.documentElement.lang = preferredLang;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Report - Naamin</title>
+    <meta name="description" content="Detailed name reports with meaning, origin, pronunciation, numerology, and brand relevance." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;0,700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .report-page {
+            background: linear-gradient(135deg, #f8f2ff 0%, #eef4ff 60%, #ffffff 100%);
+            padding-top: 90px;
+            min-height: 100vh;
+        }
+
+        .report-hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .report-hero h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+
+        .report-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .report-card {
+            background: var(--bg-card-light);
+            border-radius: 18px;
+            border: 1px solid var(--border-color-light);
+            padding: 22px;
+            box-shadow: var(--box-shadow-soft);
+        }
+
+        .report-card i {
+            color: var(--accent-primary);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .report-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .report-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .report-preview img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--glow-strong);
+        }
+
+        .report-cta {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <nav class="navbar">
+        <div class="logo">Naam<span class="logo-in">in</span></div>
+        <ul class="nav-links desktop-only">
+            <li><a href="index.html" data-en="Home" data-hi="होम">Home</a></li>
+            <li><a href="about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+            <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चे तक">Parents to Child</a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-en="More" data-hi="अधिक">More<span class="arrow">▼</span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular Names</a></li>
+                    <li><a href="unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a></li>
+                    <li><a href="famous-personalities.html" data-en="Famous Personalities" data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                    <li><a href="more/motto-for-everything/index.html" data-en="Motto Creator" data-hi="Motto Creator">Motto Creator</a></li>
+                    <li><a href="more/domain-name-creator/index.html" data-en="Domain Name Creator" data-hi="Domain Name Creator">Domain Name Creator</a></li>
+                    <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="राशि चक्र खोजक">Zodiac Finder</a></li>
+                    <li><a href="product.html" data-en="Our Products" data-hi="Our Products">Our Products</a></li>
+                    <li><a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                    <li><a href="pricing.html" class="nav-hidden" data-en="Aura" data-hi="आभा">Aura</a></li>
+                    <li><a href="careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="nav-actions desktop-only">
+            <button id="language-toggle" class="btn btn-login btn-lang" title="Toggle language">ENG/HIN</button>
+            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span id="fav-count">0</span>
+            </button>
+            <a href="login.html" class="btn btn-login">Log in</a>
+            <a href="signup.html" class="btn btn-signup">Sign up</a>
+        </div>
+        <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html" data-en="Home" data-hi="होम">Home</a></li>
+                <li><a href="about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+                <li><a href="parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चे तक">Parents to Child</a></li>
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="अधिक">More<span class="arrow">▼</span></a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular Names</a></li>
+                        <li><a href="unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a></li>
+                        <li><a href="famous-personalities.html" data-en="Famous Personalities" data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                        <li><a href="more/motto-for-everything/index.html" data-en="Motto Creator" data-hi="Motto Creator">Motto Creator</a></li>
+                        <li><a href="more/domain-name-creator/index.html" data-en="Domain Name Creator" data-hi="Domain Name Creator">Domain Name Creator</a></li>
+                        <li><a href="more/zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="राशि चक्र खोजक">Zodiac Finder</a></li>
+                        <li><a href="product.html" data-en="Our Products" data-hi="Our Products">Our Products</a></li>
+                        <li><a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                        <li><a href="pricing.html" class="nav-hidden" data-en="Aura" data-hi="आभा">Aura</a></li>
+                        <li><a href="careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                        <li><a href="blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mobile-actions">
+                <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
+                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span id="fav-count-mobile">0</span>
+                </button>
+                <a href="login.html" class="btn btn-login mobile-btn">Log in</a>
+                <a href="signup.html" class="btn btn-signup mobile-btn">Sign up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="report-page">
+        <section class="report-hero">
+            <h1>Name Report</h1>
+            <p>Get a refined, beautifully structured report for any name — baby, brand, or institution — including meaning, origin, pronunciation, numerology, and brand relevance.</p>
+        </section>
+
+        <section class="section">
+            <div class="content-wrapper">
+                <div class="report-grid">
+                    <div class="report-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Meaning & Origin</h3>
+                        <p>Clear etymology, cultural context, and linguistic roots for confident decisions.</p>
+                    </div>
+                    <div class="report-card">
+                        <i class="fas fa-volume-high"></i>
+                        <h3>Pronunciation Guide</h3>
+                        <p>Phonetic breakdowns, syllable emphasis, and easy speaking tips.</p>
+                    </div>
+                    <div class="report-card">
+                        <i class="fas fa-star"></i>
+                        <h3>Numerology Insights</h3>
+                        <p>Number vibration, personality mapping, and auspicious highlights.</p>
+                    </div>
+                    <div class="report-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Brand Fit Notes</h3>
+                        <p>Use-case notes for brands, startups, institutions, or personal identity.</p>
+                    </div>
+                </div>
+
+                <div class="report-preview">
+                    <img src="IMG3.jpeg" alt="Name report preview" loading="lazy">
+                    <div>
+                        <h2>What You Receive</h2>
+                        <p>A polished PDF report with structured sections, quick summaries, and visual highlights. Perfect for sharing with family, teams, or stakeholders.</p>
+                        <ul>
+                            <li>Meaning + origin snapshot</li>
+                            <li>Pronunciation & spelling variants</li>
+                            <li>Numerology and cultural cues</li>
+                            <li>Suggested domain & motto ideas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="report-cta">
+                    <a href="contact.html" class="btn btn-signup">Request a Report</a>
+                    <a href="services.html" class="btn btn-login">See All Services</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3>
+                <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+                <a href="about.html" data-en="About" data-hi="हमारे बारे में">About</a>
+                <a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a>
+                <a href="contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a>
+            </div>
+            <div>
+                <h3 data-en="Our Services" data-hi="हमारी सेवाएं">Our Services</h3>
+                <a href="services.html#consultation">Name Consultation</a>
+                <a href="services.html#brand">Brand & Startup Naming</a>
+                <a href="services.html#company">Company & Institution Naming</a>
+            </div>
+            <div>
+                <h3 data-en="Follow Us" data-hi="हमें फॉलो करें">Follow Us</h3>
+                <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
+            </div>
+            <div>
+                <h3 data-en="Contact" data-hi="संपर्क">Contact</h3>
+                <p><a href="tel:+919413678955">+91 94136 78955</a></p>
+                <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
+                <p data-en="Hyderabad, Telangana, India" data-hi="Hyderabad, Telangana, India">Hyderabad, Telangana, India</p>
+            </div>
+        </div>
+        <p class="copyrights" data-en="© 2025 Naamin. All rights reserved."
+            data-hi="© 2025 Naamin. All rights reserved.">© 2025 Naamin. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js?v=debug" defer></script>
+    <script src="navbar_fix.js?v=capture_fix"></script>
+</body>
+
+</html>
+
+
+

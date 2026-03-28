@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const genderPills = document.querySelectorAll('[data-filter="gender"]');
     const cultureSelect = document.getElementById('culture-filter');
     const regionSelect = document.getElementById('region-filter');
+    const searchInput = document.getElementById('name-search');
 
     let currentFilters = {
         gender: 'all',
         culture: 'all',
-        region: 'all'
+        region: 'all',
+        search: ''
     };
 
     // Curated popular names dataset
@@ -117,6 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
         applyFilters();
     });
 
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            currentFilters.search = searchInput.value.trim().toLowerCase();
+            applyFilters();
+        });
+    }
+
     // Language Toggle logic
     const updateLanguage = () => {
         const lang = document.documentElement.lang || 'en';
@@ -146,8 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const genderMatch = currentFilters.gender === 'all' || name.gender === currentFilters.gender;
             const cultureMatch = currentFilters.culture === 'all' || name.culture === currentFilters.culture;
             const regionMatch = currentFilters.region === 'all' || name.region === currentFilters.region;
+            const searchMatch = !currentFilters.search ||
+                name.name.toLowerCase().includes(currentFilters.search) ||
+                (name.meaning || '').toLowerCase().includes(currentFilters.search);
 
-            return genderMatch && cultureMatch && regionMatch;
+            return genderMatch && cultureMatch && regionMatch && searchMatch;
         });
 
         displayNames(filtered);
@@ -164,7 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const favorites = (window.favManager && Array.isArray(window.favManager.favorites))
+            ? window.favManager.favorites
+            : JSON.parse(localStorage.getItem('naamin_favorites_v1') || localStorage.getItem('favorites') || '[]');
 
         // Translation Maps
         const trendLabelMap = {
@@ -275,6 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
+        localStorage.setItem('naamin_favorites_v1', JSON.stringify(favorites));
+        try { document.dispatchEvent(new CustomEvent('favoritesUpdated')); } catch (e) { }
         updateFavoriteCount();
     }
 

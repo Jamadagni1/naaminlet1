@@ -91,18 +91,54 @@
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     border-radius: 14px;
-    padding: 18px;
+    padding: 20px;
     box-shadow: var(--shadow-soft);
     border: 1px solid var(--card-border);
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
     margin-bottom: 0;
 }
 
 .filter-group {
     flex: 1;
     min-width: 200px;
+}
+
+.search-group {
+    min-width: 240px;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-lighter);
+    background: #fff;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.search-input i {
+    color: var(--accent);
+    font-size: 0.95rem;
+}
+
+.search-input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-secondary);
+    background: transparent;
+}
+
+.search-input:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(108, 43, 217, 0.12);
 }
 
 .filter-label {

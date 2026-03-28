@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (() => {
+            const preferredLang = localStorage.getItem("language") || "en";
+            document.documentElement.lang = preferredLang;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Name Creator - Naamin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+    <nav class="navbar">
+        <div class="logo">Naam<span class="logo-in">in</span></div>
+        <ul class="nav-links desktop-only">
+            <li><a href="../../index.html" data-en="Home" data-hi="होम">Home</a></li>
+            <li><a href="../../about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+            <li><a href="../../parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चे तक">Parents to Child</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-en="More" data-hi="अधिक">More<span class="arrow">▼</span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="../../popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular Names</a></li>
+                    <li><a href="../../unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a></li>
+                    <li><a href="../../famous-personalities.html" data-en="Famous Personalities" data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                    <li><a href="../motto-for-everything/index.html" data-en="Motto Creator" data-hi="Motto Creator">Motto Creator</a></li>
+                    <li><a href="index.html" class="active" data-en="Domain Name Creator" data-hi="Domain Name Creator">Domain Name Creator</a></li>
+                    <li><a href="../zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="राशि चक्र खोजक">Zodiac Finder</a></li>
+                    <li><a href="../../product.html" data-en="Our Products" data-hi="Our Products">Our Products</a></li>
+                    <li><a href="../../services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                    <li><a href="../../pricing.html" class="nav-hidden" data-en="Aura" data-hi="आभा">Aura</a></li>
+                    <li><a href="../../careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                    <li><a href="../../blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                    <li><a href="../../contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="nav-actions desktop-only">
+            <button id="language-toggle" class="btn btn-login btn-lang" title="Toggle language">ENG/HIN</button>
+            <button id="fav-view-btn" class="btn btn-fav" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span id="fav-count">0</span>
+            </button>
+            <a href="../../login.html" class="btn btn-login">Log in</a>
+            <a href="../../signup.html" class="btn btn-signup">Sign up</a>
+        </div>
+        <button class="hamburger-menu mobile-only" id="hamburger-menu" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="../../index.html" data-en="Home" data-hi="होम">Home</a></li>
+                <li><a href="../../about.html" data-en="About" data-hi="हमारे बारे में">About</a></li>
+                <li><a href="../../parents-mix.html" data-en="Parents to Child" data-hi="माता-पिता से बच्चे तक">Parents to Child</a></li>
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="अधिक">More<span class="arrow">▼</span></a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="../../popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular Names</a></li>
+                        <li><a href="../../unique-names.html" data-en="Unique Names" data-hi="अद्वितीय नाम">Unique Names</a></li>
+                        <li><a href="../../famous-personalities.html" data-en="Famous Personalities" data-hi="प्रसिद्ध हस्तियां">Famous Personalities</a></li>
+                        <li><a href="../motto-for-everything/index.html" data-en="Motto Creator" data-hi="Motto Creator">Motto Creator</a></li>
+                        <li><a href="index.html" class="active" data-en="Domain Name Creator" data-hi="Domain Name Creator">Domain Name Creator</a></li>
+                        <li><a href="../zodiac-finder/index.html" data-en="Zodiac Finder" data-hi="राशि चक्र खोजक">Zodiac Finder</a></li>
+                        <li><a href="../../product.html" data-en="Our Products" data-hi="Our Products">Our Products</a></li>
+                        <li><a href="../../services.html" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                        <li><a href="../../pricing.html" class="nav-hidden" data-en="Aura" data-hi="आभा">Aura</a></li>
+                        <li><a href="../../careers.html" data-en="Careers" data-hi="करियर">Careers</a></li>
+                        <li><a href="../../blog.html" data-en="Blog" data-hi="ब्लॉग">Blog</a></li>
+                        <li><a href="../../contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mobile-actions">
+                <button id="language-toggle-mobile" class="btn mobile-btn">ENG/HIN</button>
+                <button id="fav-view-btn-mobile" class="btn btn-fav mobile-btn" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span id="fav-count-mobile">0</span>
+                </button>
+                <a href="../../login.html" class="btn btn-login mobile-btn">Log in</a>
+                <a href="../../signup.html" class="btn btn-signup mobile-btn">Sign up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="domain-page">
+        <section class="domain-hero">
+            <h1>Domain Name Creator</h1>
+            <p>Create domain-ready names with clean spellings and modern appeal for brands, startups, and institutions.</p>
+        </section>
+
+        <section class="domain-generator">
+            <div class="domain-card">
+                <label for="domain-keyword">Keywords or Theme</label>
+                <input id="domain-keyword" type="text" placeholder="e.g. wellness, fintech, education">
+                <div class="domain-actions">
+                    <button id="generate-domains" class="btn btn-signup">Generate Ideas</button>
+                    <button id="clear-domains" class="btn btn-login">Clear</button>
+                </div>
+            </div>
+
+            <div class="domain-results">
+                <h3>Suggested Domains</h3>
+                <ul id="domain-list">
+                    <li>naaminstudio.com</li>
+                    <li>brandgenius.in</li>
+                    <li>namecraft.co</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3>
+                <a href="../../index.html" data-en="Home" data-hi="होम">Home</a>
+                <a href="../../about.html" data-en="About" data-hi="हमारे बारे में">About</a>
+                <a href="../../services.html" data-en="Services" data-hi="सेवाएं">Services</a>
+                <a href="../../contact.html" data-en="Contact" data-hi="संपर्क करें">Contact</a>
+            </div>
+            <div>
+                <h3 data-en="Our Services" data-hi="हमारी सेवाएं">Our Services</h3>
+                <a href="../../services.html#consultation">Name Consultation</a>
+                <a href="../../services.html#brand">Brand & Startup Naming</a>
+                <a href="../../services.html#company">Company & Institution Naming</a>
+            </div>
+            <div>
+                <h3 data-en="Follow Us" data-hi="हमें फॉलो करें">Follow Us</h3>
+                <p><a href="https://www.linkedin.com/company/naamin/" target="_blank" rel="noopener">LinkedIn</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Instagram</a></p>
+                <p><a href="#" target="_blank" rel="noopener">Facebook</a></p>
+            </div>
+            <div>
+                <h3 data-en="Contact" data-hi="संपर्क">Contact</h3>
+                <p><a href="tel:+919413678955">+91 94136 78955</a></p>
+                <p><a href="mailto:naamin.com@gmail.com">naamin.com@gmail.com</a></p>
+                <p data-en="Hyderabad, Telangana, India" data-hi="Hyderabad, Telangana, India">Hyderabad, Telangana, India</p>
+            </div>
+        </div>
+        <p class="copyrights" data-en="© 2025 Naamin. All rights reserved."
+            data-hi="© 2025 Naamin. All rights reserved.">© 2025 Naamin. All rights reserved.</p>
+    </footer>
+
+    <script src="../../script.js?v=debug" defer></script>
+    <script src="../../navbar_fix.js?v=capture_fix"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const keyword = document.getElementById('domain-keyword');
+            const list = document.getElementById('domain-list');
+            const generate = document.getElementById('generate-domains');
+            const clear = document.getElementById('clear-domains');
+
+            const suffixes = ['.com', '.co', '.in', '.io', '.ai'];
+            const prefixes = ['neo', 'nova', 'zen', 'veri', 'luma', 'astra'];
+
+            const buildIdeas = (base) => {
+                const clean = base.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() || 'naamin';
+                const ideas = new Set();
+                prefixes.forEach(prefix => ideas.add(`${prefix}${clean}${suffixes[Math.floor(Math.random() * suffixes.length)]}`));
+                suffixes.forEach(suffix => ideas.add(`${clean}${suffix}`));
+                ideas.add(`${clean}studio.com`);
+                return Array.from(ideas).slice(0, 8);
+            };
+
+            generate.addEventListener('click', () => {
+                const ideas = buildIdeas(keyword.value.trim());
+                list.innerHTML = ideas.map(i => `<li>${i}</li>`).join('');
+            });
+
+            clear.addEventListener('click', () => {
+                keyword.value = '';
+                list.innerHTML = '<li>naaminstudio.com</li><li>brandgenius.in</li><li>namecraft.co</li>';
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+

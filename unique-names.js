@@ -201,6 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
+        localStorage.setItem('naamin_favorites_v1', JSON.stringify(favorites));
+        try { document.dispatchEvent(new CustomEvent('favoritesUpdated')); } catch (e) { }
         updateFavoriteCount();
     }
 

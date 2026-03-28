@@ -8,19 +8,25 @@ body.blog-page {
 
   background: var(--blog-bg-gradient);
   background-attachment: fixed;
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) + 20px);
+  min-height: 100vh;
 }
 
 body.blog-page .container {
   max-width: 850px;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 60px 24px 100px;
   flex: 1;
+}
+
+body.blog-page .navbar {
+  z-index: 2000;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 body.blog-page header.blog-header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 body.blog-page header.blog-header h1 {
@@ -37,16 +43,54 @@ body.blog-page header.blog-header p {
   font-size: 1.25rem;
 }
 
-body.blog-page .blog-list {
+body.blog-page .blog-hero {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: var(--blog-shadow-premium);
+  border: 1px solid rgba(108, 43, 217, 0.08);
+}
+
+body.blog-page .blog-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+body.blog-page .blog-stats {
+  margin-top: 24px;
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+body.blog-page .blog-stat {
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-medium);
+  border: 1px solid rgba(108, 43, 217, 0.1);
+}
+
+body.blog-page .blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
 }
 
 body.blog-page .blog-card {
   background: #ffffff;
   border-radius: var(--blog-radius-lg);
-  padding: 50px;
+  padding: 38px;
   box-shadow: var(--blog-shadow-premium);
   border: 1px solid var(--border-color-light);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -70,7 +114,7 @@ body.blog-page .blog-date {
 
 body.blog-page .blog-title {
   font-family: 'Lora', serif;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 20px;
   line-height: 1.25;
@@ -92,7 +136,7 @@ body.blog-page .blog-full-content {
   display: none;
   opacity: 0;
   color: var(--text-dark);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   margin-bottom: 30px;
 }
 
@@ -152,4 +196,3 @@ body.blog-page .read-more-btn:hover {
     font-size: 1.8rem;
   }
 }
-

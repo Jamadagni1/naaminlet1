@@ -388,20 +388,40 @@ const FALLBACK_DATA = {
 };
 
 // --- FAVORITES MANAGER CLASS ---
+const FAVORITES_PRIMARY_KEY = 'naamin_favorites_v1';
+const FAVORITES_LEGACY_KEY = 'favorites';
+
+function loadFavoritesFromStorage() {
+    const primary = localStorage.getItem(FAVORITES_PRIMARY_KEY);
+    if (primary) {
+        try { return JSON.parse(primary) || []; } catch (e) { }
+    }
+    const legacy = localStorage.getItem(FAVORITES_LEGACY_KEY);
+    if (legacy) {
+        try { return JSON.parse(legacy) || []; } catch (e) { }
+    }
+    return [];
+}
+
+function saveFavoritesToStorage(list) {
+    const payload = JSON.stringify(list || []);
+    localStorage.setItem(FAVORITES_PRIMARY_KEY, payload);
+    localStorage.setItem(FAVORITES_LEGACY_KEY, payload);
+}
+
 class FavoritesManager {
     constructor() {
-        this.storageKey = 'naamin_favorites_v1';
+        this.storageKey = FAVORITES_PRIMARY_KEY;
         this.favorites = this.load();
         this.updateHeaderCount();
     }
 
     load() {
-        const data = localStorage.getItem(this.storageKey);
-        return data ? JSON.parse(data) : [];
+        return loadFavoritesFromStorage();
     }
 
     save() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
+        saveFavoritesToStorage(this.favorites);
         this.updateHeaderCount();
         try {
             document.dispatchEvent(new CustomEvent('favoritesUpdated'));
@@ -431,8 +451,11 @@ class FavoritesManager {
     }
 
     updateHeaderCount() {
-        const countSpan = document.getElementById('fav-count');
-        if (countSpan) countSpan.textContent = this.favorites.length;
+        const count = this.favorites.length;
+        document.querySelectorAll('#fav-count, #fav-count-mobile').forEach(span => {
+            span.textContent = count;
+            span.style.display = 'inline-flex';
+        });
     }
 }
 
@@ -578,6 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Initial sync
+    favManager?.updateHeaderCount();
     syncFavoritesCount();
 
     // Dropdown behavior for new navbar
@@ -619,6 +643,123 @@ document.addEventListener("DOMContentLoaded", () => {
     function getLanguage() {
         return localStorage.getItem("language") || "en";
     }
+
+    function applyPlatformNavUpdates() {
+        const isInMore = window.location.pathname.includes("/more/");
+        const rootPrefix = isInMore ? "../" : "";
+        const domainHref = isInMore
+            ? "../domain-name-creator/index.html"
+            : "more/domain-name-creator/index.html";
+
+        // Rename Motto Generator -> Motto Creator
+        document.querySelectorAll('a[href*="motto-for-everything"]').forEach(a => {
+            a.setAttribute('data-en', 'Motto Creator');
+            a.setAttribute('data-hi', 'आदर्श वाक्य निर्माता');
+            if (!a.querySelector('*')) a.textContent = 'Motto Creator';
+        });
+
+        // Rename Products -> Our Products
+        document.querySelectorAll('a[href$="product.html"]').forEach(a => {
+            a.setAttribute('data-en', 'Our Products');
+            a.setAttribute('data-hi', 'हमारे उत्पाद');
+            if (!a.querySelector('*')) a.textContent = 'Our Products';
+        });
+
+        // Hide Plans (pricing)
+        document.querySelectorAll('nav a[href$="pricing.html"], nav a[href*="pricing.html"], footer a[href$="pricing.html"]').forEach(a => {
+            a.classList.add('nav-hidden');
+        });
+
+        // Insert Domain Name Creator in dropdowns if missing
+        document.querySelectorAll('.dropdown-menu, .mobile-dropdown-menu').forEach(menu => {
+            if (menu.querySelector(`a[href*="domain-name-creator"]`)) return;
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = domainHref;
+            link.setAttribute('data-en', 'Domain Name Creator');
+            link.setAttribute('data-hi', 'डोमेन नाम निर्माता');
+            link.textContent = 'Domain Name Creator';
+            li.appendChild(link);
+
+            const mottoLink = menu.querySelector('a[href*="motto-for-everything"]');
+            if (mottoLink && mottoLink.parentElement) {
+                mottoLink.parentElement.insertAdjacentElement('afterend', li);
+            } else {
+                menu.appendChild(li);
+            }
+        });
+
+        // Update footer services list
+        document.querySelectorAll('footer .footer-grid').forEach(grid => {
+            const columns = Array.from(grid.children || []);
+            const servicesCol = columns.find(col => {
+                const h = col.querySelector('h3');
+                if (!h) return false;
+                const en = (h.getAttribute('data-en') || h.textContent || '').trim().toLowerCase();
+                return en === 'our services';
+            });
+            if (!servicesCol) return;
+            servicesCol.querySelectorAll('a').forEach(a => a.remove());
+
+            const links = [
+                { href: `${rootPrefix}services.html#consultation`, en: 'Name Consultation', hi: 'नाम परामर्श' },
+                { href: `${rootPrefix}services.html#brand`, en: 'Brand & Startup Naming', hi: 'ब्रांड व स्टार्टअप नामकरण' },
+                { href: `${rootPrefix}services.html#company`, en: 'Company & Institution Naming', hi: 'कंपनी व संस्था नामकरण' },
+                { href: domainHref, en: 'Domain Name Creator', hi: 'डोमेन नाम निर्माता' },
+                { href: `${rootPrefix}more/motto-for-everything/index.html`, en: 'Motto Creator', hi: 'आदर्श वाक्य निर्माता' },
+                { href: `${rootPrefix}name-report.html`, en: 'Name Report', hi: 'नाम रिपोर्ट' },
+                { href: `${rootPrefix}product.html`, en: 'Our Products', hi: 'हमारे उत्पाद' }
+            ];
+            links.forEach(l => {
+                const a = document.createElement('a');
+                a.href = l.href;
+                a.setAttribute('data-en', l.en);
+                a.setAttribute('data-hi', l.hi);
+                a.textContent = l.en;
+                servicesCol.appendChild(a);
+            });
+        });
+    }
+
+    function setupAnimatedCounters() {
+        const counters = document.querySelectorAll('[data-counter-target]');
+        if (!counters.length) return;
+        const formatNumber = (value, format) => {
+            if (format === 'indian') return value.toLocaleString('en-IN');
+            return value.toLocaleString('en-US');
+        };
+        const animateCounter = (el) => {
+            const target = parseInt(el.dataset.counterTarget, 10) || 0;
+            const suffix = el.dataset.counterSuffix || '';
+            const format = el.dataset.counterFormat || 'indian';
+            const duration = 1400;
+            const start = performance.now();
+
+            const step = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const value = Math.floor(progress * target);
+                el.textContent = `${formatNumber(value, format)}${suffix}`;
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                if (el.dataset.counterDone === 'true') return;
+                el.dataset.counterDone = 'true';
+                animateCounter(el);
+                obs.unobserve(el);
+            });
+        }, { threshold: 0.4 });
+
+        counters.forEach(counter => observer.observe(counter));
+    }
+
+    applyPlatformNavUpdates();
+    setupAnimatedCounters();
 
     function namesFileForGender(gender) {
         const lang = getLanguage() === 'hi' ? 'hi' : 'en';

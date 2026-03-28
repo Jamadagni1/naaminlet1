@@ -78,32 +78,35 @@
                 if (text) el.textContent = text;
             }
         });
+        // Platform-wide nav updates + footer standardization
+        if (!window.__naaminPlatformBrandingApplied) {
+            window.__naaminPlatformBrandingApplied = true;
 
-        // Baby-naming only: remove unrelated menu items + standardize footer services
-        if (!window.__naaminBabyBrandingApplied) {
-            window.__naaminBabyBrandingApplied = true;
-
-            // Remove Motto Generator links wherever they appear
             document.querySelectorAll('a[href*="motto-for-everything"]').forEach(a => {
-                const li = a.closest('li');
-                if (li) li.remove(); else a.remove();
+                a.setAttribute('data-en', 'Motto Creator');
+                a.setAttribute('data-hi', 'Motto Creator');
+                if (!a.querySelector('*')) a.textContent = 'Motto Creator';
             });
 
-            // Rename Products + Aura in nav (if present)
             document.querySelectorAll('a[href$="product.html"]').forEach(a => {
-                a.setAttribute('data-en', 'Name Posters');
-                a.setAttribute('data-hi', 'नाम पोस्टर');
-                if (!a.querySelector('*')) a.textContent = 'Name Posters';
+                a.setAttribute('data-en', 'Our Products');
+                a.setAttribute('data-hi', 'Our Products');
+                if (!a.querySelector('*')) a.textContent = 'Our Products';
             });
+
             document.querySelectorAll('a[href$="pricing.html"]').forEach(a => {
-                a.setAttribute('data-en', 'Plans');
-                a.setAttribute('data-hi', 'प्लान');
-                if (!a.querySelector('*')) a.textContent = 'Plans';
+                a.classList.add('nav-hidden');
             });
 
             // Determine correct relative path for services page links
             const servicesNavLink = document.querySelector('a[href$="services.html"]');
             const servicesBase = servicesNavLink ? (servicesNavLink.getAttribute('href') || 'services.html').replace(/#.*$/, '') : 'services.html';
+
+            const isInMore = window.location.pathname.includes("/more/");
+            const rootPrefix = isInMore ? "../" : "";
+            const domainHref = isInMore
+                ? "../domain-name-creator/index.html"
+                : "more/domain-name-creator/index.html";
 
             // Update footer "Our Services" column (if present)
             document.querySelectorAll('footer .footer-grid').forEach(grid => {
@@ -118,9 +121,13 @@
                 servicesCol.querySelectorAll('a').forEach(a => a.remove());
 
                 const links = [
-                    { href: `${servicesBase}#consultation`, en: 'Name Consultation', hi: 'नाम परामर्श' },
-                    { href: `${servicesBase}#vedic`, en: 'Vedic Guidance', hi: 'वैदिक मार्गदर्शन' },
-                    { href: `${servicesBase}#posters`, en: 'Name Posters', hi: 'नाम पोस्टर' }
+                    { href: `${servicesBase}#consultation`, en: 'Name Consultation', hi: 'Name Consultation' },
+                    { href: `${servicesBase}#brand`, en: 'Brand & Startup Naming', hi: 'Brand & Startup Naming' },
+                    { href: `${servicesBase}#company`, en: 'Company & Institution Naming', hi: 'Company & Institution Naming' },
+                    { href: domainHref, en: 'Domain Name Creator', hi: 'Domain Name Creator' },
+                    { href: `${rootPrefix}more/motto-for-everything/index.html`, en: 'Motto Creator', hi: 'Motto Creator' },
+                    { href: `${rootPrefix}name-report.html`, en: 'Name Report', hi: 'Name Report' },
+                    { href: `${rootPrefix}product.html`, en: 'Our Products', hi: 'Our Products' }
                 ];
                 links.forEach(l => {
                     const a = document.createElement('a');
@@ -132,7 +139,6 @@
                 });
             });
         }
-
 
         // NUCLEAR OPTION: Global Capture Phase Listener
         // This runs BEFORE any other click listeners on the page.
@@ -203,3 +209,4 @@
     window.forceNavbarTranslation = applyNavbarTranslation;
 
 })();
+
