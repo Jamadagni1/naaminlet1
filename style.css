@@ -4196,6 +4196,12 @@ footer a[href$="pricing.html"] {
     gap: 24px;
 }
 
+.service-tile-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .service-tile {
     background: var(--bg-card-light);
     border-radius: 18px;
@@ -4203,6 +4209,9 @@ footer a[href$="pricing.html"] {
     border: 1px solid var(--border-color-light);
     box-shadow: var(--box-shadow-soft);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-tile:hover {
@@ -4228,6 +4237,25 @@ footer a[href$="pricing.html"] {
     color: var(--text-medium);
     font-size: 0.95rem;
     line-height: 1.5;
+    flex: 1;
+}
+
+.service-tile-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 16px 18px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.service-tile-cta i {
+    transition: transform 0.2s ease;
+}
+
+.service-tile-link:hover .service-tile-cta i {
+    transform: translateX(3px);
 }
 
 /* Careers */
