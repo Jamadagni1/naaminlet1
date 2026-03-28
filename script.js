@@ -51,6 +51,34 @@ GenderTheme.init();
 document.body.style.visibility = "visible";
 document.body.style.opacity = "1";
 
+document.addEventListener('DOMContentLoaded', () => {
+    const heroVideo = document.querySelector('.hero-video');
+    if (!heroVideo) return;
+
+    const markReady = () => {
+        heroVideo.classList.add('is-ready');
+        if (heroVideo.hasAttribute('poster')) {
+            heroVideo.removeAttribute('poster');
+        }
+    };
+
+    heroVideo.addEventListener('loadeddata', markReady, { once: true });
+    heroVideo.addEventListener('playing', () => {
+        markReady();
+    });
+
+    heroVideo.addEventListener('error', () => {
+        heroVideo.classList.remove('is-ready');
+    });
+
+    const autoplayAttempt = heroVideo.play();
+    if (autoplayAttempt && typeof autoplayAttempt.catch === 'function') {
+        autoplayAttempt.catch(() => {
+            heroVideo.classList.remove('is-ready');
+        });
+    }
+});
+
 // Comprehensive English to Hindi Name Mapping & Transliteration
 function getHindiName(englishName) {
     if (!englishName) return "";

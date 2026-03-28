@@ -1891,10 +1891,14 @@ footer {
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
+    transform: scale(1.06);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
 }
 
 .baby-card:hover .baby-image {
-    transform: scale(1.05);
+    transform: scale(1.12);
 }
 
 .baby-info {
@@ -3219,6 +3223,8 @@ h1#card-name {
 .hero-media {
     position: absolute;
     inset: 0;
+    overflow: hidden;
+    background: #f5f0ff;
 }
 
 .hero-media img {
@@ -3226,7 +3232,14 @@ h1#card-name {
     height: 100%;
     object-fit: cover;
     filter: saturate(1.05) contrast(1.05);
-    transform: scale(1.02);
+    transform: scale(1.08);
+}
+
+.hero-fallback-image {
+    position: absolute;
+    inset: 0;
+    object-position: center 30%;
+    will-change: transform;
 }
 
 .hero-video {
@@ -3237,6 +3250,16 @@ h1#card-name {
     object-fit: cover;
     object-position: center;
     filter: saturate(1.15) contrast(1.05) brightness(1.08);
+    transform: scale(1.05);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, opacity;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.hero-video.is-ready {
+    opacity: 1;
 }
 
 .hero-overlay {
