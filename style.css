@@ -4081,6 +4081,15 @@ footer a[href$="pricing.html"] {
     color: #fff;
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.layout-main > .scrolling-banner {
+    position: sticky;
+    top: var(--header-height);
+    z-index: 8;
 }
 
 .scrolling-track {
