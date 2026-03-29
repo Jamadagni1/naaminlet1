@@ -178,8 +178,25 @@ document.addEventListener('DOMContentLoaded', () => {
         backBtn.setAttribute('data-hi', cleaned);
     });
 
+    const posterSeal = document.querySelector('.p-seal');
+    if (posterSeal && /^[\?\s]+$/.test(posterSeal.textContent || '')) {
+        posterSeal.textContent = '★';
+    }
+
+    const posterHindiName = document.getElementById('poster-name-hi');
+    if (posterHindiName && /^[\?\s]+$/.test(posterHindiName.textContent || '')) {
+        posterHindiName.textContent = 'नाम';
+    }
+
     const videoCards = document.querySelectorAll('.video-card');
     if (!videoCards.length) return;
+
+    const curatedVideos = [
+        { src: 'assets/baby-name-hero.mp4', title: 'Brand Naming Spotlight' },
+        { src: 'assets/video.mp4', title: 'Baby Name Stories' },
+        { src: 'assets/hero.mp4', title: 'Domains & Mottos' },
+        { src: 'assets/baby-name-hero.mp4', title: 'Institutional Naming' }
+    ];
 
     let lightbox = document.getElementById('video-lightbox');
     if (!lightbox) {
@@ -232,9 +249,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    videoCards.forEach(card => {
+    videoCards.forEach((card, cardIndex) => {
         const videoEl = card.querySelector('video');
-        const title = card.dataset.videoTitle || card.querySelector('.video-card-title')?.textContent?.trim() || 'Naamin Video';
+        const preferredVideo = curatedVideos[cardIndex % curatedVideos.length];
+        const title =
+            card.dataset.videoTitle ||
+            card.querySelector('.video-card-title')?.textContent?.trim() ||
+            preferredVideo.title ||
+            'Naamin Video';
         let expandBtn = card.querySelector('.video-expand-btn');
 
         if (!expandBtn) {
@@ -249,6 +271,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (videoEl) {
+            const sourceEl = videoEl.querySelector('source');
+            if (sourceEl) {
+                const existingSrc = sourceEl.getAttribute('src') || '';
+                if (existingSrc !== preferredVideo.src) {
+                    sourceEl.setAttribute('src', preferredVideo.src);
+                    videoEl.load();
+                }
+            }
+            card.dataset.videoTitle = title;
+
             videoEl.addEventListener('click', (event) => {
                 event.preventDefault();
                 openVideoLightbox(videoEl, title);
@@ -894,23 +926,29 @@ document.addEventListener("DOMContentLoaded", () => {
             a.classList.add('nav-hidden');
         });
 
-        // Insert Domain Naming Service in dropdowns if missing
+        // Insert Domain Naming Service + Name Report in dropdowns if missing
         document.querySelectorAll('.dropdown-menu, .mobile-dropdown-menu').forEach(menu => {
-            if (menu.querySelector(`a[href*="domain-name-creator"]`)) return;
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = domainHref;
-            link.setAttribute('data-en', 'Domain Naming Service');
-            link.setAttribute('data-hi', 'Domain Naming Service');
-            link.textContent = 'Domain Naming Service';
-            li.appendChild(link);
+            const ensureMenuLink = (href, enText, hiText, insertAfterSelector) => {
+                if (menu.querySelector(`a[href="${href}"], a[href*="${href}"]`)) return;
 
-            const mottoLink = menu.querySelector('a[href*="motto-for-everything"]');
-            if (mottoLink && mottoLink.parentElement) {
-                mottoLink.parentElement.insertAdjacentElement('afterend', li);
-            } else {
-                menu.appendChild(li);
-            }
+                const li = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = href;
+                link.setAttribute('data-en', enText);
+                link.setAttribute('data-hi', hiText);
+                link.textContent = enText;
+                li.appendChild(link);
+
+                const afterLink = menu.querySelector(insertAfterSelector);
+                if (afterLink && afterLink.parentElement) {
+                    afterLink.parentElement.insertAdjacentElement('afterend', li);
+                } else {
+                    menu.appendChild(li);
+                }
+            };
+
+            ensureMenuLink(domainHref, 'Domain Naming Service', 'Domain Naming Service', 'a[href*="motto-for-everything"]');
+            ensureMenuLink(nameReportHref, 'Name Report', 'Name Report', 'a[href*="domain-name-creator"]');
         });
 
         // Keep "Our Products" outside "More" dropdown (desktop + mobile)
