@@ -20,12 +20,33 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .report-page {
+            --report-navy: #071a4d;
+            --report-navy-2: #0b2d79;
+            --report-gold: #e5c27a;
+            --report-gold-deep: #c4923a;
+            --report-ivory: #f8f0dd;
+            --report-ink: #211a2f;
             min-height: 100vh;
             padding-top: calc(var(--header-height) + 18px);
             background:
-                radial-gradient(circle at 6% 5%, rgba(193, 132, 243, 0.16), transparent 32%),
-                radial-gradient(circle at 94% 0%, rgba(108, 43, 217, 0.13), transparent 30%),
-                linear-gradient(160deg, #f7f0ff 0%, #eef4ff 44%, #ffffff 100%);
+                radial-gradient(circle at 6% 6%, rgba(229, 194, 122, 0.2), transparent 35%),
+                radial-gradient(circle at 94% 2%, rgba(229, 194, 122, 0.16), transparent 32%),
+                linear-gradient(160deg, #03113a 0%, var(--report-navy) 48%, var(--report-navy-2) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.34;
+            background-image:
+                radial-gradient(circle at 22% 24%, rgba(229, 194, 122, 0.95) 0 1.2px, transparent 1.6px),
+                radial-gradient(circle at 74% 18%, rgba(229, 194, 122, 0.85) 0 1.2px, transparent 1.6px),
+                radial-gradient(circle at 12% 72%, rgba(229, 194, 122, 0.85) 0 1.2px, transparent 1.6px),
+                radial-gradient(circle at 86% 78%, rgba(229, 194, 122, 0.9) 0 1.2px, transparent 1.6px);
         }
 
         .report-wrap {
@@ -34,12 +55,14 @@
             padding: 28px 0 82px;
             display: grid;
             gap: 26px;
+            position: relative;
+            z-index: 1;
         }
 
         .glass-panel {
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(108, 43, 217, 0.12);
-            box-shadow: 0 18px 48px rgba(31, 27, 46, 0.08);
+            background: rgba(7, 20, 60, 0.76);
+            border: 1px solid rgba(229, 194, 122, 0.32);
+            box-shadow: 0 24px 50px rgba(3, 10, 30, 0.45);
             backdrop-filter: blur(8px);
             border-radius: 24px;
         }
@@ -60,7 +83,7 @@
             width: 260px;
             height: 260px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(193, 132, 243, 0.32), transparent 72%);
+            background: radial-gradient(circle, rgba(229, 194, 122, 0.26), transparent 72%);
             pointer-events: none;
         }
 
@@ -74,20 +97,22 @@
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--accent-primary);
-            background: rgba(108, 43, 217, 0.1);
+            color: #2a1f10;
+            background: linear-gradient(135deg, var(--report-gold), #f2ddad);
+            border: 1px solid rgba(229, 194, 122, 0.5);
         }
 
         .report-hero h1 {
             margin: 14px 0 12px;
             line-height: 1.12;
             font-size: clamp(2rem, 4.2vw, 3.45rem);
-            color: var(--text-dark);
+            color: #f9e7bd;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
         }
 
         .report-hero p {
             margin: 0;
-            color: var(--text-medium);
+            color: #d8def4;
             font-size: 1.04rem;
             max-width: 62ch;
         }
@@ -102,9 +127,9 @@
         .hero-highlights span {
             padding: 8px 12px;
             border-radius: 999px;
-            background: #fff;
-            border: 1px solid rgba(108, 43, 217, 0.16);
-            color: var(--text-dark);
+            background: rgba(248, 240, 221, 0.95);
+            border: 1px solid rgba(229, 194, 122, 0.5);
+            color: var(--report-ink);
             font-size: 0.88rem;
             font-weight: 600;
         }
@@ -122,11 +147,11 @@
         }
 
         .report-mock {
-            background: linear-gradient(162deg, #ffffff 0%, #f8f3ff 100%);
-            border: 1px solid rgba(108, 43, 217, 0.16);
+            background: linear-gradient(160deg, #07215f, #0a2f79);
+            border: 1px solid rgba(229, 194, 122, 0.42);
             border-radius: 20px;
             padding: 18px;
-            box-shadow: 0 16px 34px rgba(108, 43, 217, 0.14);
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
             position: relative;
         }
 
@@ -134,56 +159,118 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.09em;
-            color: var(--accent-primary);
+            color: #f5d18a;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .mock-brand {
+            text-align: center;
+            color: #f7e3b8;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .mock-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
+            display: block;
+            text-align: center;
             margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(229, 194, 122, 0.3);
         }
 
         .mock-name {
-            font-size: 1.1rem;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f9e7bd;
+            line-height: 1.1;
+            font-family: "Lora", serif;
+        }
+
+        .mock-name-hi {
+            margin-top: 6px;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--text-dark);
+            color: #f4dba3;
+            line-height: 1.1;
+            font-family: "Lora", serif;
+        }
+
+        .mock-desc {
+            margin: 8px 0 0;
+            color: #d8def4;
+            font-style: italic;
+            font-size: 0.94rem;
         }
 
         .mock-score {
-            font-size: 0.8rem;
+            display: none;
+        }
+
+        .mock-icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .mock-icon-chip {
+            border-radius: 14px;
+            padding: 9px 6px;
+            text-align: center;
+            background: rgba(248, 240, 221, 0.95);
+            border: 1px solid rgba(229, 194, 122, 0.6);
+            color: var(--report-ink);
+        }
+
+        .mock-icon-chip i {
+            color: var(--report-gold-deep);
+            font-size: 0.98rem;
+            margin-bottom: 4px;
+        }
+
+        .mock-icon-chip strong {
+            display: block;
+            font-size: 0.75rem;
+            line-height: 1.2;
             font-weight: 700;
-            padding: 6px 10px;
-            border-radius: 999px;
-            color: #fff;
-            background: var(--accent-gradient);
+            color: var(--report-ink);
         }
 
         .mock-list {
             display: grid;
-            gap: 8px;
+            gap: 9px;
             margin: 0;
             padding: 0;
             list-style: none;
         }
 
         .mock-list li {
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            background: #fff;
-            padding: 9px 11px;
-            border-radius: 10px;
-            border: 1px solid rgba(108, 43, 217, 0.1);
-            font-size: 0.88rem;
+            display: block;
+            background: var(--report-ivory);
+            padding: 10px 11px;
+            border-radius: 12px;
+            border: 1px solid rgba(229, 194, 122, 0.55);
+            font-size: 0.84rem;
+            color: var(--report-ink);
+        }
+
+        .mock-list span {
+            display: block;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: #332613;
         }
 
         .mock-list strong {
-            color: var(--text-dark);
-            text-align: right;
+            color: var(--report-ink);
+            text-align: left;
+            font-weight: 600;
         }
 
         .trust-strip {
@@ -197,27 +284,27 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: var(--text-dark);
+            color: var(--report-ink);
             font-weight: 600;
             font-size: 0.93rem;
             padding: 10px 12px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.82);
-            border: 1px solid rgba(108, 43, 217, 0.1);
+            background: rgba(248, 240, 221, 0.95);
+            border: 1px solid rgba(229, 194, 122, 0.5);
         }
 
         .trust-item i {
-            color: var(--accent-primary);
+            color: var(--report-gold-deep);
         }
 
         .section-title {
             font-size: clamp(1.55rem, 2.4vw, 2.2rem);
             margin-bottom: 8px;
-            color: var(--text-dark);
+            color: #f5d79b;
         }
 
         .section-intro {
-            color: var(--text-medium);
+            color: #d8def4;
             margin-bottom: 16px;
         }
 
@@ -228,17 +315,17 @@
         }
 
         .report-card {
-            background: #fff;
+            background: var(--report-ivory);
             border-radius: 16px;
-            border: 1px solid rgba(108, 43, 217, 0.12);
+            border: 1px solid rgba(229, 194, 122, 0.45);
             padding: 18px;
             transition: transform .25s ease, box-shadow .25s ease;
-            box-shadow: 0 10px 22px rgba(31, 27, 46, 0.06);
+            box-shadow: 0 10px 22px rgba(2, 6, 18, 0.18);
         }
 
         .report-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 18px 30px rgba(108, 43, 217, 0.14);
+            box-shadow: 0 18px 30px rgba(2, 6, 18, 0.28);
         }
 
         .report-icon {
@@ -248,8 +335,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(145deg, rgba(193, 132, 243, 0.2), rgba(108, 43, 217, 0.16));
-            color: var(--accent-primary);
+            background: linear-gradient(145deg, rgba(229, 194, 122, 0.25), rgba(196, 146, 58, 0.24));
+            color: #715220;
             font-size: 1.12rem;
             margin-bottom: 10px;
         }
@@ -257,12 +344,12 @@
         .report-card h3 {
             margin-bottom: 7px;
             font-size: 1.03rem;
-            color: var(--text-dark);
+            color: var(--report-ink);
         }
 
         .report-card p {
             margin: 0;
-            color: var(--text-medium);
+            color: #5f5240;
             line-height: 1.55;
             font-size: 0.94rem;
         }
@@ -274,8 +361,8 @@
         }
 
         .process-card {
-            background: #fff;
-            border: 1px solid rgba(108, 43, 217, 0.12);
+            background: var(--report-ivory);
+            border: 1px solid rgba(229, 194, 122, 0.45);
             border-radius: 16px;
             padding: 18px;
             position: relative;
@@ -290,21 +377,21 @@
             justify-content: center;
             font-weight: 800;
             color: #fff;
-            background: var(--accent-gradient);
+            background: linear-gradient(135deg, var(--report-gold-deep), #7d551d);
             margin-bottom: 10px;
             font-size: 0.9rem;
         }
 
         .process-card h4 {
             margin-bottom: 6px;
-            color: var(--text-dark);
+            color: var(--report-ink);
             font-size: 1rem;
         }
 
         .process-card p {
             margin: 0;
             font-size: 0.92rem;
-            color: var(--text-medium);
+            color: #5f5240;
         }
 
         .delivery-grid {
@@ -315,10 +402,10 @@
         }
 
         .delivery-card {
-            background: #fff;
+            background: var(--report-ivory);
             border-radius: 18px;
             padding: 20px;
-            border: 1px solid rgba(108, 43, 217, 0.12);
+            border: 1px solid rgba(229, 194, 122, 0.45);
         }
 
         .deliverables {
@@ -333,13 +420,13 @@
             gap: 10px;
             padding: 10px 12px;
             border-radius: 12px;
-            background: rgba(108, 43, 217, 0.05);
-            border: 1px solid rgba(108, 43, 217, 0.1);
+            background: rgba(229, 194, 122, 0.18);
+            border: 1px solid rgba(229, 194, 122, 0.45);
         }
 
         .deliverable i {
             margin-top: 2px;
-            color: var(--accent-primary);
+            color: #74521d;
         }
 
         .preview-stack {
@@ -351,8 +438,8 @@
         .preview-stack img {
             width: 100%;
             border-radius: 14px;
-            border: 1px solid rgba(108, 43, 217, 0.12);
-            box-shadow: 0 8px 24px rgba(31, 27, 46, 0.08);
+            border: 1px solid rgba(229, 194, 122, 0.45);
+            box-shadow: 0 8px 24px rgba(2, 6, 18, 0.3);
             height: 170px;
             object-fit: cover;
         }
@@ -363,8 +450,8 @@
         }
 
         .faq-item {
-            border: 1px solid rgba(108, 43, 217, 0.14);
-            background: #fff;
+            border: 1px solid rgba(229, 194, 122, 0.4);
+            background: rgba(248, 240, 221, 0.96);
             border-radius: 14px;
             overflow: hidden;
         }
@@ -379,14 +466,14 @@
             gap: 10px;
             font: inherit;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--report-ink);
             padding: 14px 16px;
             cursor: pointer;
             text-align: left;
         }
 
         .faq-trigger i {
-            color: var(--accent-primary);
+            color: #74521d;
             transition: transform .2s ease;
         }
 
@@ -398,7 +485,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height .24s ease;
-            color: var(--text-medium);
+            color: #4f422f;
             padding: 0 16px;
         }
 
@@ -415,25 +502,25 @@
             flex-wrap: wrap;
             align-items: center;
             border-radius: 22px;
-            background: linear-gradient(138deg, rgba(108, 43, 217, 0.95), rgba(193, 132, 243, 0.95));
-            color: #fff;
-            box-shadow: 0 18px 38px rgba(108, 43, 217, 0.3);
+            background: linear-gradient(138deg, #f0d79e, #d5aa5d);
+            color: var(--report-ink);
+            box-shadow: 0 18px 38px rgba(2, 6, 18, 0.28);
         }
 
         .report-cta-band h3 {
-            color: #fff;
+            color: var(--report-ink);
             margin-bottom: 4px;
         }
 
         .report-cta-band p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(33, 26, 47, 0.86);
             margin: 0;
         }
 
         .report-cta-band .btn-login {
-            background: rgba(255, 255, 255, 0.16);
-            border-color: rgba(255, 255, 255, 0.45);
-            color: #fff;
+            background: rgba(7, 26, 77, 0.85);
+            border-color: rgba(7, 26, 77, 0.95);
+            color: #f6e6be;
         }
 
         @media (max-width: 980px) {
@@ -487,6 +574,10 @@
 
             .preview-stack img {
                 height: 190px;
+            }
+
+            .mock-icon-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .report-cta-band {
@@ -587,16 +678,22 @@
                 </div>
                 <aside class="report-mock">
                     <div class="mock-label">sample report preview</div>
+                    <div class="mock-brand">Naamin Naming Solutions</div>
                     <div class="mock-head">
-                        <div class="mock-name">Name: Aadvik</div>
-                        <span class="mock-score">Fit Score 94%</span>
+                        <div class="mock-name">Aditya</div>
+                        <div class="mock-name-hi">आदित्य</div>
+                        <p class="mock-desc">Sun, son of Aditi</p>
+                    </div>
+                    <div class="mock-icon-grid">
+                        <div class="mock-icon-chip"><i class="fas fa-mars"></i><strong>Boy</strong></div>
+                        <div class="mock-icon-chip"><i class="fas fa-om"></i><strong>Sanskrit</strong></div>
+                        <div class="mock-icon-chip"><i class="fas fa-star"></i><strong>Ashwini</strong></div>
+                        <div class="mock-icon-chip"><i class="fas fa-moon"></i><strong>Aries</strong></div>
                     </div>
                     <ul class="mock-list">
-                        <li><span>Meaning</span><strong>Unique, one of a kind</strong></li>
-                        <li><span>Pronunciation</span><strong>AA-d-vik</strong></li>
-                        <li><span>Numerology</span><strong>Number 6 | Venus</strong></li>
-                        <li><span>Domain style</span><strong>aadvik.co / aadvik.in</strong></li>
-                        <li><span>Motto vibe</span><strong>Simple. Strong. Memorable.</strong></li>
+                        <li><span># Numerology</span><strong>Number: 3 | Planet: Jupiter | Lucky Color: Yellow</strong></li>
+                        <li><span>◆ Naamin Aura Analysis</span><strong>Courageous, energetic, and a born leader.</strong></li>
+                        <li><span>2026 Prediction</span><strong>Career growth and new beginnings are strongly favored.</strong></li>
                     </ul>
                 </aside>
             </section>
