@@ -1647,11 +1647,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!favListContainer) return;
         favListContainer.innerHTML = "";
         const list = favManager.favorites;
+        const favFooter = clearFavBtn ? clearFavBtn.closest('.fav-footer') : null;
 
         if (list.length === 0) {
+            if (clearFavBtn) clearFavBtn.style.display = 'none';
+            if (favFooter) favFooter.style.display = 'none';
             favListContainer.innerHTML = '<p style="text-align:center; color:var(--text-medium);">No names saved yet.</p>';
             return;
         }
+
+        if (clearFavBtn) clearFavBtn.style.display = 'inline-flex';
+        if (favFooter) favFooter.style.display = 'block';
 
         list.forEach(item => {
             const name = item.name || item.Name;

@@ -2457,11 +2457,9 @@ footer {
     z-index: 2000;
     display: flex;
     justify-content: center;
-    /* Center horizontally */
-    align-items: flex-start;
-    /* Align to top but with margin */
-    padding-top: 80px;
-    /* Space from top */
+    align-items: center;
+    padding: clamp(12px, 3vh, 28px);
+    overflow-y: auto;
 }
 
 /* Modal Box */
@@ -2474,8 +2472,7 @@ footer {
     border: 1px solid var(--border-color-light);
     display: flex;
     flex-direction: column;
-    max-height: 80vh;
-    /* Don't overflow screen */
+    max-height: calc(100vh - 28px);
     animation: slideDown 0.3s ease-out;
 }
 
@@ -2528,6 +2525,19 @@ footer {
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+    .fav-overlay {
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .fav-modal {
+        width: 100%;
+        max-height: calc(100vh - 24px);
+        border-radius: 16px;
+    }
 }
 
 /* Shortlist Items Design */
