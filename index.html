@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Naamin | Naming Service Platform</title>
 
+    <style>
+        body.preloader-active {
+            overflow: hidden;
+        }
+
+        body.preloader-active > *:not(#naamin-preloader):not(script) {
+            visibility: hidden !important;
+        }
+
+        #naamin-preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1eef8;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,9 +34,9 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="preloader.css">
-
     <link rel="stylesheet" href="poster-styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+    <script src="preloader.js" defer></script>
     <script src="script.js?v=debug" defer></script>
 
 
@@ -29,18 +48,27 @@
     </script>
 </head>
 
-<body data-theme="light" style="visibility: visible !important; opacity: 1 !important;">
+<body class="preloader-active" data-theme="light" style="visibility: visible !important; opacity: 1 !important;">
 
-    <script>
-        (function () {
-            // Insert preloader markup and load preloader script quickly.
-            // CSS is already linked in <head> for fastest paint.
-            fetch('preloader.html').then(function (r) { return r.text(); }).then(function (html) {
-                document.body.insertAdjacentHTML('afterbegin', html);
-                var s = document.createElement('script'); s.src = 'preloader.js'; s.async = true; document.body.appendChild(s);
-            }).catch(function () { /* fail silently */ });
-        })();
-    </script>
+    <div id="naamin-preloader" aria-hidden="false">
+  <div class="naamin-inner">
+    <div class="naamin-logo" aria-hidden="true">
+      <span class="logo-letter">N</span>
+      <span class="logo-letter">a</span>
+      <span class="logo-letter">a</span>
+      <span class="logo-letter">m</span>
+      <span class="logo-letter i-wrap logo-in">
+        <span class="i-base">i</span>
+        <span class="i-dot" aria-hidden="true"></span>
+      </span>
+      <span class="logo-letter logo-in">n</span>
+    </div>
+
+    <div class="preloader-bar" aria-hidden="true">
+      <div class="preloader-progress"></div>
+    </div>
+  </div>
+</div>
 
     <nav class="navbar">
         <!-- Logo -->
@@ -627,40 +655,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Preloader behavior: show at least minDuration, then fade out after page load
-        (function () {
-            const pre = document.getElementById('naamin-preloader');
-            if (!pre) return;
-            const minDuration = 500; // minimum visible time in ms
-            const maxWait = 2500; // fallback max wait in ms
-            const start = Date.now();
-            let hidden = false;
-
-            function doHide() {
-                if (hidden) return; hidden = true;
-                pre.style.transition = 'opacity 420ms ease, visibility 420ms';
-                pre.style.opacity = '0';
-                pre.style.visibility = 'hidden';
-                document.body.style.overflow = '';
-                setTimeout(() => { try { pre.remove(); } catch (e) { } }, 520);
-            }
-
-            window.addEventListener('load', () => {
-                const elapsed = Date.now() - start;
-                const wait = Math.max(0, minDuration - elapsed);
-                setTimeout(doHide, wait);
-            });
-
-            // Fallback: if page doesn't load quickly, ensure preloader hides after maxWait
-            setTimeout(doHide, maxWait);
-
-            // Prevent scroll while preloader active
-            document.body.style.overflow = 'hidden';
-        })();
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="navbar-auth.js"></script>
 </body>

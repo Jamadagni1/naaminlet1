@@ -19,6 +19,7 @@
 
     stopAnimations();
     pre.classList.add('fade-out');
+    document.body.classList.remove('preloader-active');
 
     setTimeout(() => {
       try { pre.remove(); } catch (e) {}
