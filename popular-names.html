@@ -149,10 +149,10 @@
             <div class="container">
                 <div class="filters-container">
                     <div class="filter-group search-group">
-                        <label class="filter-label" data-en="Search Name" data-hi="नाम खोजें">Search Name</label>
+                        <label class="filter-label" data-en="Search by Starting Letter" data-hi="Search by Starting Letter">Search by Starting Letter</label>
                         <div class="search-input">
                             <i class="fas fa-magnifying-glass"></i>
-                            <input type="text" id="name-search" placeholder="Search by name or meaning">
+                            <input type="text" id="name-search" maxlength="1" placeholder="Type first letter (A-Z)">
                         </div>
                     </div>
                     <!-- Gender Filter -->
@@ -169,32 +169,6 @@
                         </div>
                     </div>
 
-                    <!-- Culture Filter -->
-                    <div class="filter-group">
-                        <label class="filter-label" data-en="Culture" data-hi="संस्कृति">Culture</label>
-                        <select class="filter-select" id="culture-filter">
-                            <option value="all" data-en="All Cultures" data-hi="सभी संस्कृतियां">All Cultures</option>
-                            <option value="hindu" data-en="Hindu" data-hi="हिंदू">Hindu</option>
-                            <option value="muslim" data-en="Muslim" data-hi="मुस्लिम">Muslim</option>
-                            <option value="sikh" data-en="Sikh" data-hi="सिख">Sikh</option>
-                            <option value="christian" data-en="Christian" data-hi="ईसाई">Christian</option>
-                            <option value="modern" data-en="Modern/Global" data-hi="आधुनिक/वैश्विक">Modern/Global
-                            </option>
-                        </select>
-                    </div>
-
-                    <!-- Region Filter -->
-                    <div class="filter-group">
-                        <label class="filter-label" data-en="Region" data-hi="क्षेत्र">Region</label>
-                        <select class="filter-select" id="region-filter">
-                            <option value="all">All Regions</option>
-                            <option value="north">North India</option>
-                            <option value="south">South India</option>
-                            <option value="west">West India</option>
-                            <option value="east">East India</option>
-                            <option value="pan-india">Pan-India</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="results-count">

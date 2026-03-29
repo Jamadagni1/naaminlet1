@@ -5,15 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const namesGrid = document.getElementById('names-grid');
     const showingCount = document.getElementById('showing-count');
     const genderPills = document.querySelectorAll('[data-filter="gender"]');
-    const cultureSelect = document.getElementById('culture-filter');
-    const regionSelect = document.getElementById('region-filter');
     const searchInput = document.getElementById('name-search');
 
     let currentFilters = {
         gender: 'all',
-        culture: 'all',
-        region: 'all',
-        search: ''
+        startsWith: ''
     };
 
     // Curated popular names dataset
@@ -107,21 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Culture filter
-    cultureSelect.addEventListener('change', () => {
-        currentFilters.culture = cultureSelect.value;
-        applyFilters();
-    });
-
-    // Region filter
-    regionSelect.addEventListener('change', () => {
-        currentFilters.region = regionSelect.value;
-        applyFilters();
-    });
-
     if (searchInput) {
         searchInput.addEventListener('input', () => {
-            currentFilters.search = searchInput.value.trim().toLowerCase();
+            const onlyLetters = searchInput.value.replace(/[^a-zA-Z]/g, '');
+            const firstLetter = onlyLetters.trim().slice(0, 1).toLowerCase();
+            searchInput.value = firstLetter ? firstLetter.toUpperCase() : '';
+            currentFilters.startsWith = firstLetter;
             applyFilters();
         });
     }
@@ -153,13 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyFilters() {
         let filtered = popularNames.filter(name => {
             const genderMatch = currentFilters.gender === 'all' || name.gender === currentFilters.gender;
-            const cultureMatch = currentFilters.culture === 'all' || name.culture === currentFilters.culture;
-            const regionMatch = currentFilters.region === 'all' || name.region === currentFilters.region;
-            const searchMatch = !currentFilters.search ||
-                name.name.toLowerCase().includes(currentFilters.search) ||
-                (name.meaning || '').toLowerCase().includes(currentFilters.search);
+            const startsWithMatch = !currentFilters.startsWith || name.name.toLowerCase().startsWith(currentFilters.startsWith);
 
-            return genderMatch && cultureMatch && regionMatch && searchMatch;
+            return genderMatch && startsWithMatch;
         });
 
         displayNames(filtered);
@@ -172,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isHindi = lang === 'hi';
 
         if (names.length === 0) {
-            namesGrid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; font-size: 1.2rem; color: #6B6B6B;">${isHindi ? 'आपके फ़िल्टर से मेल खाते कोई नाम नहीं मिले' : 'No names found matching your filters'}</p>`;
+            namesGrid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; font-size: 1.2rem; color: #6B6B6B;">${isHindi ? 'इस अक्षर से कोई नाम नहीं मिला' : 'No names found for this starting letter'}</p>`;
             return;
         }
 

@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('user-input');
         const tone = document.getElementById('tone');
 
-        if (input) input.placeholder = isHindi ? "उदा: लूनावैव या साहस" : "e.g. LunaWave or Courage";
+        if (input) input.placeholder = isHindi ? "e.g. LunaWave or Courage (optional)" : "e.g. LunaWave or Courage (optional)";
         if (tone) tone.placeholder = isHindi ? "उदा: आधुनिक, प्रेरणादायक, न्यूनतम" : "e.g. Modern, Inspiring, Minimal";
     };
 
@@ -159,9 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.onsubmit = async (e) => {
         e.preventDefault();
-        const type = document.getElementById('motto-type').value;
-        const input = document.getElementById('user-input').value;
-        const tone = document.getElementById('tone').value;
+        const type = (document.getElementById('motto-type').value || 'Brand Motto').trim();
+        const input = (document.getElementById('user-input').value || '').trim();
+        const tone = (document.getElementById('tone').value || '').trim();
 
         resultsSection.style.display = 'none';
         loadingSpinner.style.display = 'block';
@@ -219,11 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const lang = document.documentElement.lang || 'en';
         const isHindi = lang === 'hi';
 
-        let displayInput = input;
+        const safeInput = input || (isHindi ? 'आपका विचार' : 'Your Idea');
+        let displayInput = safeInput;
         let displayTone = tone;
 
-        if (isHindi && window.getHindiName) {
-            displayInput = window.getHindiName(input);
+        if (isHindi && window.getHindiName && input) {
+            displayInput = window.getHindiName(safeInput);
             if (tone) displayTone = window.getHindiName(tone);
         }
 
@@ -241,14 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const base = [
-            `${input}: Elegance redefined`,
-            `${input}: Where vision meets value`,
-            `${input}: Beyond the ordinary`,
-            `${input}: Driven by passion`,
-            `The spirit of ${input}`,
-            `Simply ${input}`
+            `${safeInput}: Elegance redefined`,
+            `${safeInput}: Where vision meets value`,
+            `${safeInput}: Beyond the ordinary`,
+            `${safeInput}: Driven by passion`,
+            `The spirit of ${safeInput}`,
+            `Simply ${safeInput}`
         ];
-        if (tone) base.push(`${tone} & ${input}: A perfect match`);
+        if (tone) base.push(`${tone} & ${safeInput}: A perfect match`);
         return base;
     }
 });

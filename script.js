@@ -907,6 +907,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const mottoHref = `${rootPrefix}more/motto-for-everything/index.html`;
         const nameReportHref = `${rootPrefix}name-report.html`;
 
+        document.querySelectorAll('footer a[href*="services.html#posters"]').forEach(a => {
+            a.href = productsHref;
+            a.setAttribute('data-en', 'Our Products');
+            a.setAttribute('data-hi', 'Our Products');
+            a.textContent = 'Our Products';
+        });
+
+        document.querySelectorAll('a[href*="name-report"]').forEach(a => {
+            a.href = nameReportHref;
+        });
+
         // Rename Motto Generator -> Motto Creator
         document.querySelectorAll('a[href*="motto-for-everything"]').forEach(a => {
             a.setAttribute('data-en', 'Motto Creator');

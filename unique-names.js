@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const namesGrid = document.getElementById('names-grid');
     const showingCount = document.getElementById('showing-count');
     const genderPills = document.querySelectorAll('[data-filter="gender"]');
-    const originSelect = document.getElementById('origin-filter');
+    const letterSelect = document.getElementById('letter-filter');
     const detailContainer = document.querySelector('.name-details-container');
     const detailBox = document.querySelector('.name-details');
     const backBtn = document.querySelector('.back-btn');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentFilters = {
         gender: 'all',
-        origin: 'all'
+        startsWith: 'all'
     };
 
     // Curated Unique/Rare names dataset
@@ -102,17 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Origin filter event
-    originSelect.addEventListener('change', () => {
-        currentFilters.origin = originSelect.value;
-        applyFilters();
-    });
+    // Letter filter event
+    if (letterSelect) {
+        letterSelect.addEventListener('change', () => {
+            currentFilters.startsWith = letterSelect.value.toLowerCase();
+            applyFilters();
+        });
+    }
 
     function applyFilters() {
         let filtered = uniqueNames.filter(name => {
             const genderMatch = currentFilters.gender === 'all' || name.gender === currentFilters.gender;
-            const originMatch = currentFilters.origin === 'all' || name.origin.toLowerCase().includes(currentFilters.origin.toLowerCase());
-            return genderMatch && originMatch;
+            const startsWithMatch = currentFilters.startsWith === 'all' || name.name.toLowerCase().startsWith(currentFilters.startsWith);
+            return genderMatch && startsWithMatch;
         });
 
         displayNames(filtered);
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         namesGrid.innerHTML = '';
 
         if (names.length === 0) {
-            namesGrid.innerHTML = `<p class="no-results">${isHindi ? 'कोई नाम नहीं मिला।' : 'No names found matching your criteria.'}</p>`;
+            namesGrid.innerHTML = `<p class="no-results">${isHindi ? 'इस अक्षर से कोई नाम नहीं मिला।' : 'No names found for this starting letter.'}</p>`;
             return;
         }
 
