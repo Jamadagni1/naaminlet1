@@ -90,14 +90,29 @@
 .filters-container {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
-    border-radius: 14px;
-    padding: 20px;
+    border-radius: 18px;
+    padding: 24px;
     box-shadow: var(--shadow-soft);
-    border: 1px solid var(--card-border);
+    border: 1px solid rgba(108, 43, 217, 0.2);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 16px;
     margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.filters-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(108, 43, 217, 0.08), transparent 58%);
+    pointer-events: none;
+}
+
+.filters-container>* {
+    position: relative;
+    z-index: 1;
 }
 
 .filter-group {
@@ -113,9 +128,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 2px solid var(--accent-lighter);
+    min-height: 56px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 2px solid rgba(108, 43, 217, 0.2);
     background: #fff;
     color: var(--text-secondary);
     transition: all 0.3s ease;
@@ -130,7 +146,7 @@
     border: none;
     outline: none;
     width: 100%;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-family: 'Nunito', sans-serif;
     color: var(--text-secondary);
     background: transparent;
@@ -160,7 +176,8 @@
 }
 
 .filter-pill {
-    padding: 9px 16px;
+    min-height: 44px;
+    padding: 10px 16px;
     border: 2px solid var(--accent-lighter);
     background: white;
     color: var(--text-secondary);
@@ -190,7 +207,8 @@
 /* Filter Selects (Culture, Region) */
 .filter-select {
     width: 100%;
-    padding: 11px 15px;
+    min-height: 50px;
+    padding: 12px 15px;
     border: 2px solid var(--accent-lighter);
     border-radius: 10px;
     background: white;

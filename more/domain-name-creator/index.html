@@ -95,28 +95,48 @@
 
     <main class="domain-page">
         <section class="domain-hero">
-            <h1>Domain Name Creator</h1>
-            <p>Create domain-ready names with clean spellings and modern appeal for brands, startups, and institutions.</p>
+            <h1 data-en="Domain Naming Service" data-hi="Domain Naming Service">Domain Naming Service</h1>
+            <p data-en="Domain name tool is not public right now. Our expert team personally helps you with brand-ready, India-first domain options."
+                data-hi="Domain name tool abhi public nahi hai. Hamari expert team aapko personally brand-ready domain options deti hai.">
+                Domain name tool is not public right now. Our expert team personally helps you with brand-ready, India-first domain options.
+            </p>
         </section>
 
-        <section class="domain-generator">
-            <div class="domain-card">
-                <label for="domain-keyword">Keywords or Theme</label>
-                <input id="domain-keyword" type="text" placeholder="e.g. wellness, fintech, education">
-                <div class="domain-actions">
-                    <button id="generate-domains" class="btn btn-signup">Generate Ideas</button>
-                    <button id="clear-domains" class="btn btn-login">Clear</button>
-                </div>
-            </div>
+        <section class="domain-service-wrap">
+            <article class="domain-card domain-intro">
+                <h3>Service Available (No Public Tool)</h3>
+                <p>
+                    Aap hume apna business category, naming style, audience aur preferred extensions bataiye. 
+                    Hum manually research karke aapko short, clean aur memorable domain options bhejte hain.
+                </p>
+                <p>
+                    This is done in consultation format so quality high rahe and aapko practical options milen that are easy to use.
+                </p>
+            </article>
 
-            <div class="domain-results">
-                <h3>Suggested Domains</h3>
-                <ul id="domain-list">
-                    <li>naaminstudio.com</li>
-                    <li>brandgenius.in</li>
-                    <li>namecraft.co</li>
+            <article class="domain-card domain-process">
+                <h3>How It Works</h3>
+                <ul>
+                    <li><strong>Step 1:</strong> Share business/startup details and preferred style.</li>
+                    <li><strong>Step 2:</strong> We curate domain suggestions with naming logic.</li>
+                    <li><strong>Step 3:</strong> You shortlist and we refine final options.</li>
+                    <li><strong>Step 4:</strong> Final handover with practical recommendations.</li>
                 </ul>
-            </div>
+            </article>
+
+            <article class="domain-card domain-contact">
+                <h3>Indian Style Direct Support</h3>
+                <p>
+                    Seedha baat kariye — call ya WhatsApp pe apni requirement bhejiye.  
+                    Team aapko proper script, shortlist flow aur naming guidance ke saath support karegi.
+                </p>
+                <div class="domain-actions">
+                    <a href="../../contact.html" class="btn btn-signup domain-cta">Request Service</a>
+                    <a href="https://wa.me/919413678955?text=Namaste%20Naamin%20Team%2C%20hume%20domain%20naming%20service%20chahiye."
+                        target="_blank" rel="noopener" class="btn btn-login domain-cta">WhatsApp Us</a>
+                    <a href="tel:+919413678955" class="btn btn-login domain-cta">Call +91 94136 78955</a>
+                </div>
+            </article>
         </section>
     </main>
 
@@ -154,36 +174,8 @@
 
     <script src="../../script.js?v=debug" defer></script>
     <script src="../../navbar_fix.js?v=capture_fix"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const keyword = document.getElementById('domain-keyword');
-            const list = document.getElementById('domain-list');
-            const generate = document.getElementById('generate-domains');
-            const clear = document.getElementById('clear-domains');
-
-            const suffixes = ['.com', '.co', '.in', '.io', '.ai'];
-            const prefixes = ['neo', 'nova', 'zen', 'veri', 'luma', 'astra'];
-
-            const buildIdeas = (base) => {
-                const clean = base.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() || 'naamin';
-                const ideas = new Set();
-                prefixes.forEach(prefix => ideas.add(`${prefix}${clean}${suffixes[Math.floor(Math.random() * suffixes.length)]}`));
-                suffixes.forEach(suffix => ideas.add(`${clean}${suffix}`));
-                ideas.add(`${clean}studio.com`);
-                return Array.from(ideas).slice(0, 8);
-            };
-
-            generate.addEventListener('click', () => {
-                const ideas = buildIdeas(keyword.value.trim());
-                list.innerHTML = ideas.map(i => `<li>${i}</li>`).join('');
-            });
-
-            clear.addEventListener('click', () => {
-                keyword.value = '';
-                list.innerHTML = '<li>naaminstudio.com</li><li>brandgenius.in</li><li>namecraft.co</li>';
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="../../navbar-auth.js"></script>
 </body>
 
 </html>

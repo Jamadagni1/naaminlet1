@@ -3,17 +3,17 @@ body {
 }
 
 .domain-page {
-    padding-top: 90px;
+    padding-top: 94px;
     min-height: 100vh;
 }
 
 .domain-hero {
     text-align: center;
-    padding: 60px 20px 30px;
+    padding: 58px 20px 24px;
 }
 
 .domain-hero h1 {
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-size: clamp(2.3rem, 5vw, 3.3rem);
     font-weight: 800;
     color: var(--text-dark);
     margin-bottom: 12px;
@@ -26,95 +26,102 @@ body {
     font-size: 1.1rem;
 }
 
-.domain-generator {
-    max-width: 980px;
+.domain-service-wrap {
+    max-width: 1040px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 18px;
     padding: 20px;
 }
 
 .domain-card {
     background: var(--bg-card-light);
-    border-radius: 20px;
-    border: 1px solid var(--border-color-light);
+    border-radius: 18px;
+    border: 1px solid rgba(108, 43, 217, 0.2);
     box-shadow: var(--box-shadow-soft);
-    padding: 24px;
+    padding: 26px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
 }
 
-.domain-card label {
-    font-weight: 600;
+.domain-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(108, 43, 217, 0.12), transparent 50%);
+    pointer-events: none;
+}
+
+.domain-card h3,
+.domain-card p,
+.domain-card ul {
+    position: relative;
+    z-index: 1;
+}
+
+.domain-card h3 {
     color: var(--text-dark);
+    font-size: 1.2rem;
 }
 
-.domain-card input {
-    padding: 14px 16px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color-light);
-    font-size: 1rem;
-    outline: none;
+.domain-card p {
+    color: var(--text-medium);
+    line-height: 1.7;
 }
 
-.domain-card input:focus {
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.12);
-}
-
-.domain-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.domain-results {
-    background: #fff;
-    border-radius: 20px;
-    border: 1px solid var(--border-color-light);
-    box-shadow: var(--box-shadow-soft);
-    padding: 24px;
-}
-
-.domain-results h3 {
-    margin-bottom: 16px;
-    color: var(--text-dark);
-}
-
-.domain-results ul {
+.domain-process ul {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
     display: grid;
     gap: 10px;
 }
 
-.domain-results li {
+.domain-process li {
     background: rgba(108, 43, 217, 0.08);
+    border: 1px solid rgba(108, 43, 217, 0.12);
     border-radius: 12px;
-    padding: 10px 14px;
-    font-weight: 600;
+    padding: 12px 14px;
     color: var(--text-dark);
+    line-height: 1.55;
+}
+
+.domain-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.domain-cta {
+    flex: 1 1 220px;
+    text-align: center;
+    justify-content: center;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
     .domain-page {
-        padding-top: 84px;
+        padding-top: 82px;
     }
 
     .domain-hero {
         padding: 42px 14px 24px;
     }
 
-    .domain-generator {
+    .domain-service-wrap {
         padding: 14px;
         gap: 14px;
     }
 
-    .domain-card,
-    .domain-results {
+    .domain-card {
         border-radius: 16px;
         padding: 16px;
     }
@@ -139,13 +146,12 @@ body {
         font-size: 0.92rem;
     }
 
-    .domain-generator {
+    .domain-service-wrap {
         padding: 10px;
         gap: 10px;
     }
 
-    .domain-card,
-    .domain-results {
+    .domain-card {
         padding: 12px;
         border-radius: 14px;
     }
@@ -154,13 +160,9 @@ body {
         gap: 8px;
     }
 
-    .domain-actions .btn {
+    .domain-actions .btn,
+    .domain-cta {
         flex: 1 1 100%;
         width: 100%;
-    }
-
-    .domain-card input {
-        padding: 12px 13px;
-        font-size: 0.95rem;
     }
 }
