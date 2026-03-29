@@ -12,6 +12,21 @@ body {
     padding: 58px 20px 24px;
 }
 
+.domain-availability {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(108, 43, 217, 0.12);
+    border: 1px solid rgba(108, 43, 217, 0.24);
+    color: #4d1ea5;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    margin-bottom: 14px;
+}
+
 .domain-hero h1 {
     font-size: clamp(2.3rem, 5vw, 3.3rem);
     font-weight: 800;
@@ -73,6 +88,30 @@ body {
     line-height: 1.7;
 }
 
+.domain-audience {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 9px;
+}
+
+.domain-audience li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(108, 43, 217, 0.08);
+    border: 1px solid rgba(108, 43, 217, 0.14);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.domain-audience i {
+    color: #6c2bd9;
+}
+
 .domain-process ul {
     list-style: none;
     margin: 0;
@@ -96,6 +135,31 @@ body {
     flex-wrap: wrap;
     position: relative;
     z-index: 1;
+}
+
+.contact-script {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(108, 43, 217, 0.08), rgba(59, 130, 246, 0.08));
+    border: 1px dashed rgba(108, 43, 217, 0.32);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.contact-script h4 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.script-line {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.script-line + .script-line {
+    margin-top: 8px;
 }
 
 .domain-cta {

@@ -59,7 +59,7 @@ body[data-theme="girl"] {
 .filters-container {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(14px);
-    padding: 24px 30px;
+    padding: 28px 32px;
     border-radius: 22px;
     box-shadow: var(--card-shadow-premium);
     max-width: 1000px;
@@ -106,8 +106,8 @@ body[data-theme="girl"] {
 }
 
 .filter-pill {
-    min-height: 46px;
-    padding: 11px 20px;
+    min-height: 54px;
+    padding: 13px 22px;
     border-radius: 30px;
     border: 1px solid #ddd;
     background: white;
@@ -126,13 +126,33 @@ body[data-theme="girl"] {
 }
 
 .filter-select {
-    min-height: 50px;
-    padding: 12px 15px;
-    border-radius: 12px;
+    min-height: 60px;
+    padding: 15px 16px;
+    border-radius: 14px;
     border: 1px solid #ddd;
     background: white;
-    font-size: 0.98rem;
+    font-size: 1.04rem;
+    font-weight: 600;
     outline: none;
+}
+
+.results-info {
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(108, 43, 217, 0.08);
+    border: 1px solid rgba(108, 43, 217, 0.16);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.results-info #showing-count {
+    color: var(--rare-purple);
+    font-weight: 800;
 }
 
 /* Names Grid */
@@ -331,7 +351,7 @@ body[data-theme="girl"] {
 
     .filters-container {
         gap: 15px;
-        padding: 16px;
+        padding: 18px;
     }
 
     .names-grid {
@@ -382,6 +402,7 @@ body[data-theme="girl"] {
     .filter-pill {
         flex: 1 1 calc(50% - 8px);
         text-align: center;
+        min-height: 48px;
         padding: 10px 12px;
     }
 }
