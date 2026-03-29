@@ -448,4 +448,19 @@
     .name-card {
         padding: 16px;
     }
+
+    .search-group,
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .filter-pills {
+        flex-wrap: wrap;
+    }
+
+    .filter-pill {
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
+        padding: 9px 10px;
+    }
 }

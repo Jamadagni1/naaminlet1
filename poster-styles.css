@@ -20,7 +20,7 @@
     border-radius: 20px;
     padding: 35px;
     box-shadow: 0 12px 34px rgba(108, 43, 217, 0.08);
-    width: 400px;
+    width: min(400px, 100%);
     min-height: 700px;
     margin: 0 auto;
     text-align: center;
@@ -208,4 +208,40 @@
     top: 0;
     visibility: visible;
     display: block;
+}
+
+@media (max-width: 768px) {
+    .premium-variant {
+        padding: 24px 18px;
+        border-radius: 16px;
+        min-height: auto;
+        gap: 12px;
+    }
+
+    .p-name-en {
+        font-size: 34px;
+    }
+
+    .p-name-hi {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 520px) {
+    .premium-variant {
+        width: min(340px, 100%);
+        padding: 18px 14px;
+    }
+
+    .p-identity-row {
+        grid-template-columns: 1fr;
+    }
+
+    .p-seal {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        right: 14px;
+        bottom: 14px;
+    }
 }

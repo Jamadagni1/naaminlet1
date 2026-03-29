@@ -476,4 +476,18 @@
     .personality-card {
         padding: 20px;
     }
+
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .filter-pills {
+        gap: 8px;
+    }
+
+    .filter-pill {
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
+        padding: 9px 10px;
+    }
 }
