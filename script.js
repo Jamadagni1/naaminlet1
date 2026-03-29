@@ -56,9 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!heroVideo) return;
 
     const HERO_VIDEO_START_OFFSET = 0.85;
+    const HERO_VIDEO_READY_TIMEOUT = 1600;
     let introSkipped = false;
+    let readyMarked = false;
 
     const markReady = () => {
+        if (readyMarked) return;
+        readyMarked = true;
         heroVideo.classList.add('is-ready');
     };
 
@@ -86,10 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    heroVideo.addEventListener('loadedmetadata', () => {
-        if (!attemptSkipIntroFrame() && heroVideo.readyState >= 2) {
+    const revealOnlyAfterOffset = () => {
+        if (heroVideo.currentTime >= HERO_VIDEO_START_OFFSET - 0.05) {
             markReady();
         }
+    };
+
+    heroVideo.addEventListener('loadedmetadata', () => {
+        attemptSkipIntroFrame();
         ensurePlayback();
     }, { once: true });
 
@@ -99,27 +107,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    heroVideo.addEventListener('loadeddata', () => {
-        if (!introSkipped && heroVideo.readyState >= 2) {
-            markReady();
-        }
-    });
-
     heroVideo.addEventListener('playing', () => {
-        if (heroVideo.currentTime >= HERO_VIDEO_START_OFFSET - 0.05 || heroVideo.readyState >= 2) {
-            markReady();
-        }
+        revealOnlyAfterOffset();
     });
 
+    heroVideo.addEventListener('timeupdate', revealOnlyAfterOffset);
     heroVideo.addEventListener('error', markFallback);
 
-    if (heroVideo.readyState >= 1) {
-        if (!attemptSkipIntroFrame() && heroVideo.readyState >= 2) {
-            markReady();
-        }
-    }
+    if (heroVideo.readyState >= 1) attemptSkipIntroFrame();
 
     ensurePlayback();
+
+    window.setTimeout(() => {
+        if (readyMarked) return;
+        if (heroVideo.readyState >= 2 && !heroVideo.paused) {
+            markReady();
+        } else {
+            markFallback();
+        }
+    }, HERO_VIDEO_READY_TIMEOUT);
 });
 
 // Comprehensive English to Hindi Name Mapping & Transliteration
@@ -885,7 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!text) return text;
 
             // Only attempt decoding for common mojibake markers seen in this repo.
-            if (!/(?:Â|Ã|â|à¤|à¥)/.test(text)) return text;
+            if (!/(?:[\u00C2\u00C3\u00E2]|\u00E0\u00A4|\u00E0\u00A5)/.test(text)) return text;
 
             try {
                 const bytes = new Uint8Array(text.length);
@@ -909,7 +915,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (devanagariCount > 0) return decoded;
 
                 // Fix common symbol mojibake like "Â©" -> "©", "â€™" -> "’", "â–¼" -> "▼"
-                if (/(?:Â|Ã|â)/.test(text) && !/(?:Â|Ã|â)/.test(decoded)) return decoded;
+                if (/(?:[\u00C2\u00C3\u00E2])/.test(text) && !/(?:[\u00C2\u00C3\u00E2])/.test(decoded)) return decoded;
 
                 return text;
             } catch (_e) {
@@ -960,7 +966,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: lang } }));
 
         const inp = document.getElementById("hero-search-input");
-        if (inp) inp.placeholder = lang === "hi" ? "उदा: आरव, अद्विक..." : "e.g., Aarav, Advik...";
+        if (inp) inp.placeholder = lang === "hi" ? "\u0909\u0926\u093e: \u0906\u0930\u0935, \u0905\u0926\u094d\u0935\u093f\u0915..." : "e.g., Aarav, Advik...";
 
         // If name finder is visible, reload names for currently selected gender so JSON file/language updates instantly
         try {

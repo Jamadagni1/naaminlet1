@@ -76,10 +76,12 @@
             var pre = document.getElementById("naamin-preloader");
             if (pre && !pre.classList.contains("fade-out")) {
                 pre.classList.add("fade-out");
-                setTimeout(function () { try { pre.remove(); } catch (e) { } }, 420);
+                setTimeout(function () {
+                    try { pre.remove(); } catch (e) { }
+                    document.body.classList.remove("preloader-active");
+                    document.body.style.overflow = "";
+                }, 420);
             }
-            document.body.classList.remove("preloader-active");
-            document.body.style.overflow = "";
         }, 3500);
     </script>
 
@@ -96,8 +98,8 @@
 
             <!-- Dropdown -->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-en="More" data-hi="????">
-                    More<span class="arrow">?</span>
+                <a href="#" class="dropdown-toggle" data-en="More" data-hi="More">
+                    More<span class="arrow">&#9662;</span>
                 </a>
 
                 <ul class="dropdown-menu">
@@ -155,8 +157,8 @@
 
                 <!-- Mobile Dropdown -->
                 <li class="mobile-dropdown">
-                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="????">More<span
-                            class="arrow">?</span></a>
+                    <a href="#" class="mobile-dropdown-toggle" data-en="More" data-hi="More">More<span
+                            class="arrow">&#9662;</span></a>
                     <ul class="mobile-dropdown-menu">
                         <li><a href="popular-names.html" data-en="Popular Names" data-hi="लोकप्रिय नाम">Popular
                                 Names</a></li>
@@ -227,8 +229,8 @@
                 </div>
 
                 <div class="baby-carousel-container">
-                    <button class="carousel-nav carousel-prev" type="button" aria-label="Previous babies">?</button>
-                    <button class="carousel-nav carousel-next" type="button" aria-label="Next babies">?</button>
+                    <button class="carousel-nav carousel-prev" type="button" aria-label="Previous babies">&#10094;</button>
+                    <button class="carousel-nav carousel-next" type="button" aria-label="Next babies">&#10095;</button>
 
                     <div class="baby-carousel" aria-label="Baby inspiration carousel">
                         <article class="baby-card">
