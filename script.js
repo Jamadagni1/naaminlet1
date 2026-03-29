@@ -107,6 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    heroVideo.addEventListener('canplay', () => {
+        attemptSkipIntroFrame();
+        revealOnlyAfterOffset();
+    });
+
     heroVideo.addEventListener('playing', () => {
         revealOnlyAfterOffset();
     });
@@ -121,11 +126,149 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         if (readyMarked) return;
         if (heroVideo.readyState >= 2 && !heroVideo.paused) {
-            markReady();
-        } else {
-            markFallback();
+            attemptSkipIntroFrame();
+            if (heroVideo.currentTime >= HERO_VIDEO_START_OFFSET - 0.05) {
+                markReady();
+                return;
+            }
+            window.setTimeout(revealOnlyAfterOffset, 120);
+            return;
         }
+        markFallback();
     }, HERO_VIDEO_READY_TIMEOUT);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const nameFinderSection = document.getElementById('name-finder');
+    const namingInspirationSection = document.getElementById('baby-showcase');
+    if (nameFinderSection && namingInspirationSection && namingInspirationSection.parentNode) {
+        namingInspirationSection.parentNode.insertBefore(nameFinderSection, namingInspirationSection);
+    }
+
+    const heroMedia = document.querySelector('.hero-media');
+    if (heroMedia && !heroMedia.querySelector('.hero-media-placeholder')) {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'hero-media-placeholder';
+        placeholder.setAttribute('aria-hidden', 'true');
+        placeholder.innerHTML = `
+            <div class="hero-placeholder-inner">
+                <span class="hero-placeholder-kicker">WELCOME TO NAAMIN</span>
+                <strong>Loading your naming experience...</strong>
+                <span>Beautiful names for babies, brands, startups & more.</span>
+            </div>
+        `;
+        heroMedia.appendChild(placeholder);
+    }
+
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent && !heroContent.querySelector('.hero-scroll-hint')) {
+        const hintLink = document.createElement('a');
+        hintLink.className = 'hero-scroll-hint';
+        hintLink.href = '#name-finder';
+        hintLink.setAttribute('data-en', 'Find your name');
+        hintLink.setAttribute('data-hi', 'Find your name');
+        hintLink.innerHTML = '<span>Find your name</span><i class="fas fa-arrow-down" aria-hidden="true"></i>';
+        heroContent.appendChild(hintLink);
+    }
+
+    document.querySelectorAll('.back-btn').forEach(backBtn => {
+        const cleaned = (backBtn.textContent || '').replace(/^\?\s*/, '').trim() || 'Back to list';
+        backBtn.textContent = cleaned;
+        backBtn.setAttribute('data-en', cleaned);
+        backBtn.setAttribute('data-hi', cleaned);
+    });
+
+    const videoCards = document.querySelectorAll('.video-card');
+    if (!videoCards.length) return;
+
+    let lightbox = document.getElementById('video-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'video-lightbox';
+        lightbox.className = 'video-lightbox';
+        lightbox.hidden = true;
+        lightbox.innerHTML = `
+            <div class="video-lightbox-backdrop" data-close-video-lightbox></div>
+            <div class="video-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title">
+                <button class="video-lightbox-close" type="button" data-close-video-lightbox aria-label="Close video">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <h3 id="video-lightbox-title">Naamin Video</h3>
+                <video id="video-lightbox-player" controls playsinline></video>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+    }
+
+    const lightboxTitle = lightbox.querySelector('#video-lightbox-title');
+    const lightboxPlayer = lightbox.querySelector('#video-lightbox-player');
+    if (!lightboxPlayer || !lightboxTitle) return;
+
+    const closeVideoLightbox = () => {
+        lightboxPlayer.pause();
+        lightboxPlayer.removeAttribute('src');
+        lightboxPlayer.load();
+        lightbox.setAttribute('hidden', '');
+        document.body.classList.remove('video-lightbox-open');
+        document.body.style.overflow = '';
+    };
+
+    const openVideoLightbox = (videoEl, fallbackTitle) => {
+        if (!videoEl) return;
+        const src = videoEl.currentSrc || videoEl.querySelector('source')?.src;
+        if (!src) return;
+
+        document.querySelectorAll('.video-card video').forEach(v => v.pause());
+        lightboxPlayer.src = src;
+        lightboxPlayer.poster = videoEl.getAttribute('poster') || '';
+        lightboxTitle.textContent = fallbackTitle || 'Naamin Video';
+        lightbox.removeAttribute('hidden');
+        document.body.classList.add('video-lightbox-open');
+        document.body.style.overflow = 'hidden';
+        lightboxPlayer.currentTime = 0;
+        const playPromise = lightboxPlayer.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => { });
+        }
+    };
+
+    videoCards.forEach(card => {
+        const videoEl = card.querySelector('video');
+        const title = card.dataset.videoTitle || card.querySelector('.video-card-title')?.textContent?.trim() || 'Naamin Video';
+        let expandBtn = card.querySelector('.video-expand-btn');
+
+        if (!expandBtn) {
+            const content = card.querySelector('.video-card-content');
+            if (content) {
+                expandBtn = document.createElement('button');
+                expandBtn.className = 'video-expand-btn';
+                expandBtn.type = 'button';
+                expandBtn.textContent = 'View Large';
+                content.appendChild(expandBtn);
+            }
+        }
+
+        if (videoEl) {
+            videoEl.addEventListener('click', (event) => {
+                event.preventDefault();
+                openVideoLightbox(videoEl, title);
+            });
+        }
+
+        if (expandBtn && videoEl) {
+            expandBtn.addEventListener('click', () => openVideoLightbox(videoEl, title));
+        }
+    });
+
+    lightbox.querySelectorAll('[data-close-video-lightbox]').forEach(closeEl => {
+        closeEl.addEventListener('click', closeVideoLightbox);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !lightbox.hasAttribute('hidden')) {
+            closeVideoLightbox();
+        }
+    });
 });
 
 // Comprehensive English to Hindi Name Mapping & Transliteration
@@ -861,7 +1004,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const target = parseInt(el.dataset.counterTarget, 10) || 0;
             const suffix = el.dataset.counterSuffix || '';
             const format = el.dataset.counterFormat || 'indian';
-            const duration = 1400;
+            const duration = target >= 100000 ? 3800 : 2800;
             const start = performance.now();
 
             const step = (now) => {
@@ -1000,17 +1143,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
+        function hasPlaceholderQuestionMarks(text) {
+            if (!text) return true;
+            const trimmed = String(text).trim();
+            if (!trimmed) return true;
+            if (/^\?+$/.test(trimmed)) return true;
+            if (/[\?]{2,}/.test(trimmed)) return true;
+            if (trimmed.includes('�')) return true;
+            return false;
+        }
+
         document.documentElement.lang = lang;
         localStorage.setItem("language", lang);
         const translatableElements = document.querySelectorAll("[data-en]");
         translatableElements.forEach(el => {
-            const raw = el.getAttribute(lang === "hi" ? "data-hi" : "data-en");
+            const preferredRaw = el.getAttribute(lang === "hi" ? "data-hi" : "data-en");
+            const fallbackRaw = el.getAttribute("data-en");
+            const raw = (lang === "hi" && hasPlaceholderQuestionMarks(preferredRaw)) ? fallbackRaw : preferredRaw;
             const text = normalizeMaybeMojibake(raw);
             if (text) {
                 if (el.getAttribute('href') && el.getAttribute('href').includes('popular-names')) {
                     console.log("Script.js: Translating Popular Names element to: " + text);
                 }
-                setTextPreserveChildren(el, text);
+                const cleaned = text.replace(/^\?\s+/, '');
+                setTextPreserveChildren(el, cleaned);
             }
         });
 
@@ -2131,17 +2287,21 @@ document.addEventListener('DOMContentLoaded', function () {
         const lang = getLanguage();
         const sectionTitle = document.querySelector('#baby-showcase h2');
         const sectionSubtitle = document.querySelector('#baby-showcase .section-subtitle');
+        const pickText = (element) => {
+            if (!element) return '';
+            const preferred = element.getAttribute(lang === 'hi' ? 'data-hi' : 'data-en') || '';
+            const fallback = element.getAttribute('data-en') || '';
+            const normalized = String(preferred).trim();
+            const looksBroken = !normalized || /^\?+$/.test(normalized) || /[\?]{2,}/.test(normalized) || normalized.includes('�');
+            return (lang === 'hi' && looksBroken) ? fallback : preferred;
+        };
 
         if (sectionTitle) {
-            sectionTitle.textContent = lang === 'hi'
-                ? sectionTitle.getAttribute('data-hi')
-                : sectionTitle.getAttribute('data-en');
+            sectionTitle.textContent = pickText(sectionTitle);
         }
 
         if (sectionSubtitle) {
-            sectionSubtitle.textContent = lang === 'hi'
-                ? sectionSubtitle.getAttribute('data-hi')
-                : sectionSubtitle.getAttribute('data-en');
+            sectionSubtitle.textContent = pickText(sectionSubtitle);
         }
     };
 
