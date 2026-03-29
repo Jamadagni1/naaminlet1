@@ -255,6 +255,7 @@
         // Toggle Blog Content
         function toggleReadMore(cardId) {
             const card = document.getElementById(cardId);
+            if (!card) return;
             const btnText = card.querySelector('.btn-text');
             const isExpanded = card.classList.contains('expanded');
 
@@ -268,8 +269,42 @@
             }
         }
 
+        function appendBlogCards(cards) {
+            const blogList = document.querySelector('.blog-list');
+            if (!blogList || !Array.isArray(cards) || !cards.length) return;
+
+            const currentCount = blogList.querySelectorAll('.blog-card').length;
+            cards.forEach((post, index) => {
+                const cardId = `blog-${currentCount + index + 1}`;
+                const article = document.createElement('article');
+                article.className = 'blog-card';
+                article.id = cardId;
+                article.innerHTML = `
+                    <span class="blog-date">${post.date}</span>
+                    <h2 class="blog-title">${post.title}</h2>
+                    <div class="blog-excerpt">${post.excerpt}</div>
+                    <div class="blog-full-content">${post.fullContent}</div>
+                    <button class="read-more-btn" onclick="toggleReadMore('${cardId}')">
+                        <span class="btn-text">Read More</span>
+                    </button>
+                `;
+                blogList.appendChild(article);
+            });
+        }
+
         // Navbar & Scroll Logic
         document.addEventListener('DOMContentLoaded', () => {
+            // Add new cards here in future by pushing objects in this array.
+            const BLOG_POSTS = [
+                {
+                    date: 'Sunday, Jan 18, 2026',
+                    title: 'How to Choose a Name That Works in India and Globally',
+                    excerpt: 'A great name should feel rooted and still travel well across languages, markets, and digital platforms.',
+                    fullContent: 'When choosing a name today, families and founders both think beyond local usage. A strong name is easy to pronounce, easy to remember, and easy to search online.<br><br>For baby names, this means balancing culture with simplicity so the name feels meaningful at home and practical worldwide. For brands and startups, it means testing pronunciation, domain possibilities, and clarity before finalizing.<br><br>At Naamin, we shortlist names that preserve identity while staying globally usable, so your final choice stays strong for years.'
+                }
+            ];
+            appendBlogCards(BLOG_POSTS);
+
             const scrollBtn = document.getElementById('scrollToTopBtn');
             if (!scrollBtn) return;
 

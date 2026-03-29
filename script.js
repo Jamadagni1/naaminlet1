@@ -1042,6 +1042,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function setupServicesCardRedirects() {
+        const serviceCards = document.querySelectorAll('#services .service-card');
+        if (!serviceCards.length) return;
+
+        serviceCards.forEach(card => {
+            card.classList.add('service-card-clickable');
+            card.setAttribute('role', 'link');
+            card.setAttribute('tabindex', '0');
+
+            const serviceTitle = (card.querySelector('h3')?.textContent || card.id || 'Service').trim();
+            const redirectToContact = () => {
+                const target = `contact.html?service=${encodeURIComponent(serviceTitle)}`;
+                window.location.href = target;
+            };
+
+            card.addEventListener('click', (event) => {
+                if (event.target.closest('a, button, input, select, textarea')) return;
+                redirectToContact();
+            });
+
+            card.addEventListener('keydown', (event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                redirectToContact();
+            });
+        });
+    }
+
     function setupAnimatedCounters() {
         const counters = document.querySelectorAll('[data-counter-target]');
         if (!counters.length) return;
@@ -1080,6 +1108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     applyPlatformNavUpdates();
+    setupServicesCardRedirects();
     setupAnimatedCounters();
 
     function namesFileForGender(gender) {

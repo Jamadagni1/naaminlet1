@@ -1897,6 +1897,25 @@ footer {
     will-change: transform;
 }
 
+#services .service-card.service-card-clickable {
+    cursor: pointer;
+}
+
+#services .service-card.service-card-clickable::after {
+    content: "Click to contact";
+    display: inline-flex;
+    margin-top: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    border: 1px solid rgba(108, 43, 217, 0.22);
+    background: rgba(255, 255, 255, 0.68);
+}
+
 .baby-card:hover .baby-image {
     transform: scale(1.12);
 }
@@ -3337,7 +3356,11 @@ h1#card-name {
     z-index: 2;
     max-width: 720px;
     text-align: center;
-    padding: 0 20px;
+    padding: 26px 26px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(12, 8, 22, 0.28);
+    backdrop-filter: blur(4px);
 }
 
 .hero-eyebrow {
@@ -3605,11 +3628,13 @@ h1#card-name {
 
 @media (max-width: 900px) {
     .hero-content {
-        text-align: left;
+        text-align: center;
+        max-width: 94%;
+        padding: 20px 18px;
     }
 
     .hero-actions {
-        justify-content: flex-start;
+        justify-content: center;
     }
 }
 
@@ -4875,6 +4900,27 @@ svg {
         height: 46px;
         right: 12px;
         bottom: 24px;
+    }
+
+    .hero-content {
+        max-width: calc(100% - 16px);
+        padding: 16px 14px;
+        border-radius: 16px;
+    }
+
+    .hero-eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 1.6px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(1.9rem, 9vw, 2.6rem);
+        line-height: 1.14;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        line-height: 1.45;
     }
 }
 
