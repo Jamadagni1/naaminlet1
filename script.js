@@ -1,4 +1,4 @@
-/* ======================================================
+﻿/* ======================================================
    SCRIPT.JS - FINAL COMPLETE VERSION
    (Includes: 2026 Horoscope, Favorites, Typing Animation)
    ====================================================== */
@@ -723,22 +723,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function applyPlatformNavUpdates() {
         const isInMore = window.location.pathname.includes("/more/");
-        const rootPrefix = isInMore ? "../" : "";
+        const rootPrefix = isInMore ? "../../" : "";
         const domainHref = isInMore
             ? "../domain-name-creator/index.html"
             : "more/domain-name-creator/index.html";
+        const productsHref = `${rootPrefix}product.html`;
+        const servicesHref = `${rootPrefix}services.html`;
+        const mottoHref = `${rootPrefix}more/motto-for-everything/index.html`;
+        const nameReportHref = `${rootPrefix}name-report.html`;
 
         // Rename Motto Generator -> Motto Creator
         document.querySelectorAll('a[href*="motto-for-everything"]').forEach(a => {
             a.setAttribute('data-en', 'Motto Creator');
-            a.setAttribute('data-hi', 'आदर्श वाक्य निर्माता');
+            a.setAttribute('data-hi', 'Motto Creator');
             if (!a.querySelector('*')) a.textContent = 'Motto Creator';
         });
 
         // Rename Products -> Our Products
         document.querySelectorAll('a[href$="product.html"]').forEach(a => {
             a.setAttribute('data-en', 'Our Products');
-            a.setAttribute('data-hi', 'हमारे उत्पाद');
+            a.setAttribute('data-hi', 'Our Products');
             if (!a.querySelector('*')) a.textContent = 'Our Products';
         });
 
@@ -747,15 +751,15 @@ document.addEventListener("DOMContentLoaded", () => {
             a.classList.add('nav-hidden');
         });
 
-        // Insert Domain Name Creator in dropdowns if missing
+        // Insert Domain Naming Service in dropdowns if missing
         document.querySelectorAll('.dropdown-menu, .mobile-dropdown-menu').forEach(menu => {
             if (menu.querySelector(`a[href*="domain-name-creator"]`)) return;
             const li = document.createElement('li');
             const link = document.createElement('a');
             link.href = domainHref;
-            link.setAttribute('data-en', 'Domain Name Creator');
-            link.setAttribute('data-hi', 'डोमेन नाम निर्माता');
-            link.textContent = 'Domain Name Creator';
+            link.setAttribute('data-en', 'Domain Naming Service');
+            link.setAttribute('data-hi', 'Domain Naming Service');
+            link.textContent = 'Domain Naming Service';
             li.appendChild(link);
 
             const mottoLink = menu.querySelector('a[href*="motto-for-everything"]');
@@ -763,6 +767,54 @@ document.addEventListener("DOMContentLoaded", () => {
                 mottoLink.parentElement.insertAdjacentElement('afterend', li);
             } else {
                 menu.appendChild(li);
+            }
+        });
+
+        // Keep "Our Products" outside "More" dropdown (desktop + mobile)
+        document.querySelectorAll('.dropdown-menu a[href$="product.html"], .mobile-dropdown-menu a[href$="product.html"]').forEach(a => {
+            const li = a.closest('li');
+            if (li) li.remove();
+        });
+
+        document.querySelectorAll('ul.nav-links.desktop-only').forEach(navList => {
+            let topProductsLink = navList.querySelector(':scope > li > a[href$="product.html"]');
+            if (!topProductsLink) {
+                const li = document.createElement('li');
+                const anchor = document.createElement('a');
+                anchor.href = productsHref;
+                anchor.setAttribute('data-en', 'Our Products');
+                anchor.setAttribute('data-hi', 'Our Products');
+                anchor.textContent = 'Our Products';
+                li.appendChild(anchor);
+                const dropdownLi = navList.querySelector(':scope > li.dropdown');
+                if (dropdownLi) navList.insertBefore(li, dropdownLi);
+                else navList.appendChild(li);
+            } else {
+                topProductsLink.href = productsHref;
+                topProductsLink.setAttribute('data-en', 'Our Products');
+                topProductsLink.setAttribute('data-hi', 'Our Products');
+                if (!topProductsLink.querySelector('*')) topProductsLink.textContent = 'Our Products';
+            }
+        });
+
+        document.querySelectorAll('ul.mobile-nav-links').forEach(navList => {
+            let topProductsLink = navList.querySelector(':scope > li > a[href$="product.html"]');
+            if (!topProductsLink) {
+                const li = document.createElement('li');
+                const anchor = document.createElement('a');
+                anchor.href = productsHref;
+                anchor.setAttribute('data-en', 'Our Products');
+                anchor.setAttribute('data-hi', 'Our Products');
+                anchor.textContent = 'Our Products';
+                li.appendChild(anchor);
+                const dropdownLi = navList.querySelector(':scope > li.mobile-dropdown');
+                if (dropdownLi) navList.insertBefore(li, dropdownLi);
+                else navList.appendChild(li);
+            } else {
+                topProductsLink.href = productsHref;
+                topProductsLink.setAttribute('data-en', 'Our Products');
+                topProductsLink.setAttribute('data-hi', 'Our Products');
+                if (!topProductsLink.querySelector('*')) topProductsLink.textContent = 'Our Products';
             }
         });
 
@@ -779,13 +831,13 @@ document.addEventListener("DOMContentLoaded", () => {
             servicesCol.querySelectorAll('a').forEach(a => a.remove());
 
             const links = [
-                { href: `${rootPrefix}services.html#consultation`, en: 'Name Consultation', hi: 'नाम परामर्श' },
-                { href: `${rootPrefix}services.html#brand`, en: 'Brand & Startup Naming', hi: 'ब्रांड व स्टार्टअप नामकरण' },
-                { href: `${rootPrefix}services.html#company`, en: 'Company & Institution Naming', hi: 'कंपनी व संस्था नामकरण' },
-                { href: domainHref, en: 'Domain Name Creator', hi: 'डोमेन नाम निर्माता' },
-                { href: `${rootPrefix}more/motto-for-everything/index.html`, en: 'Motto Creator', hi: 'आदर्श वाक्य निर्माता' },
-                { href: `${rootPrefix}name-report.html`, en: 'Name Report', hi: 'नाम रिपोर्ट' },
-                { href: `${rootPrefix}product.html`, en: 'Our Products', hi: 'हमारे उत्पाद' }
+                { href: `${servicesHref}#consultation`, en: 'Name Consultation', hi: 'Name Consultation' },
+                { href: `${servicesHref}#brand`, en: 'Brand & Startup Naming', hi: 'Brand & Startup Naming' },
+                { href: `${servicesHref}#company`, en: 'Company & Institution Naming', hi: 'Company & Institution Naming' },
+                { href: domainHref, en: 'Domain Naming Service', hi: 'Domain Naming Service' },
+                { href: mottoHref, en: 'Motto Creator', hi: 'Motto Creator' },
+                { href: nameReportHref, en: 'Name Report', hi: 'Name Report' },
+                { href: productsHref, en: 'Our Products', hi: 'Our Products' }
             ];
             links.forEach(l => {
                 const a = document.createElement('a');
@@ -2113,3 +2165,4 @@ updateBabyCarouselLanguage();
 
     setInterval(rotate, 5000);
 })();
+

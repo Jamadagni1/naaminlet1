@@ -1,16 +1,16 @@
 :root {
-  --more-accent: #7a35e8;
-  --more-accent-soft: rgba(122, 53, 232, 0.12);
+  --more-accent: #6c2bd9;
+  --more-accent-soft: rgba(108, 43, 217, 0.14);
   --more-surface: rgba(255, 255, 255, 0.92);
-  --more-border: rgba(122, 53, 232, 0.14);
+  --more-border: rgba(108, 43, 217, 0.16);
   --more-shadow: 0 20px 44px rgba(39, 19, 77, 0.14);
 }
 
 body.more-unified-ui {
   background:
-    radial-gradient(circle at 12% 8%, rgba(122, 53, 232, 0.1), transparent 38%),
+    radial-gradient(circle at 12% 8%, rgba(108, 43, 217, 0.1), transparent 38%),
     radial-gradient(circle at 92% 12%, rgba(32, 125, 255, 0.09), transparent 36%),
-    #f6f5fd;
+    linear-gradient(180deg, #ffffff 0%, #f8f2ff 50%, #ffffff 100%);
 }
 
 .more-unified-ui main {
@@ -27,8 +27,8 @@ body.more-unified-ui {
   border-radius: 24px;
   border: 1px solid var(--more-border);
   background:
-    linear-gradient(135deg, rgba(122, 53, 232, 0.92), rgba(34, 25, 97, 0.95)),
-    linear-gradient(135deg, #7a35e8, #2e1b65);
+    linear-gradient(135deg, rgba(193, 132, 243, 0.94), rgba(108, 43, 217, 0.95)),
+    linear-gradient(135deg, #c184f3, #6c2bd9);
   box-shadow: var(--more-shadow);
   padding: clamp(24px, 4vw, 44px);
   color: #fff;
@@ -110,7 +110,7 @@ body.more-unified-ui {
 .more-unified-ui .filter-pill.active,
 .more-unified-ui .btn-generate,
 .more-unified-ui .domain-cta.btn-signup {
-  background: linear-gradient(135deg, #7a35e8, #5727af);
+  background: linear-gradient(135deg, #c184f3, #6c2bd9);
   color: #fff;
   border-color: transparent;
 }

@@ -106,8 +106,56 @@
             : "services.html";
 
         const isInMore = window.location.pathname.includes("/more/");
-        const rootPrefix = isInMore ? "../" : "";
+        const rootPrefix = isInMore ? "../../" : "";
         const domainHref = isInMore ? "../domain-name-creator/index.html" : "more/domain-name-creator/index.html";
+        const productsHref = `${rootPrefix}product.html`;
+
+        document.querySelectorAll(".dropdown-menu a[href$=\"product.html\"], .mobile-dropdown-menu a[href$=\"product.html\"]").forEach((link) => {
+            const listItem = link.closest("li");
+            if (listItem) listItem.remove();
+        });
+
+        document.querySelectorAll("ul.nav-links.desktop-only").forEach((navList) => {
+            let topProductsLink = navList.querySelector(":scope > li > a[href$=\"product.html\"]");
+            if (!topProductsLink) {
+                const listItem = document.createElement("li");
+                topProductsLink = document.createElement("a");
+                topProductsLink.href = productsHref;
+                topProductsLink.textContent = "Our Products";
+                topProductsLink.setAttribute("data-en", "Our Products");
+                topProductsLink.setAttribute("data-hi", "Our Products");
+                listItem.appendChild(topProductsLink);
+                const dropdownItem = navList.querySelector(":scope > li.dropdown");
+                if (dropdownItem) navList.insertBefore(listItem, dropdownItem);
+                else navList.appendChild(listItem);
+            } else {
+                topProductsLink.href = productsHref;
+                topProductsLink.setAttribute("data-en", "Our Products");
+                topProductsLink.setAttribute("data-hi", "Our Products");
+                if (!topProductsLink.querySelector("*")) topProductsLink.textContent = "Our Products";
+            }
+        });
+
+        document.querySelectorAll("ul.mobile-nav-links").forEach((navList) => {
+            let topProductsLink = navList.querySelector(":scope > li > a[href$=\"product.html\"]");
+            if (!topProductsLink) {
+                const listItem = document.createElement("li");
+                topProductsLink = document.createElement("a");
+                topProductsLink.href = productsHref;
+                topProductsLink.textContent = "Our Products";
+                topProductsLink.setAttribute("data-en", "Our Products");
+                topProductsLink.setAttribute("data-hi", "Our Products");
+                listItem.appendChild(topProductsLink);
+                const dropdownItem = navList.querySelector(":scope > li.mobile-dropdown");
+                if (dropdownItem) navList.insertBefore(listItem, dropdownItem);
+                else navList.appendChild(listItem);
+            } else {
+                topProductsLink.href = productsHref;
+                topProductsLink.setAttribute("data-en", "Our Products");
+                topProductsLink.setAttribute("data-hi", "Our Products");
+                if (!topProductsLink.querySelector("*")) topProductsLink.textContent = "Our Products";
+            }
+        });
 
         document.querySelectorAll("footer .footer-grid").forEach((grid) => {
             const columns = Array.from(grid.children || []);
@@ -128,7 +176,7 @@
                 { href: domainHref, en: "Domain Naming Service", hi: "Domain Naming Service" },
                 { href: `${rootPrefix}more/motto-for-everything/index.html`, en: "Motto Creator", hi: "Motto Creator" },
                 { href: `${rootPrefix}name-report.html`, en: "Name Report", hi: "Name Report" },
-                { href: `${rootPrefix}product.html`, en: "Our Products", hi: "Our Products" }
+                { href: productsHref, en: "Our Products", hi: "Our Products" }
             ];
 
             links.forEach((linkData) => {
