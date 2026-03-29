@@ -4084,17 +4084,21 @@ footer a[href$="pricing.html"] {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    min-height: 42px;
+    flex: 0 0 auto;
 }
 
 .layout-main > .scrolling-banner {
-    position: sticky;
-    top: var(--header-height);
+    position: relative !important;
+    top: 0 !important;
     z-index: 8;
 }
 
 .scrolling-track {
     display: flex;
     width: max-content;
+    min-height: 42px;
+    align-items: center;
     gap: 48px;
     padding: 10px 0;
     white-space: nowrap;
