@@ -57,25 +57,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const markReady = () => {
         heroVideo.classList.add('is-ready');
-        if (heroVideo.hasAttribute('poster')) {
-            heroVideo.removeAttribute('poster');
-        }
+    };
+
+    const markFallback = () => {
+        heroVideo.classList.remove('is-ready');
     };
 
     heroVideo.addEventListener('loadeddata', markReady, { once: true });
-    heroVideo.addEventListener('playing', () => {
-        markReady();
-    });
+    heroVideo.addEventListener('playing', markReady);
+    heroVideo.addEventListener('error', markFallback);
 
-    heroVideo.addEventListener('error', () => {
-        heroVideo.classList.remove('is-ready');
-    });
+    if (heroVideo.readyState >= 2) {
+        markReady();
+    }
 
     const autoplayAttempt = heroVideo.play();
     if (autoplayAttempt && typeof autoplayAttempt.catch === 'function') {
-        autoplayAttempt.catch(() => {
-            heroVideo.classList.remove('is-ready');
-        });
+        autoplayAttempt.catch(markFallback);
     }
 });
 

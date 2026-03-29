@@ -3235,13 +3235,6 @@ h1#card-name {
     transform: scale(1.08);
 }
 
-.hero-fallback-image {
-    position: absolute;
-    inset: 0;
-    object-position: center 30%;
-    will-change: transform;
-}
-
 .hero-video {
     position: absolute;
     inset: 0;
@@ -3254,7 +3247,7 @@ h1#card-name {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     will-change: transform, opacity;
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.35s ease;
 }
 
