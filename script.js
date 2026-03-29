@@ -929,61 +929,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function applyBabyNamingBranding() {
-        window.__naaminBabyBrandingApplied = true;
-
-        // Remove non-baby-naming utilities from nav menus
-        document.querySelectorAll('a[href*="motto-for-everything"]').forEach(a => {
-            const li = a.closest('li');
-            if (li) li.remove(); else a.remove();
-        });
-
-        // Rename "Products" and "Aura" to baby-naming focused labels
-        document.querySelectorAll('a[href="product.html"]').forEach(a => {
-            a.setAttribute('data-en', 'Name Posters');
-            a.setAttribute('data-hi', 'नाम पोस्टर');
-            if (!a.querySelector('*')) a.textContent = 'Name Posters';
-        });
-        document.querySelectorAll('a[href="pricing.html"]').forEach(a => {
-            a.setAttribute('data-en', 'Plans');
-            a.setAttribute('data-hi', 'प्लान');
-            if (!a.querySelector('*')) a.textContent = 'Plans';
-        });
-
-        // Standardize footer services to baby naming only
-        document.querySelectorAll('footer .footer-grid').forEach(grid => {
-            const columns = Array.from(grid.children || []);
-            const servicesCol = columns.find(col => {
-                const h = col.querySelector('h3');
-                if (!h) return false;
-                const en = (h.getAttribute('data-en') || h.textContent || '').trim().toLowerCase();
-                return en === 'our services';
-            });
-            if (!servicesCol) return;
-
-            servicesCol.querySelectorAll('a').forEach(a => a.remove());
-            const links = [
-                { href: 'services.html#consultation', en: 'Name Consultation', hi: 'नाम परामर्श' },
-                { href: 'services.html#vedic', en: 'Vedic Guidance', hi: 'वैदिक मार्गदर्शन' },
-                { href: 'services.html#posters', en: 'Name Posters', hi: 'नाम पोस्टर' }
-            ];
-            links.forEach(l => {
-                const a = document.createElement('a');
-                a.href = l.href;
-                a.setAttribute('data-en', l.en);
-                a.setAttribute('data-hi', l.hi);
-                a.textContent = l.en;
-                servicesCol.appendChild(a);
-            });
-        });
-
-        // Heart button = Shortlist
-        document.querySelectorAll('#fav-view-btn, #fav-view-btn-mobile').forEach(btn => {
-            btn.setAttribute('title', 'Shortlist');
-            btn.setAttribute('aria-label', 'Shortlist');
-        });
-    }
-
+    // Keep full-platform naming navigation; do not apply legacy baby-only overrides.
     const langBtn = document.getElementById("language-toggle");
     if (langBtn) {
         langBtn.addEventListener('click', () => {
@@ -999,7 +945,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateContent(newLang);
         });
     }
-    applyBabyNamingBranding();
+
     updateContent(getLanguage());
 
     // --- Aura Plan Click Logic ---

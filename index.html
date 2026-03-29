@@ -70,6 +70,19 @@
   </div>
 </div>
 
+    <script>
+        // preloader fail-safe: never keep page blocked if loader script is delayed
+        window.setTimeout(function () {
+            var pre = document.getElementById("naamin-preloader");
+            if (pre && !pre.classList.contains("fade-out")) {
+                pre.classList.add("fade-out");
+                setTimeout(function () { try { pre.remove(); } catch (e) { } }, 420);
+            }
+            document.body.classList.remove("preloader-active");
+            document.body.style.overflow = "";
+        }, 3500);
+    </script>
+
     <nav class="navbar">
         <!-- Logo -->
         <div class="logo">Naam<span class="logo-in">in</span></div>

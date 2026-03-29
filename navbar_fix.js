@@ -1,6 +1,25 @@
 (function () {
     console.log("Navbar Fix Script Loaded");
 
+    function getFavoritesCount() {
+        try {
+            const raw = localStorage.getItem("favorites");
+            if (!raw) return 0;
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed.length : 0;
+        } catch (_e) {
+            return 0;
+        }
+    }
+
+    function syncNavbarFavoritesCount() {
+        const count = getFavoritesCount();
+        document.querySelectorAll("#fav-count, #fav-count-mobile").forEach(el => {
+            el.textContent = String(count);
+            el.style.display = "inline-flex";
+        });
+    }
+
     function getLang() {
         return localStorage.getItem("language") || "en";
     }
@@ -195,6 +214,14 @@
     // Run on load
     document.addEventListener("DOMContentLoaded", () => {
         setTimeout(applyNavbarTranslation, 500); // 500ms delay to be safe
+        syncNavbarFavoritesCount();
+    });
+
+    document.addEventListener("favoritesUpdated", syncNavbarFavoritesCount);
+    window.addEventListener("storage", (event) => {
+        if (!event || event.key === "favorites") {
+            syncNavbarFavoritesCount();
+        }
     });
 
     // Hook into language toggle buttons if they exist
@@ -207,6 +234,7 @@
 
     // Expose globally just in case
     window.forceNavbarTranslation = applyNavbarTranslation;
+    window.syncNavbarFavoritesCount = syncNavbarFavoritesCount;
 
 })();
 
