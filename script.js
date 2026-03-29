@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroVideo = document.querySelector('.hero-video');
     if (!heroVideo) return;
 
+    const HERO_VIDEO_START_OFFSET = 0.85;
+    let introSkipped = false;
+
     const markReady = () => {
         heroVideo.classList.add('is-ready');
     };
@@ -63,18 +66,60 @@ document.addEventListener('DOMContentLoaded', () => {
         heroVideo.classList.remove('is-ready');
     };
 
-    heroVideo.addEventListener('loadeddata', markReady, { once: true });
-    heroVideo.addEventListener('playing', markReady);
+    const attemptSkipIntroFrame = () => {
+        if (introSkipped) return false;
+        const canSeek = Number.isFinite(heroVideo.duration) && heroVideo.duration > HERO_VIDEO_START_OFFSET + 0.2;
+        if (!canSeek) return false;
+        try {
+            heroVideo.currentTime = HERO_VIDEO_START_OFFSET;
+            introSkipped = true;
+            return true;
+        } catch (error) {
+            return false;
+        }
+    };
+
+    const ensurePlayback = () => {
+        const autoplayAttempt = heroVideo.play();
+        if (autoplayAttempt && typeof autoplayAttempt.catch === 'function') {
+            autoplayAttempt.catch(markFallback);
+        }
+    };
+
+    heroVideo.addEventListener('loadedmetadata', () => {
+        if (!attemptSkipIntroFrame() && heroVideo.readyState >= 2) {
+            markReady();
+        }
+        ensurePlayback();
+    }, { once: true });
+
+    heroVideo.addEventListener('seeked', () => {
+        if (introSkipped) {
+            markReady();
+        }
+    });
+
+    heroVideo.addEventListener('loadeddata', () => {
+        if (!introSkipped && heroVideo.readyState >= 2) {
+            markReady();
+        }
+    });
+
+    heroVideo.addEventListener('playing', () => {
+        if (heroVideo.currentTime >= HERO_VIDEO_START_OFFSET - 0.05 || heroVideo.readyState >= 2) {
+            markReady();
+        }
+    });
+
     heroVideo.addEventListener('error', markFallback);
 
-    if (heroVideo.readyState >= 2) {
-        markReady();
+    if (heroVideo.readyState >= 1) {
+        if (!attemptSkipIntroFrame() && heroVideo.readyState >= 2) {
+            markReady();
+        }
     }
 
-    const autoplayAttempt = heroVideo.play();
-    if (autoplayAttempt && typeof autoplayAttempt.catch === 'function') {
-        autoplayAttempt.catch(markFallback);
-    }
+    ensurePlayback();
 });
 
 // Comprehensive English to Hindi Name Mapping & Transliteration

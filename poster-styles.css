@@ -203,11 +203,16 @@
 
 /* Utility to hide during capture prep */
 #poster-generator-container {
-    position: absolute;
-    left: -9999px;
-    top: 0;
+    position: fixed;
+    left: -10000px;
+    top: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
     visibility: visible;
     display: block;
+    opacity: 0;
+    pointer-events: none;
 }
 
 @media (max-width: 768px) {
