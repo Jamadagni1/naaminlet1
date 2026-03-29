@@ -752,6 +752,52 @@
     }
 }
 
+@media (max-width: 420px) {
+    #parents-mix {
+        padding: 74px 10px 26px;
+    }
+
+    #parents-mix h1 {
+        font-size: 1.75rem;
+        line-height: 1.25;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .parents-input-card {
+        padding: 14px 12px;
+        border-radius: 14px;
+    }
+
+    .name-input,
+    .gender-btn,
+    .generate-button {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .result-card {
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .result-name {
+        font-size: 1.2rem;
+    }
+
+    .modal-content {
+        width: calc(100% - 16px);
+        padding: 16px 12px;
+        border-radius: 14px;
+    }
+
+    .detail-section {
+        padding: 12px;
+    }
+}
+
 /* Smaller card sizing */
 .result-card {
     padding: 18px;

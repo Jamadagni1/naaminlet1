@@ -4666,3 +4666,54 @@ svg {
         bottom: 24px;
     }
 }
+
+@media (max-width: 380px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    .navbar {
+        padding: 8px 10px;
+    }
+
+    .navbar .logo {
+        font-size: 1.25rem;
+    }
+
+    section {
+        padding: 92px 10px 48px;
+    }
+
+    .content-wrapper,
+    #hero .content-wrapper {
+        padding: 22px 12px;
+        border-radius: 14px;
+    }
+
+    .hero-content h1,
+    .page-title,
+    .section-header-center h2,
+    section h2 {
+        font-size: clamp(1.35rem, 7vw, 1.7rem);
+    }
+
+    .mobile-nav-links a {
+        padding: 12px 14px;
+    }
+
+    .mobile-dropdown-menu a {
+        padding: 10px 14px 10px 24px;
+    }
+
+    .mobile-actions {
+        padding: 12px 14px;
+    }
+
+    .mobile-btn {
+        padding: 12px 12px !important;
+    }
+
+    .baby-card {
+        min-width: calc(100vw - 26px);
+    }
+}
